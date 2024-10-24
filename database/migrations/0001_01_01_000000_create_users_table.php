@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer("address_id");
+            $table->enum("type", ["admin", "user"]);
+            $table->foreign("address_id")->references("id")->on("addresses");
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
