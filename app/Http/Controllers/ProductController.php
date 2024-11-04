@@ -16,4 +16,15 @@ class ProductController extends Controller
     public function list() {
         return view("/list", array("products" => Product::all()));
     }
+
+    public function findByName($name) {
+        $products = DB::table("products")->where("name", "=", $name)->distinct()->get();
+        return view("/list", array("products" => $products));
+    }
+
+    public function findByCategory($category) {
+        $categoryID = DB::table("categories")->where("name", "=", $category)->distinct()->get();
+        $products = DB::table("products")->where("category_id", "=", $categoryID)->distinct()->get();
+        return view("/list", array("products" => $products));
+    }
 }
