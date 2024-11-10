@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 // routing for about us page
 Route::get('/about', function() {
@@ -13,20 +15,32 @@ Route::get('/login', function() {
     return view('login');
 });
 
-// routing for product display page
-Route::get('/products', function() {
-    return view('products');
+// routing for register page
+Route::get('/register', function() {
+    return view('register');
 });
+
+// routing for product display page
+// displays all products
+Route::get('/products', [ProductController::class, 'list']);
+
+// displays products by id
+Route::get('/products/{id}', [ProductController::class, 'show']);
+
+// displays products by name
+Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
+
+// displays products by category
+Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
+
 
 // routing for basket page
 Route::get('/basket', function() {
     return view('basket');
 });
 
-// routing for previous order page
-Route::get('/previous-orders', function() {
-    return view('previous-orders');
-});
+// displays previous orders
+Route::get('/previous-orders', [OrderController::class, 'list']);
 
 Auth::routes();
 

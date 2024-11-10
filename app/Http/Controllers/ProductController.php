@@ -10,11 +10,11 @@ class ProductController extends Controller
 {
     public function show($id) {
         $project = Product::find($id);
-        return view("/show", array("product" => $product));
+        return view("ProductDisplayPage", array("product" => $product));
     }
 
     public function list() {
-        return view("/list", array("products" => Product::all()));
+        return view("ProductDisplayPage", array("products" => Product::all()));
     }
 
     public function findByName($name) {
