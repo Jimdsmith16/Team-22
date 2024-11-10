@@ -10,10 +10,10 @@ class OrderController extends Controller
 {
     public function show($id) {
         $project = Order::find($id);
-        return view("/show", array("order" => $order));
+        return view("previousOrders", array("order" => $order));
     }
 
     public function list() {
-        return view("/list", array("orders" => Order::all()));
+        return view("previousOrders", array("orders" => Order::all()));
     }
 }
