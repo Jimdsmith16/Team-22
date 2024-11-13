@@ -83,3 +83,22 @@ body {
     color: #1a73e8;
     font-weight: bold;
 }
+
+footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+
+<footer>
+        <p>Contact us</p>
+        <p>Telephone: 0788635240</p>
+        <p>Email: GradeVault@gmail.com</p>
+        <p>Guard your Grades with GradeVault</p>
+    </footer>
