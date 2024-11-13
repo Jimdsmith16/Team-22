@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<!-- 1 -->
+
 <div class="product-container">
     @foreach($products as $product)
     <div class="gallery">
