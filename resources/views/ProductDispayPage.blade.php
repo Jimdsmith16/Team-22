@@ -12,7 +12,7 @@
 <div class="header">
     <div class="logo">
         <a href="index.html">
-            <img src="" alt="GradeVault Logo">
+            <img src="Team-22/resources/Images/Logo.png" alt="GradeVault Logo">
         </a>
     </div>
     <nav>
