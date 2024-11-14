@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GradeVault Login</title>
+    <title>GradeVault Register</title>
     <link rel="stylesheet" href="{{ asset('css/LoginStyles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,7 @@
 <body id="loginpage">
     <div class="header">
         <div class="logo">
-            <a href="{{ route('login') }}">
-                <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
-            </a>
+            <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
             <a href="#">GCSE</a>
@@ -22,7 +20,6 @@
             <a href="#">Tutors</a>
             <a href="#">About</a>
             <a href="#">Contact Us</a>
-            <a href="{{ route('login') }}">Login</a>
         </nav>
         <div class="search-bar">
             <input type="text" placeholder="Search...">
@@ -38,23 +35,45 @@
                     <span class="icon">
                         <ion-icon name="person"></ion-icon>
                     </span>
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required>
+                    @error('name')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="input-box">
                     <span class="icon">
                         <ion-icon name="mail"></ion-icon>
                     </span>
-                    <input type="text" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="input-box">
                     <span class="icon">
                         <ion-icon name="lock-closed"></ion-icon>
                     </span>
                     <input type="password" id="password" name="password" placeholder="Password" required>
+                    @error('password')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                </div>
+
                 <div class="terms-conditons">
-                    <label><input type="checkbox" name="terms"> I accept the Terms and Conditions</label>
+                    <label>
+                        <input type="checkbox" name="terms" required> I accept the Terms and Conditions
+                    </label>
+                    @error('terms')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
+                
                 <button class="btn" type="submit">Register</button>
             </form>
             <p class="login-register">Already have an account? <a href="{{ route('login') }}">Login</a></p>
