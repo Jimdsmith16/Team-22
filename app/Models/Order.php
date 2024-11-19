@@ -10,4 +10,7 @@ class Order extends Model
     use HasFactory;
     protected $primaryKey = "id";
     public $timestamps = false;
+
+    // fillable field - can update as needed
+    protected $fillable = ['user_id', 'estimated_delivery_date'];
 }
