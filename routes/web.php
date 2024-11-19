@@ -37,7 +37,6 @@ Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 // displays products by category
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
 
-
 // routing for basket page
 Route::get('/basket', function() {
     return view('basket');
@@ -50,6 +49,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/orders', [OrderController::class, 'addOrder']);
+
 // Logout route
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
@@ -61,6 +62,6 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('l
 Route::get('/register', function () {
     return view('auth.register');  
 })->name('register')->middleware('guest'); 
-Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store'); 
+Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store');
 
 require __DIR__.'/auth.php';
