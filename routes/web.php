@@ -19,6 +19,10 @@ Route::get('/login', function() {
 Route::get('/register', function() {
     return view('register');
 });
+// Routing for User Settings
+Route::get('/usersettings', function () {
+    return view('usersettings');
+});
 
 // routing for product display page
 // displays all products
@@ -39,7 +43,7 @@ Route::get('/basket', function() {
 });
 
 // displays previous orders
-Route::get('/previous-orders', [OrderController::class, 'list']);
+Route::get('/previous-orders/{userid}', [OrderController::class, 'getPreviousOrderInfo']);
 
 Auth::routes();
 
@@ -47,5 +51,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/orders', [OrderController::class, 'addOrder']);
 
-?>
+// Logout route
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+// Authentication Routes
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login')->middleware('guest'); 
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store'); 
+
+// Registration Route
+Route::get('/register', function () {
+    return view('auth.register');  
+})->name('register')->middleware('guest'); 
+Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store');
+
+require __DIR__.'/auth.php';
