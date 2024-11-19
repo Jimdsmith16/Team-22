@@ -17,7 +17,7 @@ class OrderController extends Controller
         return view("previousOrders", array("orders" => Order::all()));
     }
 
-    public function newOrder(Request $request) {
+    public function addOrder(Request $request) {
         Order::create($request->all());
         return response()->json(['message' => 'Order added successfully.']);
     }
