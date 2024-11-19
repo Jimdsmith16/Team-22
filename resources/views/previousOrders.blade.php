@@ -27,22 +27,22 @@
     <section class="previous-orders">
         <h2>Previous Orders</h2>
 
-        @foreach($products as $product)
+        @foreach($orders as $order)
         <div class="order">
-            <a target="_blank" href="{{ $products->image_link }}">
-                <img src="{{ $products->image_link }}" alt="Product Image">
+            <a target="_blank" href="{{ $order->image_link }}">
+                <img src="{{ $order->image_link }}" alt="Product Image">
             </a>
             <div class="product-details">
-                <p>{{$product->name}} ?></p>
-                <p>Price: £{{ number_format($product->price,2) }}</p>
-                <p>Quantity: {{$product->number_of_stock}}</p>
+                <p>{{$order->name}} ?></p>
+                <p>Price: £{{ number_format($order->price,2) }}</p>
+                <p>Quantity: {{$order->number_of_stock}}</p>
             </div>
         </div>
         @endforeach
 
         <div class="totals">
-            <p>Total: {{$products->total_price}}</p>
-            <p>Total orders: {{$products->total_orders}}</p>
+            <p>Total: {{$orders->total_price}}</p>
+            <p>Total orders: {{$orders->total_orders}}</p>
         </div>
     </section>
 </main>
