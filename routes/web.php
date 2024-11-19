@@ -44,7 +44,7 @@ Route::get('/basket', function() {
 });
 
 // displays previous orders
-Route::get('/previous-orders', [OrderController::class, 'list']);
+Route::get('/previous-orders/{userid}', [OrderController::class, 'getPreviousOrderInfo']);
 
 Auth::routes();
 
