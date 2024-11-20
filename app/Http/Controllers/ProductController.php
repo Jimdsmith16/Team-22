@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function show($id) {
         $product = Product::find($id);
-        return view("ProductDisplayPage", array("product" => $product));
+        return view("ProductDisplayPage", array("products" => $product));
     }
 
     public function list() {
