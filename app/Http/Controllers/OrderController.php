@@ -29,4 +29,15 @@ class OrderController extends Controller
         $mergedOrders = $orders->merge(["total_price" => $totalPrice, "total_orders" => $totalOrders]);
         return view("previousOrders", array("orders" => $orders));
      }
+
+     public function updateOrder($id, Request $request){
+
+        $order=Order::find($id);
+        $order->estimated_delivery_date = $request->input('estimated_delivery_date', $order->estimated_delivery_date); 
+        $order->shipping_address = $request->input('shipping_address', $order->shipping_address);
+        $order->save(); 
+        return response()->json(['message' => 'Order updated successfully.']);
+
+
+     }
 }

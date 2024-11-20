@@ -42,6 +42,10 @@ Route::get('/basket', function() {
     return view('basket');
 });
 
+
+// routing for updating orders 
+Route::patch('/orders/update-{id}', [OrderController::class, 'updateOrder']);
+
 // displays previous orders
 Route::get('/previous-orders/{userid}', [OrderController::class, 'getPreviousOrderInfo']);
 
@@ -65,3 +69,4 @@ Route::get('/register', function () {
 Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store');
 
 require __DIR__.'/auth.php';
+

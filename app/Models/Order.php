@@ -12,5 +12,5 @@ class Order extends Model
     public $timestamps = false;
 
     // fillable field - can update as needed
-    protected $fillable = ['user_id', 'estimated_delivery_date'];
+    protected $fillable = ['user_id', 'estimated_delivery_date','shipping_address'];
 }
