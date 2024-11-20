@@ -5,9 +5,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 
+// routing for home page
+Route::get('/', function() {
+    return view('GVMain');
+});
+
 // routing for about us page
 Route::get('/about', function() {
-    return view('about');
+    return view('AboutUs');
+});
+
+// routing for contact a tutor page
+Route::get('/tutor', function() {
+    return view('GVTutor');
+});
+
+// routing for contact us page
+Route::get('/contact', function() {
+    return view('ContactUs');
 });
 
 // routing for login page
