@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->date("estimated_delivery_date");
             $table->foreign("user_id")->references("id")->on("users");
+            $table->string("shipping_address"); 
         });
     }
 
