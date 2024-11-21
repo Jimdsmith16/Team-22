@@ -83,5 +83,3 @@ Route::get('/register', function () {
 })->name('register')->middleware('guest'); 
 Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store');
 
-require __DIR__.'/auth.php';
-

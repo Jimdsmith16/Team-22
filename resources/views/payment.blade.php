@@ -115,10 +115,12 @@
       </a>
     </div>
     <nav>
-      <a href="#">Tutors</a>
-      <a href="#">About</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Log In / Sign Up</a>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
+        <a href="#">Log In / Sign Up</a>
     </nav>
   </div>
 

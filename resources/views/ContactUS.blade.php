@@ -153,16 +153,15 @@ body {
   <!-- Header Section -->
   <div class="header">
     <div class="logo">
-      <a href="index.html">
-        <img src="GV.png" alt="GradeVault Logo">
-      </a>
+      <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
     </div>
     <nav>
-      <a href="{{url('/')}}">Home</a>
-      <a href="{{url('tutor')}}">Tutors</a>
-      <a href="{{url('about')}}">About</a>
-      <a href="{{url('contact')}}">Contact Us</a>
-      <a href="#">Log In / Sign Up</a>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
+        <a href="#">Log In / Sign Up</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search...">
