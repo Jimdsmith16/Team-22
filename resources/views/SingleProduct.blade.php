@@ -139,9 +139,10 @@
                 <img src="images/GvLogo.png" alt="GradeVault Logo">
         </div>
         <nav>
-            <a href="#">Tutors</a>
-            <a href="#">About</a>
-            <a href="#">Contact Us</a>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
             <a href="#">Log In / Sign Up</a>
         </nav>
         <div class="search-bar">
@@ -153,17 +154,13 @@
 
     <div class="product-container">
         <div class="product-image">
-            <img src="images/EnglishLanguage.png" alt="Product Image">
+            <img src="{{$product->image_link}}" alt="{{$product->name}}">
         </div>
 
         <div class="product-details">
-            <h1>English Language GCSE Guide</h1>
-            <div class="price">£19.99</div>
-            <div class="description">
-                Absolute clarity is the aim with a new generation of GCSE English revision guides.
-                This clear study guide has been expertly compiled and edited by successful authors of English revision guides and 
-                highly experienced examiners.
-            </div>
+            <h1>{{$product->name}}</h1>
+            <div class="price">£ {{$product->price}}</div>
+            <div class="description">{{$product->description}}</div>
             <button>Buy Now</button>
         </div>
     </div>
