@@ -100,18 +100,15 @@
   <!-- Header Section -->
   <div class="header">
     <div class="logo">
-        <a href="index.html">
-            <img src="GV.png" alt="GradeVault Logo">
-        </a>
-
-       <!-- Replace "GV.png" with your actual logo file path -->
+      <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
     </div>
     <nav>
-      <a href="{{url('/')}}">Home</a>
-      <a href="{{url('tutor')}}">Tutors</a>
-      <a href="{{url('about')}}">About</a>
-      <a href="{{url('contact')}}">Contact Us</a>
-      <a href="#">Log In / Sign Up</a>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
+        <a href="#">Log In / Sign Up</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search...">
@@ -122,7 +119,7 @@
   <div class="content">
     <!-- About Us Image Header -->
       
-    <img src="abtLogo.jpg" alt="About Us" style="width: 200px; background-color: #e7e9fc; opacity: 0.9; border-radius: 8px; padding: 5px;">
+    <img src="{{asset('Images/abtLogo.jpg')}}" alt="About Us" style="width: 200px; background-color: #e7e9fc; opacity: 0.9; border-radius: 8px; padding: 5px;">
     
     <p>Welcome to GradeVault!</p>
     <p>At GradeVault, we understand that your academic journey is unique and challenging. That's why we've built a platform that not only provides support but also protects your hard-earned achievements. Whether you're aiming to excel in GCSEs, A-Levels, or looking for top-notch tutors to help you master complex subjects, GradeVault is here to back you every step of the way.</p>

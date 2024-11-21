@@ -13,11 +13,11 @@
         <img src="#" alt="GradeVault Logo">
     </div>
     <nav>
-        <a href="#">GCSE</a>
-        <a href="#">A-level</a>
-        <a href="#">Tutors</a>
-        <a href="#">About</a>
-        <a href="#">Contact us</a>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
         <a href="#">Basket Icon</a>
         <input type="search" placeholder="Search...">
     </nav>

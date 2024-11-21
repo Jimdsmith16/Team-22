@@ -199,15 +199,14 @@
 
     <div class="header">
         <div class="logo">
-            <a href="index.html">
-                <img src="images/GvLogo.png" alt="GradeVault Logo">
-            </a>
+        <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
         </div>
         <nav>
             <a href="{{url('/')}}">Home</a>
             <a href="{{url('tutor')}}">Tutors</a>
             <a href="{{url('about')}}">About</a>
             <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
             <a href="#">Log In / Sign Up</a>
         </nav>
         <div class="search-bar">
@@ -218,15 +217,15 @@
 
     <div class="slideshow-container">
         <div class="mySlides1">
-            <img src="images/English.png" alt="English Language">
+            <img src="{{asset('Images/English.png')}}" alt="English Language">
         </div>
       
         <div class="mySlides1">
-            <img src="images/Science.png" alt="Combined Science">
+            <img src="{{asset('Images/Science.png')}}" alt="Combined Science">
         </div>
       
         <div class="mySlides1">
-            <img src="images/Maths.png" alt="Maths">
+            <img src="{{asset('Images/Maths.png')}}" alt="Maths">
         </div>
     </div>
 
