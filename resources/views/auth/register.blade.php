@@ -15,11 +15,11 @@
             <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
-            <a href="#">GCSE</a>
-            <a href="#">A-Level</a>
-            <a href="#">Tutors</a>
-            <a href="#">About</a>
-            <a href="#">Contact Us</a>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
         </nav>
         <div class="search-bar">
             <input type="text" placeholder="Search...">
@@ -80,7 +80,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/script.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

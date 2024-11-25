@@ -37,7 +37,7 @@ Route::get('/register', function() {
 // Routing for User Settings
 Route::get('/usersettings', function () {
     return view('usersettings');
-});
+})->middleware('auth');
 
 // routing for product display page
 // displays all products
@@ -70,16 +70,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/orders', [OrderController::class, 'addOrder']);
 
-// Logout route
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+use App\Http\Controllers\Auth\ResetPasswordController;
 
-// Authentication Routes
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login')->middleware('guest'); 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login.store'); 
-
-// Registration Route
-Route::get('/register', function () {
-    return view('auth.register');  
-})->name('register')->middleware('guest'); 
-Route::post('/register', [AuthenticatedSessionController::class, 'store'])->name('register.store');
-
+Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');

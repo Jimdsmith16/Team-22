@@ -15,12 +15,10 @@
 <body id="settings">
     <div class="header">
         <div class="logo">
-            <a href="{{ route('home') }}">
-                <img src="images/GV.png" alt="GradeVault Logo">
-            </a>
+            <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
-            <a href="{{ route('home') }}">Return to Homepage</a>
+            <a href="{{url('/')}}">Return to Homepage</a>
             <a href="#">Hi {{ Auth::user()->name }}</a>
             <a href="#">
                 <ion-icon name="person-outline"></ion-icon>
@@ -45,8 +43,8 @@
             <a href="#security" class="sidebar-link">
                 <ion-icon name="lock-closed"></ion-icon> <span>Security</span>
             </a>
-
-            <a href="#" id="logout-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="#" id="logout-link"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <ion-icon name="exit"></ion-icon> <span>Logout</span>
             </a>
 
@@ -89,59 +87,50 @@
                 </div>
             </section>
 
+
             <section id="security" class="section-content">
-                <div class="user-dashboard-boxes">
-                    <div class="update-password-container">
-                        <header>
-                            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                {{ __('Update Password') }}
-                            </h2>
-                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                {{ __('Create A Secure Password') }}
+                <div class="password-container">
+                    <header>
+                        <h2>Update Password</h2>
+                        <p>Create a secure password.</p>
+                    </header>
+
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="current_password">Current Password</label>
+                            <input id="current_password" name="current_password" type="password" required />
+                            @error('current_password')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">New Password</label>
+                            <input id="password" name="password" type="password" required />
+                            @error('password')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm New Password</label>
+                            <input id="password_confirmation" name="password_confirmation" type="password" required />
+                            @error('password_confirmation')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="submit-button">Save</button>
+
+                        @if (session('status') === 'password-updated')
+                            <p class="success-message">
+                                Password successfully updated.
                             </p>
-                        </header>
-
-                        <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-                            @csrf
-                            @method('put')
-
-                            <div>
-                                <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-                                <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <x-input-label for="update_password_password" :value="__('New Password')" />
-                                <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-                                <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-                            </div>
-
-                            <div class="flex items-center gap-4">
-                                <x-primary-button class="custom-save-button">{{ __('Save') }}</x-primary-button>
-
-                                @if (session('status') === 'password-updated')
-                                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">
-                                        {{ __('Saved.') }}
-                                    </p>
-                                @endif
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-
-            <section id="logout-section" class="section-content">
-                <div class="user-dashboard-boxes">
-                    <div class="box">
-                        <span><strong>Logout:</strong> Click the logout button to sign out.</span>
-                    </div>
+                        @endif
+                    </form>
                 </div>
             </section>
         </div>
@@ -170,14 +159,17 @@
                     resetActiveLinks();
 
                     const targetSection = document.querySelector(link.getAttribute('href'));
-                    targetSection.style.display = 'block';
-                    link.classList.add('active');
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        link.classList.add('active');
+                    }
                 });
             });
 
             hideAllSections();
-            document.querySelector('#user-dashboard-link').style.display = 'block';
-            document.querySelector('#user-dashboard-link').classList.add('active');
+            const defaultSection = document.querySelector('#user-dashboard-link');
+            defaultSection.style.display = 'block';
+            document.querySelector('.sidebar-link[href="#user-dashboard-link"]').classList.add('active');
         });
     </script>
 </body>

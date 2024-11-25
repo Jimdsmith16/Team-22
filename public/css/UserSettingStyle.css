@@ -173,133 +173,84 @@ nav ion-icon {
     margin-top: 10px;   
 }
 
-.update-password-container {
-    background-color: #f9f9f9;
-    border: 2px solid #ddd;
-    border-radius: 10px;
+
+.password-section {
+    width: 100%;
+    max-width: 400px;
     padding: 20px;
-    max-width: 500px;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
 }
 
-.update-password-container h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.update-password-container p {
-    font-size: 0.875rem;
-    color: #666;
+.password-container header {
     margin-bottom: 20px;
 }
 
-.update-password-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.update-password-container input[type="password"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.update-password-container .flex.items-center.gap-4 .x-primary-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
-
-.update-password-container .flex.items-center.gap-4 .x-primary-button:hover {
-    background-color: #0056b3;
-}
-
-.update-password-container .text-sm {
-    font-size: 0.875rem;
-    color: #000000;
-    margin-top: 10px;
-}
-
-#security .update-password-container {
-    background-color: #f9f9f9;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 500px;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-#security h2 {
+.password-container h2 {
     font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
+    color: #333333;
+    margin: 0;
 }
-#security p {
-    font-size: 0.875rem;
-    color: #666;
-    margin-bottom: 20px;
+
+.password-container p {
+    font-size: 0.9rem;
+    color: #666666;
 }
-#security input[type="password"] {
-    width: 100%;
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 50%;
     padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-#security input[type="password"]:focus {
-    border-color: #007bff;
+    font-size: 0.9rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
     outline: none;
+    transition: border-color 0.3s ease;
 }
-#security .flex.items-center.gap-4 .x-primary-button {
+
+.form-group input:focus {
+    border-color: #007bff;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.submit-button {
+    width: 10%;
+    padding: 10px;
     background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
+    color: #ffffff;
     border: none;
-    cursor: pointer;
+    border-radius: 4px;
     font-size: 1rem;
-    transition: background-color 0.3s;
-}
-#security .flex.items-center.gap-4 .x-primary-button:hover {
-    background-color: #0056b3;
-}
-#security .text-sm {
-    font-size: 0.875rem;
-    color: #000000;
-    margin-top: 10px;
-}
-
-.custom-save-button {
-    background-color: #28a745; 
-    color: #ffffff; 
-    padding: 12px 14px;
-    border-radius: 5px; 
-    font-size: 1.1rem; 
-    font-weight: bold; 
-    transition: background-color 0.3s, transform 0.2s; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.custom-save-button:hover {
-    background-color: #f82003; 
+.submit-button:hover {
+    background-color: #06f339;
+}
+
+.success-message {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #28a745;
 }
 
 @media (max-width: 768px) {
