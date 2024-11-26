@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'GradeVault Settings')</title>
+    <title>GradeVault Settings</title>
     <link rel="stylesheet" href="{{ asset('css/UserSettingStyle.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,11 @@
 <body id="settings">
     <div class="header">
         <div class="logo">
-            <a href="{{ route('login') }}">
-                <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
-            </a>
+            <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
-            <a href="{{ route('home') }}">Return to Homepage</a>
-            <a href="#">Hi, {{ Auth::user()->name ?? 'Admin' }}</a>
+            <a href="{{url('/')}}">Return to Homepage</a>
+            <a href="#">Hi {{ Auth::user()->name }}</a>
             <a href="#">
                 <ion-icon name="person-outline"></ion-icon>
             </a>
@@ -58,57 +56,39 @@
             <section id="dashboard" class="section-content">
                 <div class="admin-dashboard-boxes">
                     <div class="box2">
-                        <div class="total-users-label">Total Users</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
-                    </div>
-
+                    <p>Sales</p>
+                </div>
                     <div class="box2">
-                        <!-- Temporary until database is fixed -->
-                        <div class="total-users-label">Total Sales</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
+                        <p>..</p>
                     </div>
                     <div class="box2">
-                        <div class="total-users-label">Total Income</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
+                        <p>..</p>
                     </div>
                 </div>
             </section>
 
-            </section>
-
             <section id="user" class="section-content">
                 <div class="admin-dashboard-boxes">
-                    @foreach ($users as $user)
-                        <div class="box">
-                            <span>{{ $user->name }}</span>
-                            <p>Email: {{ $user->email }}</p>
-                        </div>
-                    @endforeach
+
                 </div>
             </section>
 
             <section id="analytics" class="section-content">
                 <div class="admin-dashboard-boxes">
-                    <div class="box2">
-                        <div class="total-users-label">Total Users</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
-                    </div>
+
+                </div>
             </section>
 
             <section id="order" class="section-content">
                 <div class="admin-dashboard-boxes">
-                    <div class="box2">
-                        <div class="total-users-label">Total Orders</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
-                    </div>
+
+                </div>
             </section>
 
             <section id="inventory" class="section-content">
-            <div class="admin-dashboard-boxes">
-                    <div class="box2">
-                        <div class="total-users-label">Inventory</div>
-                        <div class="total-users-number">{{ $totalUsers }}</div>
-                    </div>
+                <div class="admin-dashboard-boxes">
+
+                </div>
             </section>
         </div>
     </div>
