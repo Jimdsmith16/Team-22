@@ -15,6 +15,22 @@ Route::get('/about', function() {
     return view('AboutUs');
 });
 
+// routing for checkout page
+Route::get('/checkout', function() {
+    return view('Checkout');
+});
+
+// routing for dummy payment page, amount to be changed later
+Route::get('payment', function() {
+    $amount = 20;
+    return view('payment', ['amount' => $amount]);
+});
+
+// routing for order confirmation page
+Route::get('/order-confirmation', function() {
+    return view('GVOrderConfirmation');
+});
+
 // routing for contact a tutor page
 Route::get('/tutor', function() {
     return view('GVTutor');
@@ -39,6 +55,11 @@ Route::get('/usersettings', function () {
     return view('usersettings');
 })->middleware('auth');
 
+// routing for admin settings
+Route::get('/adminsettings', function () {
+    return view('adminsettings');
+})->middleware('auth');
+
 // routing for product display page
 // displays all products
 Route::get('/products', [ProductController::class, 'list']);
@@ -51,6 +72,15 @@ Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 
 // displays products by category
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
+
+// routing for a single product
+Route::get('/product/{id}', function($id) {
+    $product = App\Models\Product::find($id);
+    if (!$product) {
+        abort(404, 'Product not found');
+    }
+    return view('SingleProduct', ['product' => $product]);
+});
 
 // routing for basket page
 Route::get('/basket', function() {
