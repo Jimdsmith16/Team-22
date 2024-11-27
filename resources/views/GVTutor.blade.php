@@ -141,18 +141,28 @@
             color: red;
         }
 
-        footer {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
+    .footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 20px;
+    }
+    
+    .footer p {
+      margin: 5px 0;
+    }
+    
+    .footer .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .footer .contact-info p {
+      margin: 0;
+      font-size: 0.9em;
+    }
     </style>
 </head>
 <body>
@@ -279,12 +289,14 @@
         </div>
     </div>
 
-    <footer>
-        <p>Contact us</p>
-        <p>Telephone: 0788635240</p>
-        <p>Email: GradeVault@gmail.com</p>
-        <p>Guard your Grades with GradeVault</p>
-    </footer>
+ <div class="footer">
+    <div class="contact-info">
+      <p>Contact us</p>
+      <p>Telephone: 123-456-7890</p>
+      <p>Email: info@gradevault.com</p>
+    </div>
+    <p>Guard your Grades with GradeVault</p>
+  </div>
     <script>
         function openModal() {
             document.getElementById("contactModal").style.display = "flex";
