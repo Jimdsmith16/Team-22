@@ -13,9 +13,16 @@
         <img src="#" alt="GradeVault Logo">
     </div>
     <nav>
-        <a href="#">Tutors</a>
-        <a href="#">About</a>
-        <a href="#">Contact us</a>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
+            @auth
+            <a href="{{url('usersettings') }}">Settings</a>
+            @else
+            <a href="{{url('login') }}">Log In / Sign Up</a>
+            @endauth
         <input type="search" placeholder="Search...">
     </nav>
 </header>
@@ -51,8 +58,8 @@
 
 <footer>
     <p>Contact us</p>
-    <p>Telephone: </p>
-    <p>Email: </p>
+    <p>Telephone: 123 456 7890</p>
+    <p>Email: Gradevault06@gmail.com</p>
     <p>Guard your Grades with GradeVault</p>
 </footer>
 
