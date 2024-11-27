@@ -17,7 +17,11 @@
             <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
-            <a href="{{url('/')}}">Return to Homepage</a>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
             <a href="#">Hi {{ Auth::user()->name }}</a>
             <a href="#">
                 <ion-icon name="person-outline"></ion-icon>

@@ -166,7 +166,11 @@
             <a href="{{url('about')}}">About</a>
             <a href="{{url('contact')}}">Contact Us</a>
             <a href="{{url('products')}}">Products</a>
-            <a href="#">Log In / Sign Up</a>
+            @auth
+            <a href="{{ url('usersettings') }}">Settings</a>
+            @else
+            <a href="{{ url('login') }}">Log In / Sign Up</a>
+            @endauth
         </nav>
         <div class="search-bar">
             <input type="text" placeholder="Search...">

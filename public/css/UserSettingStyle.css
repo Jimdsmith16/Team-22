@@ -18,7 +18,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -38,7 +37,7 @@ body {
 nav ion-icon {
     font-size: 25px; 
     color: #ffffff; 
-    vertical-align: middle;
+    align-items: center;
 }
 
 .grid-container {
