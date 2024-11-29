@@ -104,6 +104,6 @@ Route::post('/orders', [OrderController::class, 'addOrder']);
 
 Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
 
-Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth'); // Update Profile
+Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 ?>
