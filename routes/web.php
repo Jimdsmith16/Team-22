@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 // routing for home page
 Route::get('/', function() {
@@ -100,6 +102,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/orders', [OrderController::class, 'addOrder']);
 
-use App\Http\Controllers\Auth\ResetPasswordController;
-
 Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+
+Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth'); // Update Profile
+
+?>
