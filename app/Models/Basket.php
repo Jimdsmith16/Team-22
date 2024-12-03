@@ -12,4 +12,12 @@ class Basket extends Model
     public $timestamps = false;
 
     protected $fillable = ['user_id'];
+
+    // products in basket
+    public function products()
+{
+    return $this->belongsToMany(Product::class, 'basket_product')
+                ->withPivot('quantity');
+}
+
 }
