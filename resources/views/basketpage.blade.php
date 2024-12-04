@@ -5,72 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basket Page</title>
     <style>
-        /* General body styling */
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f8ff;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
-        /* Header styling */
-        header {
+        body {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .header {
             background-color: #000;
-            color: white;
-            padding: 10px 20px;
+            padding: 0 15px;
+            height: 60px;
+            color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header nav {
-            display: flex;
-            gap: 20px;
-            align-items: center;
+        .header .logo img {
+            height: 50px;
+            max-height: 100%;
         }
 
-        header nav a {
+        .header nav a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
         }
 
-        header nav a:hover {
-            text-decoration: underline;
+        .header nav a:hover {
+            color: gold;
         }
 
-        header .search-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        header .search-box input {
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        header .search-box button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #ddd;
-        }
-
-        /* Logo styling */
-        .logo {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            width: 50px;
-        }
-
-        /* Basket container styling */
         .basket-container {
             margin: 30px auto;
             padding: 20px;
@@ -162,42 +137,52 @@
         .checkout-button:hover {
             background-color: #357abd;
         }
-
-        /* Footer styling */
-        footer {
-            background-color: #000;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-        }
+.footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 20px;
+    }
+    
+    .footer p {
+      margin: 5px 0;
+    }
+    
+    .footer .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .footer .contact-info p {
+      margin: 0;
+      font-size: 0.9em;
+    }
     </style>
 </head>
 <body>
-    <!-- Golden logo in the corner -->
-    <img src="logo.png" alt="GV Logo" class="logo">
-
-    <!-- Header -->
-    <header>
-        <nav>
-            <a href="#">Tutors</a>
-            <a href="#">About</a>
-            <a href="#">Contact us</a>
-            <a href="#">
-                <!-- Basket Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
-                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9zM1 7v1h14V7z" />
-                </svg>
-                Basket
-            </a>
-        </nav>
-        <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <button>🔍</button>
+    <div class="header">
+        <div class="logo">
+        <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
         </div>
-    </header>
+          <nav>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
+            @auth
+            <a href="{{ url('usersettings') }}">Settings</a>
+            @else
+            <a href="{{ url('login') }}">Log In / Sign Up</a>
+            @endauth
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
 
-    <!-- Basket Section -->
     <div class="basket-container">
         <div class="basket-title">Basket</div>
 
@@ -219,15 +204,17 @@
         <div class="total-section">Total = £10.00</div>
         <button class="checkout-button">Proceed to Checkout ➤</button>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        Contact us: Telephone: <strong>123-456-789</strong> Email: <strong>info@example.com</strong><br>
-        Guard your Grades with GradeVault
-    </footer>
+    
+  <div class="footer">
+    <div class="contact-info">
+      <p>Contact us</p>
+      <p>Telephone: 123-456-7890</p>
+      <p>Email: info@gradevault.com</p>
+    </div>
+    <p>Guard your Grades with GradeVault</p>
+  </div>
 
     <script>
-        // Function to update quantity and total
         function updateQuantity(change, button) {
             const quantitySpan = button.parentElement.querySelector('span');
             const totalSpan = document.querySelector('.total-section');
