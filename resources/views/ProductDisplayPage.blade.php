@@ -22,7 +22,7 @@
             <a href="{{ url('usersettings') }}">Settings</a>
             @else
             <a href="{{ url('login') }}">Log In / Sign Up</a>
-            @endauth
+        @endauth
     </nav>
     <div class="search-bar">
         <input type="text" placeholder="Search...">
