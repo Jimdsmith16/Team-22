@@ -29,7 +29,7 @@ class ProductController extends Controller
     }
  public function search(Request $request){
         $search = $request->input ('search');
-        $results = Product::where('name','like','%$search%')->get();
-        return view('products.index',['results', $results]);
+        $results = Product::where('name','like','%'. $search. '%')->get();
+        return view("ProductDisplayPage", array("products" => $results));
     }
 }
