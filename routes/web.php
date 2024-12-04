@@ -87,7 +87,7 @@ Route::get('/product/{id}', function($id) {
 
 // routing for basket page
 Route::get('/basket', function() {
-    return view('basket');
+    return view('basketpage');
 });
 
 Route::post('/basket/add', [BasketController::class, 'addToBasket'])->middleware('auth');
