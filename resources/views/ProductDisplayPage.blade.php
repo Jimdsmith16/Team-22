@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- Header Section -->
 <div class="header">
     <div class="logo">
         <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
@@ -39,9 +38,16 @@
         </a>
         <div class="desc">{{ $product->name }}</div>
         <div class="price">£{{ number_format($product->price, 2) }}</div>
+        <a href="single product.html" class="view-product-btn">View Product</a>
     </div>
     @endforeach
 </div>
+        <footer>
+        <p>Contact us</p>
+        <p>Telephone: 0788635240</p>
+        <p>Email: GradeVault@gmail.com</p>
+        <p>Guard your Grades with GradeVault</p>
+    </footer>
    
 </body>
 </html>
