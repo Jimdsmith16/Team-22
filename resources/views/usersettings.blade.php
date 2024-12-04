@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeVault User Settings</title>
-    <link rel="stylesheet" href="{{ asset('css/UserSettingStyle.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
@@ -96,8 +95,6 @@
                 </div>
             </section>
 
-
-
             <section id="order-history" class="section-content">
                 <div class="user-dashboard-boxes">
                     <div class="box">
@@ -107,10 +104,55 @@
             </section>
 
             <section id="address" class="section-content">
-                <div class="user-dashboard-boxes">
-                    <div class="box">
-                        <span><strong>Address:</strong> Edit your shipping address.</span>
-                    </div>
+                <div class="address-container">
+                    <header>
+                        <h2>Edit Address Information</h2>
+                    </header>
+
+                    <form method="POST" action="{{ route('address.update') }}">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="address_line1">New Address Line 1</label>
+                            <input id="address_line1" name="address_line1" type="text"
+                                value="{{ old('address_line1') }}" required />
+                            @error('address_line1')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address_line2">New Address Line 2</label>
+                            <input id="address_line2" name="address_line2" type="text"
+                                value="{{ old('address_line2') }}" />
+                            @error('address_line2')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postcode">New Postcode</label>
+                            <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required />
+                            @error('postcode')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">New Country</label>
+                            <input id="country" name="country" type="text" value="{{ old('country') }}" required />
+                            @error('country')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="submit-button">Update Address</button>
+
+                        @if (session('status') === 'address-updated')
+                            <p class="success-message">Address successfully updated.</p>
+                        @endif
+                    </form>
                 </div>
             </section>
 
@@ -314,10 +356,6 @@
         transition: color 0.3s;
     }
 
-    .sidebar a:hover {
-        color: #02e652;
-    }
-
     .sidebar a ion-icon {
         font-size: 24px;
         vertical-align: middle;
@@ -360,58 +398,73 @@
         margin: 5px;
     }
 
+    .password-container {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
     .password-container header {
         margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 
     .password-container h2 {
         font-size: 1.5rem;
         color: #333333;
+        margin: 0;
+        padding: 0;
     }
 
     .password-container p {
         font-size: 0.9rem;
         color: #666666;
+        margin: 0;
     }
 
     .form-group {
+        display: flex;
+        flex-direction: column;
         margin-bottom: 15px;
+        gap: 8px;
     }
 
     .form-group input {
-        width: 50%;
-        padding: 10px;
+        width: 100%;
+        padding: 12px;
         font-size: 0.9rem;
         border: 1px solid #cccccc;
-        border-radius: 4px;
+        border-radius: 12px;
+        box-sizing: border-box;
+        transition: border 0.3s ease;
     }
 
-    .submit-button {
-        width: 10%;
-        padding: 10px;
-        background-color: #000000;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+    .form-group input:focus {
+        border-color: #02e652;
+        outline: none;
     }
 
-    .submit-button:hover {
-        background-color: gold;
-    }
 
+    .submit-button,
     .submit-button1 {
-        width: 10%;
-        padding: 10px;
+        width: 100%;
+        padding: 12px;
         background-color: #000000;
         color: #ffffff;
         border: none;
-        border-radius: 4px;
+        border-radius: 12px;
         transition: background-color 0.3s ease, color 0.3s ease;
+        font-size: 0.9rem;
+        cursor: pointer;
     }
 
+    .submit-button:hover,
     .submit-button1:hover {
         background-color: gold;
+        color: #000000;
     }
 
     @media (max-width: 768px) {
