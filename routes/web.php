@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\BasketController;
 
 // routing for home page
 Route::get('/', function() {
@@ -89,6 +90,7 @@ Route::get('/basket', function() {
     return view('basket');
 });
 
+Route::post('/basket/add', [BasketController::class, 'addToBasket'])->middleware('auth');
 
 // routing for updating orders 
 Route::patch('/orders/update-{id}', [OrderController::class, 'updateOrder']);
