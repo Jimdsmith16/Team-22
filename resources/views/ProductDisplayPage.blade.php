@@ -22,7 +22,7 @@
             <a href="{{ url('usersettings') }}">Settings</a>
             @else
             <a href="{{ url('login') }}">Log In / Sign Up</a>
-            @endauth
+        @endauth
     </nav>
     <div class="search-bar">
         <input type="text" placeholder="Search...">
@@ -38,7 +38,7 @@
         </a>
         <div class="desc">{{ $product->name }}</div>
         <div class="price">£{{ number_format($product->price, 2) }}</div>
-        <a href="{{url('products', ['id' => $project->id])}}" class="view-product-btn">View Product</a>
+        <a href="{{url('products', ['id' => $product->id])}}" class="view-product-btn">View Product</a>
     </div>
     @endforeach
 </div>
