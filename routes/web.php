@@ -108,4 +108,9 @@ Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword']
 
 Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
+// routing for the search function
+Route::get('/','ProductController@GVMain');
+
+Route::get('/search','ProductController@search')->name('products.search');
+
 ?>

@@ -27,4 +27,9 @@ class ProductController extends Controller
         $products = DB::table("products")->where("category_id", "=", $categoryID)->distinct()->get();
         return view("ProductDisplayPage", array("products" => $products));
     }
+ public function search(Request $request){
+        $search = $request->input ('search');
+        $results = Product::where('name','like','%$search%')->get();
+        return view('products.index',['results', $results]);
+    }
 }
