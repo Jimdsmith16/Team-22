@@ -167,10 +167,12 @@ body {
             <a href="{{ url('login') }}">Log In / Sign Up</a>
             @endauth
     </nav>
-    <div class="search-bar">
-      <input type="text" placeholder="Search...">
+     <div class="search-bar">
+        <form action="{{route('products.search')}}" method="GET">
+            <input type="text" name="search" placeholder="Search Products...">
+            <button type="submit">Search</button>
+        </form>
     </div>
-  </div>
 
   <!-- Content Section -->
   <div class="content">
