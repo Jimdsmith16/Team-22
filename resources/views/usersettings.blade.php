@@ -10,7 +10,7 @@
 <body id="settings">
     <div class="header">
         <div class="logo">
-            <img src="{{ asset('images/GV.png') }}" alt="GradeVault Logo">
+            <img src="{{ asset('Images/GV.png') }}" alt="GradeVault Logo">
         </div>
         <nav>
             <div class="nav-links">
