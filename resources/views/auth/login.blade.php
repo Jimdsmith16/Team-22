@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeVault Login</title>
-    <link rel="stylesheet" href="{{ asset('css/LoginStyles.css') }}">
 </head>
 <body id="loginpage">  
 <div class="header">
@@ -71,8 +70,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 600;
+    font-family: Arial, sans-serif;
 }
 
 body {

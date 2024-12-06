@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeVault Register</title>
-    <link rel="stylesheet" href="{{ asset('css/LoginStyles.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body id="register-page">
     <div class="header">
@@ -90,8 +86,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 600;
+    font-family: Arial, sans-serif;
 }
 
 body {
