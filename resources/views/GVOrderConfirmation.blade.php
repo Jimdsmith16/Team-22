@@ -178,9 +178,12 @@
             <a href="{{url('products')}}">Products</a>
             <a href="#">Log In / Sign Up</a>
         </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-        </div>
+         <div class="search-bar">
+        <form action="{{route('products.search')}}" method="GET">
+            <input type="text" name="search" placeholder="Search Products...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
     </div>
 
     <div class="confirmation-message">
