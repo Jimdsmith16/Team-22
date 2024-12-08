@@ -36,7 +36,10 @@
                     </span>
                     <input type="text" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required>
                     @error('name')
-                        <div class="error-message">{{ $message }}</div>
+                    <div class="error-message">
+                        {{ $message }}
+                        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
                     @enderror
                 </div>
                 <div class="input-box">
@@ -45,7 +48,10 @@
                     </span>
                     <input type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                     @error('email')
-                        <div class="error-message">{{ $message }}</div>
+                    <div class="error-message">
+                        {{ $message }}
+                        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
                     @enderror
                 </div>
                 <div class="input-box">
@@ -54,14 +60,18 @@
                     </span>
                     <input type="password" id="password" name="password" placeholder="Password" required>
                     @error('password')
-                        <div class="error-message">{{ $message }}</div>
+                    <div class="error-message">
+                        {{ $message }}
+                        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
                     @enderror
                 </div>
                 <div class="input-box">
                     <span class="icon">
                         <ion-icon name="lock-closed"></ion-icon>
                     </span>
-                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                    <input type="password" id="password_confirmation" name="password_confirmation"
+                        placeholder="Confirm Password" required>
                 </div>
 
                 <div class="terms-conditons">
@@ -69,10 +79,13 @@
                         <input type="checkbox" name="terms" required> I accept the Terms and Conditions
                     </label>
                     @error('terms')
-                        <div class="error-message">{{ $message }}</div>
+                    <div class="error-message">
+                        {{ $message }}
+                        <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
                     @enderror
                 </div>
-                
+
                 <button class="btn" type="submit">Register</button>
             </form>
             <p class="login-register">Already have an account? <a href="{{ route('login') }}">Login</a></p>
@@ -258,4 +271,41 @@ body {
 .login-register a:hover {
     text-decoration: underline;
 }
+
+.error-message {
+    position: fixed;
+    top: 10px; 
+    left: 50px; 
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 0; 
+    font-size: 14px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100; 
+}
+
+.error-message + .error-message {
+    margin-top: 10px;
+}
+
+.error-message .close-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #721c24;
+    cursor: pointer;
+    margin-left: 10px;
+    line-height: 1;
+}
+
+.error-message .close-btn:hover {
+    color: #ff0000;
+}
+
 </style>
