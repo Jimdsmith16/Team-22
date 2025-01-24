@@ -26,8 +26,7 @@ class OrderController extends Controller
         $orders = DB::table("orders")->join("products_in_order", "orders.id", "=", "products_in_order.order_id")->join("products", "products.id", "=", "products_in_order.product_id")->select("products.*", "orders.estimated_delivery_date")->where("orders.user_id", "=", $userid)->get();
         $totalPrice = $orders->sum("price");
         $totalOrders = $orders->count();
-        $mergedOrders = $orders->merge(["total_price" => $totalPrice, "total_orders" => $totalOrders]);
-        return view("previousOrders", array("orders" => $orders));
+        return view("previousOrders", ["orders" => $orders, "total_orders" => $totalOrders, "total_price" => $totalPrice]);
      }
 
      public function updateOrder($id, Request $request){

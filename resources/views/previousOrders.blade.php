@@ -130,8 +130,8 @@
         @endforeach
 
         <div class="totals">
-            <p>Total: {{$orders->total_price}}</p>
-            <p>Total orders: {{$orders->total_orders}}</p>
+            <p>Total: {{$total_price}}</p>
+            <p>Total orders: {{$total_orders}}</p>
         </div>
     </section>
 </main>
