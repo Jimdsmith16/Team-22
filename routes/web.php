@@ -7,6 +7,13 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\ProductController;
+
+// Route to list all products
+Route::get('/products', [ProductController::class, 'list'])->name('products.list');
+
+// Route to filter products by category
+Route::get('/products/category', [ProductController::class, 'findByCategory'])->name('products.byCategory');
 
 //Routing for Home page.
 Route::get('/', function() {
