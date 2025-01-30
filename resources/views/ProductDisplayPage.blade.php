@@ -36,6 +36,20 @@
 
         <!-- Content Section -->
         <div class="product-container">
+
+            <!-- Category Dropdown -->
+            <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
+                <label for="category">Filter by Category:</label>
+                <select name="category" id="category" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}" {{ request('category') == $category->name ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+            
             @foreach($products as $product)
             <div class="gallery">
                 <a target="_blank" href="{{ $product->image_link }}">
