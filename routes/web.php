@@ -8,101 +8,90 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
 
-// routing for home page
+//Routing for Home page.
 Route::get('/', function() {
     return view('GVMain');
 });
 
-// routing for about us page
+//Routing for About Us page.
 Route::get('/about', function() {
     return view('AboutUs');
 });
 
-// routing for checkout page
+//Routing for Checkout page.
 Route::get('/checkout', function() {
     return view('Checkout');
 });
 
-// routing for dummy payment page, amount to be changed later
+// Routing for Payment page with placeholder amount.
 Route::get('payment', function() {
     $amount = 20;
     return view('payment', ['amount' => $amount]);
 });
 
-// routing for order confirmation page
+//Routing for Order Confirmation page.
 Route::get('/order-confirmation', function() {
     return view('GVOrderConfirmation');
 });
 
-// routing for contact a tutor page
+//Routing for Contact a Tutor page.
 Route::get('/tutor', function() {
     return view('GVTutor');
 });
 
-// routing for contact us page
+//Routing for Contact Us page.
 Route::get('/contact', function() {
     return view('ContactUs');
 });
 
-// routing for login page
+//Routing for Home page.
 Route::get('/login', function() {
     return view('login');
 });
 
-// routing for register page
+////Routing for Register page.
 Route::get('/register', function() {
     return view('register');
 });
-// Routing for User Settings
+////Routing for User Settings page. Requires authorisation.
 Route::get('/usersettings', function () {
     return view('usersettings');
 })->middleware('auth');
 
-// routing for admin settings
+////Routing for Admin Settings page. Requires authorisation.
 Route::get('/adminsettings', function () {
     return view('adminsettings');
 })->middleware('auth');
 
-// routing for product display page
-// displays all products
+//Routing for Product Display page.
 Route::get('/products', [ProductController::class, 'list']);
 
-// displays products by id
+//Routing for Singular Product page.
 Route::get('/products/{id}', [ProductController::class, 'show']);
 
-// displays products by name
+//Routing for finding products by name. Shows Product Display page.
 Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 
-// displays products by category
+//Routing for finding products by category. Shows Product Display page.
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
 
-// routing for a single product
-Route::get('/product/{id}', function($id) {
-    $product = App\Models\Product::find($id);
-    if (!$product) {
-        abort(404, 'Product not found');
-    }
-    return view('SingleProduct', ['product' => $product]);
-});
-
-// routing for basket page
+//Routing for Basket page. Needs to be linked to BasketController.
 Route::get('/basket', function() {
     return view('basketpage');
 });
 
 Route::post('/basket/add', [BasketController::class, 'addToBasket'])->middleware('auth');
 
-// routing for updating orders 
+//Routing for orders.
 Route::patch('/orders/update-{id}', [OrderController::class, 'updateOrder']);
 
-// displays previous orders
+Route::post('/orders', [OrderController::class, 'addOrder']);
+
+//Routing for Previous Orders page.
 Route::get('/previous-orders/{userid}', [OrderController::class, 'getPreviousOrderInfo']);
 
-Auth::routes();
-
+//Auth routes.
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::post('/orders', [OrderController::class, 'addOrder']);
 
 Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
 
@@ -111,5 +100,7 @@ Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.
 Route::put('/address/update', [ProfileController::class, 'updateAddress'])->name('address.update')->middleware('auth');
 
 Route::get('/search',[ProductController::class, 'search'])->name('products.search');
+
+Auth::routes();
 
 ?>

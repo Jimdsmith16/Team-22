@@ -8,19 +8,19 @@ use App\Models\Product;
 
 class BasketController extends Controller
 {
-    // add item to basket
+    //Adds product to basket.
     public function addToBasket(Request $request)
     {
-        // validation
+        //Validates the soon-to-be-added product.
         $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
 
-        // create basket
+        //Creates or gets the first basket depending on if one exists.
         $basket = Basket::firstOrCreate(['user_id' => auth()->id()]);
 
-        // add product to basket
+        //Adds product to basket.
         $basket->products()->attach($validated['product_id'], ['quantity' => $validated['quantity']]);
 
         return response()->json(['message' => 'Item added to basket successfully.'], 200);

@@ -1,3 +1,4 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +7,7 @@
     font-weight: 600;
 }
 
+/* General Page and Body Styling */
 body {
     margin: 0;
     padding: 0;
@@ -13,6 +15,7 @@ body {
     overflow: hidden;
 }
 
+/* Header Styling */
 .header {
     background-color: #000;
     padding: 0 15px;
@@ -52,7 +55,7 @@ nav {
     transition: color 0.3s ease;
 }
 
-
+/* Body Styling */
 .user-info {
     display: flex;
     align-items: center;
@@ -193,7 +196,7 @@ nav ion-icon {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .grid-container {
         grid-template-columns: 60px 1fr;

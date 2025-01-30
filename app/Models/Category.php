@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    //Sets what columns exist and can be edited.
     protected $primaryKey = "id";
     public $timestamps = false;
 }
