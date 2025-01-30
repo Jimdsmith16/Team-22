@@ -5,49 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previous Orders</title>
     <style>
-        /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    
-    /* Layout Styling */
-    body {
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    
-    .header {
-      background-color: #000;
-      padding: 0 15px;
-      height: 60px; /* Set a fixed height for the header */
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .header .logo img {
-      height: 50px; /* Adjusted the logo size */
-      max-height: 100%; /* Ensures it doesn’t exceed header height */
-    }
-    
-    .header nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    
-    .search-bar {
-      position: relative;
-    }
-    
-    .search-bar input[type="text"] {
-      padding: 5px;
-      font-size: 1em;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #F5F5F5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #000;
+            padding: 0 15px;
+            height: 60px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .logo img {
+            height: 50px;
+            max-height: 100%;
+
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+        
+        .header nav a:hover {
+            color: gold;
+        }
+
+
+        .search-bar input[type="text"] {
+            padding: 5px;
+            font-size: 1em;
+        }
     
     .content {
       max-width: 800px;
@@ -62,7 +67,7 @@
     .content img {
       max-width: 100%;
       height: auto;
-      margin-bottom: 20px; /* Adds space below the image */
+      margin-bottom: 20px; 
     }
     
     .content p {
@@ -70,7 +75,7 @@
       line-height: 1.6;
     }
 
-    /* Footer Styling */
+
     .footer {
       background-color: #000;
       color: #fff;
@@ -79,38 +84,46 @@
       margin-top: 20px;
     }
     
-    .footer p {
-      margin: 5px 0;
-    }
-    
-    .footer .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    
-    .footer .contact-info p {
-      margin: 0;
-      font-size: 0.9em;
-    }
+    footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <img src="#" alt="GradeVault Logo">
+    <div class="header">
+        <div class="logo">
+            <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+        </div>
+        <nav>
+            <a href="{{url('/')}}">Home</a>
+            <a href="{{url('tutor')}}">Tutors</a>
+            <a href="{{url('about')}}">About</a>
+            <a href="{{url('contact')}}">Contact Us</a>
+            <a href="{{url('products')}}">Products</a>
+            @auth
+            <a href="{{ url('usersettings') }}">Settings</a>
+            @else
+            <a href="{{ url('login') }}">Log In / Sign Up</a>
+            @endauth
+        </nav>
+        <div class="search-bar">
+            <form action="{{route('products.search')}}" method="GET">
+                <input type="text" name="search" placeholder="Search Products...">
+                <button type="submit">Search</button>
+            </form>
+            
+        </div>
     </div>
-    <nav>
-        <a href="{{url('/')}}">Home</a>
-        <a href="{{url('tutor')}}">Tutors</a>
-        <a href="{{url('about')}}">About</a>
-        <a href="{{url('contact')}}">Contact Us</a>
-        <a href="{{url('products')}}">Products</a>
-        <a href="#">Basket Icon</a>
-        <input type="search" placeholder="Search...">
-    </nav>
-</header>
 
 <main>
     <section class="previous-orders">
@@ -135,13 +148,13 @@
         </div>
     </section>
 </main>
-
-<footer>
-    <p>Contact us</p>
-    <p>Telephone</p>
-    <p>Email</p>
+<div class="footer">
+    <div class="contact-info">
+      <p>Contact us</p>
+      <p>Telephone: 123-456-7890</p>
+      <p>Email: info@gradevault.com</p>
+    </div>
     <p>Guard your Grades with GradeVault</p>
-</footer>
-
+  </div>
 </body>
 </html>
