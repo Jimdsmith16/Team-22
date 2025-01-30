@@ -1,14 +1,17 @@
+/* General Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* General Page and Body Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: white;
 }
 
+/* Header Styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -29,6 +32,7 @@ header nav input[type="search"] {
     border: none;
 }
 
+/* Body Styling */
 .checkout-container {
     background-color: cyan;
     margin: 20px auto;
@@ -86,6 +90,7 @@ header nav input[type="search"] {
     cursor: pointer;
 }
 
+/* Footer Styling */
 footer {
     background-color: black;
     color: white;

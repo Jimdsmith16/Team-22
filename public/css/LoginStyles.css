@@ -1,3 +1,4 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +6,13 @@
     font-family: Arial, sans-serif;
 }
 
+/* General Page and Body Styling */
 body {
     padding-top: 60px;
     background-color: #0ac135;
 }
 
-/* Header CSS */
+/* Header Styling */
 .header {
     background-color: #000;
     padding: 0 15px;
@@ -41,7 +43,7 @@ body {
     font-size: 1em;
 }
 
-/* Login Page */
+/* Body Styling */
 #loginpage {
     display: flex;
     justify-content: center;

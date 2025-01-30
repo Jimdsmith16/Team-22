@@ -13,6 +13,7 @@ use App\Models\Address;
 
 class ProfileController extends Controller
 {
+    //Edits the user's information.
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -20,6 +21,7 @@ class ProfileController extends Controller
         ]);
     }
 
+    //Edits the user's address.
     public function editAddress(Request $request)
     {
         return view('address.edit', [
@@ -27,9 +29,11 @@ class ProfileController extends Controller
         ]);
     }
 
+    //Updates the user's information.
     public function update(Request $request): RedirectResponse
     {
 
+        //Validates the given data.
         $validated = $request->validate([
             'name' => [
                 'required',
@@ -48,6 +52,7 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        //Overwrites the current information.
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
@@ -57,14 +62,19 @@ class ProfileController extends Controller
             ]);
             $user->password = bcrypt($validatedPassword['password']);
         }
+
+        //Commits the changes.
         $user->save();
 
         return redirect('/usersettings')->with('status', 'Profile updated successfully!');
     }
+
+    //Updates the user's address.
     public function updateAddress(Request $request)
     {
         $user = $request->user();
 
+        //Validates the given address.
         $validated = $request->validate([
             'address_line1' => 'required|string|max:255',
             'address_line2' => 'nullable|string|max:255',
@@ -76,6 +86,7 @@ class ProfileController extends Controller
             'country.required' => 'Please provide the country name.',
         ]);
 
+        //Overwrites the current address if it exists, if not, sets a new address.
         if ($user->address_id) {
             $address = Address::find($user->address_id);
 
@@ -103,6 +114,7 @@ class ProfileController extends Controller
     }
 
 
+    //Removes the user from the database.
     public function destroy(Request $request): RedirectResponse
     {
 
@@ -121,6 +133,7 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    //Shows the admin dashboard with data on all users.
     public function showAdminDashboard(): View
     {
         $totalUsers = User::count();

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    //Sets what columns exist and can be edited.
     public $timestamps = false;
     protected $fillable = [
         'address_line1',
@@ -13,6 +14,8 @@ class Address extends Model
         'postcode',
         'country',
     ];
+
+    //Returns the user this address belongs to.
     public function user()
     {
         return $this->hasOne(User::class);
