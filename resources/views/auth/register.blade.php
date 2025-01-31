@@ -108,7 +108,6 @@
 body {
     height: 100%;
     padding-top: 60px;
-    background-color: #0ac135;
 }
 
 /* Header CSS */
