@@ -42,4 +42,12 @@ class ProductController extends Controller
         $categories = Category::all();
         return view("ProductDisplayPage", compact("products", "categories"));
     }
+
+    // Finds all products with similar names.
+    public function search(Request $request){
+        $search = $request->input ('search');
+        $products = Product::where('name','like','%'. $search. '%')->get();
+        $categories = Category::all();
+        return view("ProductDisplayPage", compact("products", "categories"));
+    }
 }
