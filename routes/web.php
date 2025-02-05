@@ -12,7 +12,7 @@ use App\Http\Controllers\BasketController;
 Route::get('/products', [ProductController::class, 'list'])->name('products.list');
 
 // Route to filter products by category (adjusting for dynamic parameter)
-Route::get('/products/category/{category}', [ProductController::class, 'findByCategory'])->name('products.byCategory');
+Route::get('/products/category', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
 
 //Routing for Home page.
 Route::get('/', function() {
@@ -86,7 +86,9 @@ Route::get('/basket', function() {
     return view('basketpage');
 });
 
-Route::post('/basket/add', [BasketController::class, 'addToBasket'])->middleware('auth');
+Route::get('/basket', [BasketController::class, 'viewBasket'])->middleware('auth');
+Route::post('/basket/add', [BasketController::class, 'addToBasket'])->middleware('auth')->name('basket.add');
+Route::post('/basket/remove', [BasketController::class, 'removeFromBasket'])->middleware('auth')->name('basket.remove');
 
 //Routing for orders.
 Route::patch('/orders/update-{id}', [OrderController::class, 'updateOrder']);
