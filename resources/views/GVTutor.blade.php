@@ -205,6 +205,7 @@
                 <h1>John Doe</h1>
                 <p class="title">Math Tutor</p>
                 <p>Harvard University</p>
+                <p>Price: £50 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -213,6 +214,7 @@
                 <h1>Jane Harris</h1>
                 <p class="title">Math Tutor</p>
                 <p>University of Nottingham</p>
+                <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -221,6 +223,7 @@
                 <h1>Annie Brown</h1>
                 <p class="title">Math Tutor</p>
                 <p>University of Bristol</p>
+                <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
         </div>
@@ -232,6 +235,7 @@
                 <h1>John Doe</h1>
                 <p class="title">English tutor</p>
                 <p>Harvard University</p>
+                <p>Price: £40 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -240,6 +244,7 @@
                 <h1>Jane Harris</h1>
                 <p class="title">English tutor</p>
                 <p>University of Nottingham</p>
+                <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -248,6 +253,7 @@
                 <h1>Annie Brown</h1>
                 <p class="title">English Tutor</p>
                 <p>University of Bristol</p>
+                <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
         </div>
@@ -259,6 +265,7 @@
                 <h1>John Doe</h1>
                 <p class="title">Science Tutor</p>
                 <p>Harvard University</p>
+                <p>Price: £50 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -267,6 +274,7 @@
                 <h1>Jane Harris</h1>
                 <p class="title">Science Tutor</p>
                 <p>University of Nottingham</p>
+                <p>Price: £40 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
 
@@ -275,6 +283,7 @@
                 <h1>Annie Brown</h1>
                 <p class="title">Science Tutor </p>
                 <p>University of Bristol</p>
+                <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
         </div>
