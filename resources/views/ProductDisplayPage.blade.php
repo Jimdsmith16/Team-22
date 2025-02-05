@@ -52,9 +52,7 @@
             
             @foreach($products as $product)
             <div class="gallery">
-                <a target="_blank" href="{{ $product->image_link }}">
-                    <img src= "{{ $product->image_link }}" alt="{{ $product->name }}">
-                </a>
+                <img src= "{{ $product->image_link }}" alt="{{ $product->alt_text }}">
                 <div class="desc">{{ $product->name }}</div>
                 <div class="price">£{{ number_format($product->price, 2) }}</div>
                 <form action="{{ route('basket.add') }}" method="POST">
