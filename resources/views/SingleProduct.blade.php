@@ -183,9 +183,7 @@
         <div class="basket-title">Basket</div>
 
         <div class="product-container">
-            <div class="product-image">
-                <img src="{{$product->image_link}}" alt="{{$product->name}}">
-            </div>
+            <img src="{{$product->image_link}}" alt="{{$product->alt_text}}">
 
             <div class="product-details">
                 <h1>{{$product->name}}</h1>

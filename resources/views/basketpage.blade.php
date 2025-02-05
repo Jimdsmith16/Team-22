@@ -327,7 +327,7 @@
 
             @foreach($products as $product)
             <div class="basket-item">
-            <img src="{{ $product->image_link }}" alt="{{ $product->name }}">
+            <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
             <div>{{ $product->name }}</div>
             <div class="price-quantity-container">
                 <div>Price - £{{ number_format($product->price, 2) }}</div>

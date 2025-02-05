@@ -15,7 +15,8 @@ return new class extends Migration
             $table->increments("id");
             $table->string("name", length: 100);
             $table->float("price", precision: 2);
-            $table->string("description", length: 255);
+            $table->text("description");
+            $table->string("alt_text", length: 255);
             $table->integer("number_of_stock");
             $table->string("image_link", length: 255);
             $table->integer("average_rating");
