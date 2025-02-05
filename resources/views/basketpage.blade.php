@@ -325,24 +325,34 @@
 
             <div class="item-title">Title</div>
 
+            @foreach($products as $product)
             <div class="basket-item">
-                <img src="product.jpg" alt="Product Image">
-                <div>'Maths GCSE Revision Book'</div>
-                <div class="price-quantity-container">
-                    <div>Price - £10</div>
-                    <div class="quantity-control">
-                        <button onclick="updateQuantity(-1, this)">-</button>
-                        <span>1</span>
-                        <button onclick="updateQuantity(1, this)">+</button>
-                    </div>
+            <img src="{{ $product->image_link }}" alt="{{ $product->name }}">
+            <div>{{ $product->name }}</div>
+            <div class="price-quantity-container">
+                <div>Price - £{{ number_format($product->price, 2) }}</div>
+                <div class="quantity-control">
+                    <form action="{{ route('basket.remove') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <button type="submit">-</button>
+                    </form>
+                    <span>{{ $product->pivot->quantity }}</span>
+                    <form action="{{ route('basket.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit">+</button>
+                    </form>
                 </div>
             </div>
-        
-
-            <div class="total-section">Total = £10.00</div>
-            <button class="checkout-button">Proceed to Checkout ➤</button>
         </div>
+        @endforeach
+
+        <div class="total-section">Total = £{{ number_format($total, 2) }}</div>
+        <button class="checkout-button">Proceed to Checkout ➤</button>
     </div>
+
     <div class="footer">
         <div class="contact-info">
         <p>Contact us</p>
