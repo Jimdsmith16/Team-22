@@ -63,13 +63,14 @@
     }
 
     /* Basket Container */
-    .basket-container {
+     /* Basket Container */
+     .basket-container {
         margin: 30px auto;
         padding: 20px;
-        background-color: #fff; /* Keeping the basket background white */
+        background-color: #ffffff; /* White background */
         width: 80%;
         max-width: 800px;
-        border: 1.5px solid #000;
+        border: 1.5px solid #4682B4; /* Light blue border */
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         text-align: center;
@@ -77,8 +78,8 @@
 
     /* Basket Title */
     .basket-title {
-        background-color: #000; /* Black header */
-        color: white; /* Gold text */
+        background-color: #59a7d5; /* Light blue title */
+        color: white; 
         padding: 12px;
         font-size: 2em;
         font-weight: bold;
@@ -88,7 +89,7 @@
 
     /* Item Title */
     .item-title {
-        background-color: #000; /* Black title bar */
+        background-color: #59a7d5; /* Light blue title bar */
         color: white;
         padding: 8px;
         border-radius: 5px;
@@ -105,10 +106,10 @@
         align-items: center;
         gap: 30px;
         margin: 20px 0;
-        background-color: #fff; /* Keeping item area white */
+        background-color: #ffffff;
         padding: 15px;
         border-radius: 8px;
-        border: 1.5px solid #000;
+        border: 1.5px solid #4682B4;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
@@ -122,7 +123,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #000; /* Black background */
+        background-color: #59a7d5;
         color: #fff; 
         padding: 12px;
         border-radius: 8px;
@@ -139,7 +140,7 @@
     }
 
     .quantity-control button {
-        background-color: #000;
+        background-color: #59a7d5;
         border: 1px solid #fff;
         border-radius: 5px;
         padding: 6px 14px;
@@ -151,13 +152,13 @@
     }
 
     .quantity-control button:hover {
-        background-color: #fff;
-        color: #000;
+        background-color: #649fcf;
+        color: #fff;
     }
 
     /* Total Section */
     .total-section {
-        background-color: #000;
+        background-color: #59a7d5;
         color: #fff;
         padding: 14px;
         border-radius: 8px;
@@ -171,27 +172,23 @@
     .checkout-button {
         margin-top: 20px;
         padding: 14px 30px;
-        background-color: #d3bd40; /* Gold button */
-        color: #000;
+        background-color: #588ebc;
+        color: #fff;
         border: none;
         border-radius: 8px;
         cursor: pointer;
         font-size: 1.4em;
         font-weight: bold;
         transition: background-color 0.3s ease, color 0.3s ease;
-        box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
     }
 
     .checkout-button:hover {
-        background-color: #000;
-        color: #cdaf06;
-        border: 1.5px solid #cdaf06;
+        background-color: #1a6ab9;
+        color: #fff;
     }
-
     /* Footer Styling */
 
-
-    .footer {
+        .footer {
         background-color: #000;
         color: #fff;
         text-align: center;
