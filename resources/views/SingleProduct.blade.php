@@ -265,6 +265,7 @@
                 <h1>{{$product->name}}</h1>
                 <div class="price">£ {{$product->price}}</div>
                 <div class="description">{{$product->description}}</div>
+                <div class="stock">Amount in Stock: {{$product->number_of_stock}}</div>
                 <form action="{{ route('basket.add') }}" method="POST">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
