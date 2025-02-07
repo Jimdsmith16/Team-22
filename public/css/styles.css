@@ -38,6 +38,7 @@ body {
     margin: 0 10px;
     font-size: 1em;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .header nav a:hover {
