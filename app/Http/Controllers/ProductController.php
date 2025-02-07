@@ -30,18 +30,12 @@ class ProductController extends Controller
     }
 
     // Finds all unique products under the given category.
-    public function findByCategory($category) {
-        $categoryID = Category::where("name", $category)->value("id");
-
-        if ($categoryID) {
-            $products = Product::where("category_id", $categoryID)->distinct()->get();
-        } else {
-            $products = Product::all(); // If category doesn't exist, show all products.
-        }
-
-        $categories = Category::all();
-        return view("ProductDisplayPage", compact("products", "categories"));
+    public function filterByCategory($categoryId) {
+        $products = \App\Models\Product::where('category_id', $categoryId)->get();
+        return view('products.index', ['products' => $products]);
     }
+
+
 
     // Finds all products with similar names.
     public function search(Request $request){
