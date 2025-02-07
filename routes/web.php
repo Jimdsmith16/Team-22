@@ -8,11 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
 
-// Route to list all products
-Route::get('/products', [ProductController::class, 'list'])->name('products.list');
-
-// Route to filter products by category (adjusting for dynamic parameter)
-Route::get('/products/category', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
+// Route to filter products by category
+Route::get('/products/filter/{category}', [ProductController::class, 'filterByCategory']);
 
 //Routing for Home page.
 Route::get('/', function() {
