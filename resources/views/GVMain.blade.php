@@ -278,6 +278,39 @@
 .tooltip:hover .tooltip-text {
     visibility: visible;
 }
+
+.header nav {
+    flex: 1; /* Takes up remaining space */
+    display: flex;
+    justify-content: center; /* Centers navigation links */
+}
+
+.basket-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adds spacing between basket and search */
+}
+
+.basket-icon {
+    font-size: 1.8em;
+}
+
+.basket-icon a {
+    text-decoration: none;
+    color: white;
+}
+
+.basket-icon a:hover {
+    color: gold;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+
+
         </style>
     </head>
     <body>
@@ -306,6 +339,16 @@
                     <span class="tooltip-text">Toggle Font Size</span>
                 </div>
             </nav>
+
+        <div class="basket-container">  
+            @auth
+            <div class="basket-icon">
+                <a href="{{ url('basket') }}">
+                    🛒
+                </a>
+            </div>
+            @endauth
+
             <!-- Header Search Bar -->
             <div class="search-bar">
                 <form action="{{route('products.search')}}" method="GET">
@@ -315,6 +358,7 @@
                 
             </div>
         </div>
+</div>
 
         <!-- Content Section -->
         <div class="bestseller-header">Bestsellers</div>
