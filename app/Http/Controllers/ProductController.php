@@ -32,11 +32,9 @@ class ProductController extends Controller
     // Finds all unique products under the given category.
     public function filterByCategory(Request $request) {
         $categoryId = $request->input('category');
-        if ($categoryId) {
-            $products = Product::where('category_id', $categoryId)->get();
-        } else {
-            $products = Product::all();
-        }
+        $products = $categoryId 
+            ? Product::where('category_id', $categoryId)->get()
+            : Product::all();
         $categories = Category::all();
         return view('ProductDisplayPage', compact('products', 'categories'));
     }
