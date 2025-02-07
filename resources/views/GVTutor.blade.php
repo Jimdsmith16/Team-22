@@ -169,7 +169,79 @@
         .footer .contact-info p {
             margin: 0;
             font-size: 0.9em;
-<<<<<<< HEAD
+        }
+
+        /* Switch Styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #878686;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 3px;
+            background-color: rgb(6, 0, 0);
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #878686;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Tooltip Styling */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 6px;
+            border-radius: 5px;
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7em;
+            white-space: nowrap;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
         }
     </style>
 </head>
@@ -196,120 +268,22 @@
             @else
                 <a href="{{ url('login') }}">Login</a>
             @endauth
+            <div class="tooltip">
+                <label class="switch">
+                    <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="tooltip-text">Toggle Font Size</span>
+            </div>
         </nav>
-        <!-- Header Search Bar Needs Implementation-->
+        <!-- Header Search Bar -->
         <div class="search-bar">
             <input type="text" placeholder="Search...">
-=======
-            }
-            .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 10px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #878686   ;
-            transition: 0.4s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 4px;
-            bottom: 3px;
-            background-color: rgb(6, 0, 0);
-            transition: 0.4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #878686;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-        .tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltip-text {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    visibility: hidden;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 6px;
-    border-radius: 5px;
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7em;
-    white-space: nowrap;
-}
-
-.tooltip:hover .tooltip-text {
-    visibility: visible;
-}
-        </style>
-    </head>
-    <body>
-        <!-- Header Styling -->
-        <div class="header">
-            <div class="logo">
-                <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
-            </div>
-            <!-- Header Nav Bar -->
-            <nav>
-                <a href="{{url('/')}}">Home</a>
-                <a href="{{url('tutor')}}">Tutors</a>
-                <a href="{{url('about')}}">About</a>
-                <a href="{{url('contact')}}">Contact Us</a>
-                <a href="{{url('products')}}">Products</a>
-                @auth
-                <a href="{{ url('usersettings') }}">Settings</a>
-                @else
-                <a href="{{ url('login') }}">Log In / Sign Up</a>
-                @endauth
-                <div class="tooltip">
-                    <label class="switch">
-                        <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="tooltip-text">Toggle Font Size</span>
-                </div>
-            </nav>
-            <!-- Header Search Bar Needs Implementation-->
-            <div class="search-bar">
-                <input type="text" placeholder="Search...">
-            </div>
->>>>>>> 109d388ccf5dd41bd5dcb955029186545142c406
         </div>
     </div>
 
     <!-- Content Section -->
     <div class="bestseller-header">Math Tutors</div>
-
     <div class="profile-container">
         <div class="card">
             <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
@@ -338,67 +312,8 @@
             <button onclick="openModal()">Contact</button>
         </div>
     </div>
-    <div class="bestseller-header">English Tutors</div>
 
-    <div class="profile-container">
-        <div class="card">
-            <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
-            <h1>John Doe</h1>
-            <p class="title">English tutor</p>
-            <p>Harvard University</p>
-            <p>Price: £40 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-
-        <div class="card">
-            <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
-            <h1>Jane Harris</h1>
-            <p class="title">English tutor</p>
-            <p>University of Nottingham</p>
-            <p>Price: £30 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-
-        <div class="card">
-            <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
-            <h1>Annie Brown</h1>
-            <p class="title">English Tutor</p>
-            <p>University of Bristol</p>
-            <p>Price: £30 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-    </div>
-    <div class="bestseller-header">Science Tutors</div>
-
-    <div class="profile-container">
-        <div class="card">
-            <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
-            <h1>John Doe</h1>
-            <p class="title">Science Tutor</p>
-            <p>Harvard University</p>
-            <p>Price: £50 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-
-        <div class="card">
-            <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
-            <h1>Jane Harris</h1>
-            <p class="title">Science Tutor</p>
-            <p>University of Nottingham</p>
-            <p>Price: £40 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-
-        <div class="card">
-            <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
-            <h1>Annie Brown</h1>
-            <p class="title">Science Tutor </p>
-            <p>University of Bristol</p>
-            <p>Price: £30 Per Hour</p>
-            <button onclick="openModal()">Contact</button>
-        </div>
-    </div>
-
+    <!-- Modal for Contact -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -438,29 +353,14 @@
             document.getElementById("contactModal").style.display = "none";
         }
 
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             const modal = document.getElementById("contactModal");
             if (event.target === modal) {
                 closeModal();
             }
         };
-    </script>
-</body>
 
-<<<<<<< HEAD
-</html>
-=======
-            function closeModal() {
-                document.getElementById("contactModal").style.display = "none";
-            }
-
-            window.onclick = function(event) {
-                const modal = document.getElementById("contactModal");
-                if (event.target === modal) {
-                    closeModal();
-                }
-            };
-             document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const savedFontSize = localStorage.getItem("pageFontSize");
             const fontToggle = document.getElementById("fontToggle");
 
@@ -468,15 +368,15 @@
                 document.body.style.fontSize = "20px";
                 fontToggle.checked = true;
             }
+        });
 
-            window.toggleFontSize = function () {
-                const isLarge = fontToggle.checked;
-                document.body.style.fontSize = isLarge ? "20px" : "16px";
-                localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
-            };
-             })
+        function toggleFontSize() {
+            const fontToggle = document.getElementById("fontToggle");
+            const isLarge = fontToggle.checked;
+            document.body.style.fontSize = isLarge ? "20px" : "16px";
+            localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+        }
+    </script>
+</body>
 
-        </script>
-    </body>
 </html>
->>>>>>> 109d388ccf5dd41bd5dcb955029186545142c406
