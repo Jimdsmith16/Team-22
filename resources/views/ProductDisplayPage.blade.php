@@ -50,20 +50,24 @@
                 </select>
             </form>
             
+            @if($products->isEmpty())
+                <p>No products found in this category.</p>
+            @else
             @foreach($products as $product)
-            <div class="gallery">
-                <img src= "{{ $product->image_link }}" alt="{{ $product->alt_text }}">
-                <div class="desc">{{ $product->name }}</div>
-                <div class="price">£{{ number_format($product->price, 2) }}</div>
-                <form action="{{ route('basket.add') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="number" name="quantity" value="1" min="1">
-                    <button type="submit" class="add-to-basket-btn">Add to Basket</button>
-                </form>
-                <a href="{{url('products', ['id' => $product->id])}}" class="view-product-btn">View Product</a>
-            </div>
+                <div class="gallery">
+                    <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+                    <div class="desc">{{ $product->name }}</div>
+                    <div class="price">£{{ number_format($product->price, 2) }}</div>
+                    <form action="{{ route('basket.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="number" name="quantity" value="1" min="1">
+                        <button type="submit" class="add-to-basket-btn">Add to Basket</button>
+                    </form>
+                    <a href="{{ url('products', ['id' => $product->id]) }}" class="view-product-btn">View Product</a>
+                </div>
             @endforeach
+        @endif
         </div>
 
         <!-- Footer Section -->
