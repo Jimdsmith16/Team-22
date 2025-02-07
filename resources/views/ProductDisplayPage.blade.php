@@ -43,7 +43,7 @@
                 <select name="category" id="category" onchange="this.form.submit()">
                     <option value="">All Categories</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->name }}" {{ request('category') == $category->name ? 'selected' : '' }}>
+                        <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
