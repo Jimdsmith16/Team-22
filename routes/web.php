@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
 
 // Route to filter products by category
-Route::get('/products/filter/{category}', [ProductController::class, 'filterByCategory']);
+Route::get('/products/filter/{category}', [App\Http\Controllers\ProductController::class, 'filterByCategory']);
 
 //Routing for Home page.
 Route::get('/', function() {
