@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +14,40 @@
     <div class="header">
         <div class="logo">
             <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+=======
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Products</title>
+        <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+    </head>
+    <body>
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo">
+                <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+            </div>
+            <!-- Header Nav Bar -->
+            <nav>
+                <a href="{{url('/')}}">Home</a>
+                <a href="{{url('tutor')}}">Tutors</a>
+                <a href="{{url('about')}}">About</a>
+                <a href="{{url('contact')}}">Contact Us</a>
+                <a href="{{url('products')}}">Products</a>
+                @auth
+                    <a href="{{ url('usersettings') }}">Settings</a>
+                    @else
+                    <a href="{{ url('login') }}">Log In / Sign Up</a>
+                @endauth
+            </nav>
+            <!-- Heaver Search Bar -->
+            <div class="search-bar">
+                <form action="{{route('products.search')}}" method="GET">
+                    <input type="text" name="search" placeholder="Search Products...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+>>>>>>> 109d388ccf5dd41bd5dcb955029186545142c406
         </div>
         <!-- Header Nav Bar -->
         <nav>
