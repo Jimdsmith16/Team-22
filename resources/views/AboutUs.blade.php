@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
       box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
-    
+
     /* General Page and Body Styling */
-    html, body {
+    html,
+    body {
       height: 100%;
       background-color: #f5f5f5;
       color: #333;
@@ -48,34 +50,34 @@
     .content {
       max-width: 800px;
       width: 90%;
-      margin: 120px auto 20px; 
-      padding: 30px;  
+      margin: 120px auto 20px;
+      padding: 30px;
       background-color: #e7e9fc;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
       text-align: center;
     }
-     
+
     h2 {
-      margin-top: 30px;  
-      margin-bottom: 15px;  
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
 
     p {
-      margin-bottom: 20px;  
+      margin-bottom: 20px;
     }
 
     /* Frequently Asked Questions Styling */
     .faq {
-      margin-top: 30px; 
-      text-align: center;  
+      margin-top: 30px;
+      text-align: center;
     }
-    
+
     .faq-question {
       font-size: 1.2em;
       font-weight: bold;
       margin-top: 15px;
-      text-align: center; 
+      text-align: center;
     }
 
     .faq-answer {
@@ -136,11 +138,11 @@
       border-radius: 50%;
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
       background-color: #878686;
     }
 
-    input:checked + .slider:before {
+    input:checked+.slider:before {
       transform: translateX(24px);
     }
 
@@ -187,6 +189,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Header Section -->
   <div class="header">
@@ -201,53 +204,67 @@
       <a href="{{url('contact')}}">Contact Us</a>
       <a href="{{url('products')}}">Products</a>
       @auth
-        <a href="{{ url('usersettings') }}">Settings</a>
-      @else
-        <a href="{{ url('login') }}">Log In / Sign Up</a>
-      @endauth
+      @if(auth()->user()->type === 'admin')
+      <a href="{{ url('adminsettings') }}">Settings</a>
+    @else
+      <a href="{{ url('usersettings') }}">Settings</a>
+    @endif
+    @else
+      <a href="{{ url('login') }}">Login</a>
+    @endauth
       <div class="tooltip">
-                  <label class="switch">
-                      <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                      <span class="slider round"></span>
-                  </label>
-                  <span class="tooltip-text">Toggle Font Size</span>
+        <label class="switch">
+          <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+          <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
       </div>
     </nav>
-      <!-- Search Bar -->
-      <div class="search-bar">
-        <form action="{{route('products.search')}}" method="GET">
-          <input type="text" name="search" placeholder="Search Products...">
-          <button type="submit">Search</button>
-        </form>
-      </div>
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <form action="{{route('products.search')}}" method="GET">
+        <input type="text" name="search" placeholder="Search Products...">
+        <button type="submit">Search</button>
+      </form>
     </div>
+  </div>
   <div class="content">
     <img src="{{asset('Images/abtLogo.jpg')}}" alt="About Us">
     <p style="font-weight: bold; font-size: 1.5em;">Welcome to GradeVault!</p>
-    <p>At GradeVault, we understand that your academic journey is unique and challenging. That's why we've built a platform that not only provides support but also protects your hard-earned achievements. Whether you're aiming to excel in GCSEs, A-Levels, or looking for top-notch tutors to help you master complex subjects, GradeVault is here to back you every step of the way.</p>
-    
+    <p>At GradeVault, we understand that your academic journey is unique and challenging. That's why we've built a
+      platform that not only provides support but also protects your hard-earned achievements. Whether you're aiming to
+      excel in GCSEs, A-Levels, or looking for top-notch tutors to help you master complex subjects, GradeVault is here
+      to back you every step of the way.</p>
+
     <h2>Who We Are</h2>
-    <p>We are a dedicated team of educators, technologists, and academic advisors committed to empowering students to reach their full potential. GradeVault combines innovative technology with expert guidance to create a safe, structured, and supportive environment for students to thrive.</p>
+    <p>We are a dedicated team of educators, technologists, and academic advisors committed to empowering students to
+      reach their full potential. GradeVault combines innovative technology with expert guidance to create a safe,
+      structured, and supportive environment for students to thrive.</p>
 
     <h2>Our Mission</h2>
-    <p>Our mission is simple: to be your academic partner. We aim to help students excel academically by providing easy access to quality tutors, study resources. We believe that every student deserves the chance to succeed and that proper support can make all the difference.</p>
+    <p>Our mission is simple: to be your academic partner. We aim to help students excel academically by providing easy
+      access to quality tutors, study resources. We believe that every student deserves the chance to succeed and that
+      proper support can make all the difference.</p>
 
     <h2>Why Choose GradeVault?</h2>
     <ul>
       <li>Expert Tutors: Access a network of experienced tutors specializing in GCSE and A-Level subjects.</li>
-      <li>Community & Collaboration: Join a community of motivated students and educators who share the same drive for success.</li>
+      <li>Community & Collaboration: Join a community of motivated students and educators who share the same drive for
+        success.</li>
     </ul>
-    
+
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
       <p class="faq-question">What subjects do your tutors cover?</p>
       <p class="faq-answer">Our tutors specialize in the core GCSE subjects including Mathematics, Science, English.</p>
-      
+
       <p class="faq-question">How do I sign up for tutoring?</p>
-      <p class="faq-answer">Signing up is easy! Simply create an account, browse our list of available tutors, and schedule a session that fits your needs.</p>
-      
+      <p class="faq-answer">Signing up is easy! Simply create an account, browse our list of available tutors, and
+        schedule a session that fits your needs.</p>
+
       <p class="faq-question">How can I view my order history?</p>
-      <p class="faq-answer">Once you have logged in simply go to your profile and naviagte to the previous order page </p>
+      <p class="faq-answer">Once you have logged in simply go to your profile and naviagte to the previous order page
+      </p>
     </div>
   </div>
 
@@ -276,4 +293,5 @@
     });
   </script>
 </body>
+
 </html>

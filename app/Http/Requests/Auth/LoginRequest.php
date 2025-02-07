@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Requests\Auth;
 
@@ -29,6 +29,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'type' => ['required', 'in:admin,user'], // Ensuring type is either 'admin' or 'user'
         ];
     }
 
@@ -41,11 +42,22 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $credentials = $this->only('email', 'password');
+        
+        // Attempt login and ensure the user type matches
+        if (!Auth::attempt($credentials)) {
             RateLimiter::hit($this->throttleKey());
-
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
+            ]);
+        }
+
+        $user = Auth::user();
+        
+        if ($user->type !== $this->input('type')) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'type' => 'Unauthorized access for the selected user type.',
             ]);
         }
 
@@ -59,7 +71,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 

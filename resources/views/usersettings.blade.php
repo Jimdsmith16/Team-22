@@ -296,7 +296,7 @@
                 <section id="user-dashboard-link" class="section-content">
                     <div class="user-edit-container">
                         <header>
-                            <h2>Edit User Information</h2>
+                            <h2> </h2>
                         </header>
 
                         <form method="POST" action="{{ route('profile.update') }}">
@@ -339,7 +339,7 @@
                 <section id="address" class="section-content">
                     <div class="address-container">
                         <header>
-                            <h2>Edit Address Information</h2>
+                            <h2> </h2>
                         </header>
 
                         <form method="POST" action="{{ route('address.update') }}">
@@ -399,11 +399,7 @@
 
                 <section id="security" class="section-content">
                     <div class="password-container">
-                        <header>
-                            <h2>Update Password</h2>
-                            <p>Create a secure password.</p>
-                        </header>
-
+                        
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
                             @method('PUT')
