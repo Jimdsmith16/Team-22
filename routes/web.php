@@ -82,7 +82,7 @@ Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 //Routing for finding products by category. Shows Product Display page.
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
 
-//Routing for Basket page. Needs to be linked to BasketController.
+//Routing for Basket page.
 Route::get('/basket', function () {
     return view('basketpage');
 });
