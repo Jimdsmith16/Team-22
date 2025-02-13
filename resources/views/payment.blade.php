@@ -107,76 +107,76 @@
       .footer p {
         margin: 5px 0;
       }
-    .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 10px;
-        }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+        margin-left: 10px;
+      }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #878686   ;
-            transition: 0.4s;
-            border-radius: 24px;
-        }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #878686   ;
+        transition: 0.4s;
+        border-radius: 24px;
+      }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 4px;
-            bottom: 3px;
-            background-color: rgb(6, 0, 0);
-            transition: 0.4s;
-            border-radius: 50%;
-        }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 3px;
+        background-color: rgb(6, 0, 0);
+        transition: 0.4s;
+        border-radius: 50%;
+      }
 
-        input:checked + .slider {
-            background-color: #878686;
-        }
+      input:checked + .slider {
+         background-color: #878686;
+      }
 
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-        .tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltip-text {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    visibility: hidden;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 6px;
-    border-radius: 5px;
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7em;
-    white-space: nowrap;
-}
-
-.tooltip:hover .tooltip-text {
-    visibility: visible;
-}
+      input:checked + .slider:before {
+        transform: translateX(24px);
+      }
       
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip .tooltip-text {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        visibility: hidden;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        padding: 6px;
+        border-radius: 5px;
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7em;
+        white-space: nowrap;
+      }
+
+      .tooltip:hover .tooltip-text {
+        visibility: visible;
+      }
     </style>
   </head>
   <body>
@@ -239,22 +239,21 @@
     </div>
 
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            const savedFontSize = localStorage.getItem("pageFontSize");
-            const fontToggle = document.getElementById("fontToggle");
+      document.addEventListener("DOMContentLoaded", function () {
+      const savedFontSize = localStorage.getItem("pageFontSize");
+      const fontToggle = document.getElementById("fontToggle");
 
-            if (savedFontSize === "20px") {
-                document.body.style.fontSize = "20px";
-                fontToggle.checked = true;
-            }
+      if (savedFontSize === "20px") {
+          document.body.style.fontSize = "20px";
+          fontToggle.checked = true;
+      }
 
-            window.toggleFontSize = function () {
-                const isLarge = fontToggle.checked;
-                document.body.style.fontSize = isLarge ? "20px" : "16px";
-                localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
-            };
-            })
-</script>
-
+      window.toggleFontSize = function () {
+          const isLarge = fontToggle.checked;
+          document.body.style.fontSize = isLarge ? "20px" : "16px";
+          localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+      };
+      })
+    </script>
   </body>
 </html>

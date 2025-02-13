@@ -43,6 +43,7 @@ class BasketController extends Controller
         $basket = Basket::where('user_id', auth()->id())->first();
         $products = $basket ? $basket->products()->withPivot('quantity')->get() : collect();
         
+        //Calculates the total price of all products in the basket.
         $total = $products->sum(fn($product) => $product->price * $product->pivot->quantity);
         
         return view('basketpage', compact('products', 'total'));
