@@ -190,8 +190,23 @@
 
           .tooltip {
               position: relative;
-              display: inline-block;
+              
           }
+          .font-toggle-container {
+    position: fixed;
+    right: 17px;
+    bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none; /* Remove background */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: none; /* Remove shadow */
+    transition: transform 0.01s ease-in-out;
+}
+
+
 
           .tooltip .tooltip-text {
               font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -239,13 +254,6 @@
               @else
               <a href="{{ url('login') }}">Login</a>
               @endauth
-              <div class="tooltip">
-                  <label class="switch">
-                      <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                      <span class="slider round"></span>
-                  </label>
-                  <span class="tooltip-text">Toggle Font Size</span>
-              </div>
           </nav>
           <!-- Search Bar -->
           <div class="search-bar">
@@ -255,6 +263,15 @@
               </form>
           </div>
       </div>
+      <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+</div>
       <div class="content">
           <img src="{{asset('Images/abtLogo.jpg')}}" alt="About Us">
           <p style="font-weight: bold; font-size: 1.5em;">Welcome to GradeVault!</p>
@@ -320,6 +337,21 @@
                   localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
               };
           });
+
+          document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
+
+          
       </script>
   </body>
   </html>
