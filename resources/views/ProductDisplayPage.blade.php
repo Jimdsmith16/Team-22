@@ -34,6 +34,17 @@
             </div>
         </div>
 
+        <!-- List-Grid Feature below -->
+
+        
+
+        <!-- Buttons to switch between views --> 
+       
+        <div class="view-buttons">
+            <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
+            <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
+        </div>
+
         <!-- Content Section -->
         <div class="product-container">
 
@@ -77,7 +88,18 @@
             <p>Email: GradeVault@gmail.com</p>
             <p>Guard your Grades with GradeVault</p>
         </footer>
-    
+        <script>
+    function listView() {
+        document.querySelector(".product-container").classList.add("list-view");
+        document.querySelector(".product-container").classList.remove("grid-view");
+    }
+
+    function gridView() {
+        document.querySelector(".product-container").classList.add("grid-view");
+        document.querySelector(".product-container").classList.remove("list-view");
+    }
+</script>
+
     </body>
 </html>
 
