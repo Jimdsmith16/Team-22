@@ -217,7 +217,7 @@
         /* Tooltip Styling */
         .tooltip {
             position: relative;
-            display: inline-block;
+            
         }
 
         .tooltip .tooltip-text {
@@ -236,9 +236,25 @@
             white-space: nowrap;
         }
 
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-        }
+        
+        .font-toggle-container {
+    position: fixed;
+    right: 25px;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none; /* Remove background */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: none; /* Remove shadow */
+    transition: transform 0.3s ease-in-out;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
     </style>
 </head>
 <body>
@@ -262,13 +278,6 @@
               @else
               <a href="{{ url('login') }}">Login</a>
               @endauth
-              <div class="tooltip">
-                  <label class="switch">
-                      <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                      <span class="slider round"></span>
-                  </label>
-                  <span class="tooltip-text">Toggle Font Size</span>
-              </div>
           </nav>
           <!-- Search Bar -->
           <div class="search-bar">
@@ -278,6 +287,17 @@
               </form>
           </div>
       </div>
+
+      <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+</div>
+
 
 
     <!-- Content Section -->
@@ -338,6 +358,18 @@
                 localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
             };
         });
+        document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
     </script>
 
 </body>
