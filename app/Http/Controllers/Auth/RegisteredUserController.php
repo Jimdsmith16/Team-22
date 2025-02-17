@@ -26,27 +26,30 @@ class RegisteredUserController extends Controller
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
-    {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],  
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],  
-            'terms' => ['accepted'],  
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'terms' => ['accepted'],
+    ]);
 
+    // Debug: Check if type is explicitly set to 'user'
+    dd($validatedData); // This will dump the validated data before user creation
 
-        $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => strtolower($validatedData['email']),  
-            'password' => Hash::make($validatedData['password']),
-        ]);
+    $user = User::create([
+        'name' => $validatedData['name'],
+        'email' => strtolower($validatedData['email']),
+        'password' => Hash::make($validatedData['password']),
+        'type' => 'user', // Make sure this line is always setting 'user'
+    ]);
 
+    event(new Registered($user));
 
-        event(new Registered($user));
+    Auth::login($user);
 
+    return redirect()->route('login')->with('status', 'Registration successful! Please login.');
+}
 
-        Auth::login($user);
-
-        return redirect()->route('login')->with('status', 'Registration successful! Please login.');
-    }
+    
 }

@@ -24,6 +24,10 @@ class User extends Authenticatable
         'type',
     ];
 
+    protected $attributes = [
+        'type' => 'user',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -56,7 +60,7 @@ class User extends Authenticatable
     {
         return $this->orders()->where('estimated_delivery_date', '>', now())->exists();
     }
-    
+
     public function address()
     {
         return $this->belongsTo(Address::class);
