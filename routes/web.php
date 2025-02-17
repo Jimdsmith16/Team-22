@@ -110,6 +110,14 @@ Route::put('/address/update', [ProfileController::class, 'updateAddress'])->name
 
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
 
+Route::post('/user/add', [ProfileController::class, 'store'])->name('user.add');
+
+Route::put('/user/update/{id}', [ProfileController::class, 'update'])->name('user.update');
+
+Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->name('user.destroy');
+
+Route::get('/adminsettings', [ProfileController::class, 'showAdminDashboard'])->name('admin.settings');
+
 Auth::routes();
 
 ?>

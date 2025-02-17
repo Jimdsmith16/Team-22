@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
     ];
 
     /**
@@ -45,6 +46,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    // Check if the user has any active orders
+    public function hasActiveOrders()
+    {
+        return $this->orders()->where('estimated_delivery_date', '>', now())->exists();
+    }
+    
     public function address()
     {
         return $this->belongsTo(Address::class);
