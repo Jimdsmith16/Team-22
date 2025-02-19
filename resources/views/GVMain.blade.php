@@ -19,6 +19,16 @@
             background-color: #fff;
             color: #333;
         }
+                  /* dark mode review */
+        .dark-mode {
+            background-color: #121212;
+            color: #fff;
+        }
+        .dark-mode .review-box {
+            background-color: #333;
+            color: #fff;
+            border-color: #555;
+        }
 
         /* Header Styling */
         .header {
@@ -39,10 +49,15 @@
             max-height: 100%;
         }
 
+        .header nav {
+            display: flex;
+            gap: 40px;
+        }
+
+
         .header nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 10px;
             transition: color 0.3s ease;
         }
 
@@ -53,6 +68,25 @@
         .search-bar input[type="text"] {
             padding: 5px;
             font-size: 1em;
+        }
+         /* Dark Mode Button */
+         .dark-mode-button {
+         background: none;
+          border: none;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .dark-mode-button:hover {
+            text-decoration: underline;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Body Styling */
@@ -160,7 +194,7 @@
             max-width: 800px;
         }
 
-        .review-box {
+                .review-box {
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -179,13 +213,11 @@
 
         .review-box .review-text {
             font-size: 1em;
-            color: #333;
             margin: 10px 0;
         }
 
         .review-box .review-author {
             font-style: italic;
-            color: #666;
         }
 
         /* Footer Styling */
@@ -326,15 +358,18 @@
             </div>
             @endauth
 
-            <!-- Header Search Bar -->
-            <div class="search-bar">
-                <form action="{{route('products.search')}}" method="GET">
+            <!-- Header Dark mode -->
+            <div class="header-container">
+                <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+             <!-- Header Search Bar -->
+                <div class="search-bar">
+                <form action="#" method="GET">
                     <input type="text" name="search" placeholder="Search Products...">
                     <button type="submit">Search</button>
                 </form>
             </div>
         </div>
-    </div>
+        </div>
 
     <!-- Content Section -->
     <div class="bestseller-header">Bestsellers</div>
@@ -388,6 +423,18 @@
     </div>
 
     <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            const darkMode = localStorage.getItem("darkMode") === "enabled";
+            if (darkMode) {
+                document.body.classList.add("dark-mode");
+            }
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+        }
         let slideIndex = 0;
         showSlides();
 
