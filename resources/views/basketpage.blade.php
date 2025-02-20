@@ -348,7 +348,10 @@
             @endforeach
 
             <div class="total-section">Total = £{{ number_format($total, 2) }}</div>
-            <button class="checkout-button">Proceed to Checkout ➤</button>
+            <form action="{{ route('checkout.page') }}" method="GET">
+                @csrf
+                <button type="submit" class="checkout-button">Proceed to Checkout ➤</button>
+            </form>
         </div>
 
         <!-- Footer Section -->
