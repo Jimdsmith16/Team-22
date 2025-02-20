@@ -273,19 +273,25 @@
         </div>
         
         <!-- Content Section -->
-        <div class="confirmation-message">
+        <section class="order-confirmation">
             <h1>Thank you for your order!</h1>
             <p>Your order has been confirmed! A confirmation email has been sent to your email address.</p>
 
-            <div class="order-details">
-                <h2>Order Details</h2>
-                <p><strong>Item:</strong> GCSE Maths revision book</p>
-                <p><strong>Price:</strong> £20.00</p>
-                <p><strong>Order Number:</strong> #123456</p>
-                <p><strong>Date:</strong> 14/11/2024</p>
-                <p><strong>Shipping Address:</strong> 123 Aston Street B4 8UM</p>
+            <div class="order">
+                <h3>Order #{{ $order->id }} - Delivery Date: {{ $order->estimated_delivery_date->toFormattedDateString() }}</h3>
+                @foreach($order->products as $product)
+                    <div class="product-details">
+                        <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+                        <p>{{ $product->name }}</p>
+                        <p>Price: £{{ number_format($product->pivot->price, 2) }}</p>
+                        <p>Quantity: {{ $product->pivot->quantity }}</p>
+                    </div>
+                @endforeach
+                <p><strong>Total: £{{ number_format($order->products->sum(fn($p) => $p->pivot->price * $p->pivot->quantity), 2) }}</strong></p>
             </div>
-        </div>
+
+            <a href="{{ route('previous.orders') }}" class="btn">View All Orders</a>
+        </section>
         <div class="info-rectangle">
             <p>Explore more GCSE revision guides</p>
         </div>
