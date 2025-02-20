@@ -78,4 +78,13 @@ class BasketController extends Controller
          //Returns you back to the page and returns a message to show the product was successfully removed from the basket.
          return redirect()->back()->with('message', 'Item removed from basket.');
      }
+
+     public function viewCheckout()
+    {
+        $basket = Basket::where('user_id', auth()->id())->first();
+        $products = $basket ? $basket->products()->withPivot('quantity')->get() : collect();
+        $total = $products->sum(fn($product) => $product->price * $product->pivot->quantity);
+
+        return view('Checkout', compact('products', 'total'));
+    }
 }
