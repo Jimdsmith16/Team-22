@@ -5,45 +5,79 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
+use App\Models\Basket;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
-   //Shows the order linked to the given ID.
-    public function show($id) {
-      $order = Order::find($id);
-      return view("previousOrders", array("order" => $order));
-   }
+    //Shows all previous order for the logged in user.
+    public function getPreviousOrderInfo()
+    {
+        $userId = auth()->id();
+        $orders = Order::with('products')->where('user_id', $userId)->get();
 
-   //Shows all orders.
-   public function list() {
-      return view("previousOrders", array("orders" => Order::all()));
-   }
-  
-   //Adds a new order to the database.
-   public function addOrder(Request $request) {
-      Order::create($request->all());
-      return response()->json(['message' => 'Order added successfully.']);
-   }
+        $totalPrice = $orders->flatMap->products->sum(fn($product) => $product->pivot->quantity * $product->price);
+        $totalOrders = $orders->count();
 
-   //Gets the previous orders linked to the given User ID.
-   public function getPreviousOrderInfo($userid) {
-      //Joins the orders, products and products_in_order table to gather all the relevant data.
-      $orders = DB::table("orders")->join("products_in_order", "orders.id", "=", "products_in_order.order_id")->join("products", "products.id", "=", "products_in_order.product_id")->select("products.*", "orders.estimated_delivery_date")->where("orders.user_id", "=", $userid)->get();
-      //Sums the total price and gets the total number of orders.
-      $totalPrice = $orders->sum("price");
-      $totalOrders = $orders->count();
-      return view("previousOrders", ["orders" => $orders, "total_orders" => $totalOrders, "total_price" => $totalPrice]);
-   }
+        return view('previousOrders', compact('orders', 'totalPrice', 'totalOrders'));
+    }
 
-   //Updates the order corresponding to the given ID.
-   public function updateOrder($id, Request $request){
-      //Get the relevant order from the database.
-      $order=Order::find($id);
-      //Updates the relevant columns in the database.
-      $order->estimated_delivery_date = $request->input('estimated_delivery_date', $order->estimated_delivery_date); 
-      $order->shipping_address = $request->input('shipping_address', $order->shipping_address);
-      //Commits changes.
-      $order->save(); 
-      return response()->json(['message' => 'Order updated successfully.']);
-   }
+    //Process order after checkout form is submitted.
+    public function processCheckout(Request $request)
+    {
+        $request->validate([
+            'customer_name' => 'required|string',
+            'address_line1' => 'required|string',
+            'address_line2' => 'nullable|string',
+            'postcode' => 'required|string',
+            'country' => 'required|string',
+        ]);
+    
+        $basket = Basket::where('user_id', auth()->id())->first();
+        $products = $basket->products()->withPivot('quantity')->get();
+        $totalPrice = $products->sum(fn($product) => $product->price * $product->pivot->quantity);
+    
+        //Store the order outside of the transaction
+        $order = DB::transaction(function () use ($request, $basket, $products, $totalPrice) {
+            //Insert the address into the addresses table.
+            $addressId = DB::table('addresses')->insertGetId([
+                'address_line1' => $request->address_line1,
+                'address_line2' => $request->address_line2,
+                'postcode' => $request->postcode,
+                'country' => $request->country,
+            ]);
+    
+            //Create the order and associate the address with it.
+            $order = Order::create([
+                'user_id' => auth()->id(),
+                'address_id' => $addressId,
+                'estimated_delivery_date' => Carbon::now()->addDays(5),
+            ]);
+    
+            //Attach products to the order with quantity and price.
+            foreach ($products as $product) {
+                $order->products()->attach($product->id, [
+                    'quantity' => $product->pivot->quantity,
+                    'price' => $product->price,
+                ]);
+            }
+    
+            //Clear the basket after placing the order.
+            $basket->products()->detach();
+    
+            //Return order from the transaction
+            return $order;
+        });
+    
+        return redirect()->route('order.confirmation', ['order' => $order->id]);
+    }
+
+
+    public function orderConfirmation($orderId)
+    {
+        $order = Order::with('products')->findOrFail($orderId);
+
+        return view('GVOrderConfirmation', compact('order'));
+    }
+
 }
