@@ -22,9 +22,9 @@ Route::get('/about', function () {
 });
 
 //Routing for Checkout page.
-Route::get('/checkout', function () {
-    return view('Checkout');
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [BasketController::class, 'viewCheckout'])->name('checkout.page');
+    Route::post('/checkout/process', [OrderController::class, 'processCheckout'])->name('checkout.process');
 
 // Routing for Payment page with placeholder amount.
 Route::get('payment', function () {
@@ -33,11 +33,8 @@ Route::get('payment', function () {
 });
 
 //Routing for Order Confirmation page.
-Route::get('/order-confirmation', function () {
-    return view('GVOrderConfirmation');
-});
+Route::get('/order-confirmation/{order}', [OrderController::class, 'orderConfirmation'])->name('order.confirmation');
 
-//Routing for Contact a Tutor page.
 Route::get('/tutor', function () {
     return view('GVTutor');
 });
@@ -97,7 +94,8 @@ Route::patch('/orders/update-{id}', [OrderController::class, 'updateOrder']);
 Route::post('/orders', [OrderController::class, 'addOrder']);
 
 //Routing for Previous Orders page.
-Route::get('/previous-orders/{userid}', [OrderController::class, 'getPreviousOrderInfo']);
+Route::get('/orders/previous', [OrderController::class, 'getPreviousOrderInfo'])->name('previous.orders');
+});
 
 //Auth routes.
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
