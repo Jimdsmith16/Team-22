@@ -256,7 +256,7 @@
         </div>
 
         <!-- Content Section -->
-        <div class="basket-title">Basket</div>
+        <div class="basket-title">{{$product->name}}</div>
 
         <div class="product-container">
             <img src="{{$product->image_link}}" alt="{{$product->alt_text}}">
