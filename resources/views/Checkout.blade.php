@@ -305,29 +305,58 @@
     <main>
         <div class="checkout-container">
             <h2>Checkout</h2>
-            <div class="checkout-step">
-                <label for="customer-details">Customer Details</label>
-                <input type="text" id="customer-details" placeholder="Enter your name">
-            </div>
-            <div class="checkout-step">
-                <label for="address">Confirm Address</label>
-                <input type="text" id="address" placeholder="Enter your address">
-            </div>
-            <div class="checkout-step">
-                <label for="payment-details">Payment Details</label>
-                <select id="payment-details">
-                    <option value="">Select payment method</option>
-                    <option value="card">Credit/Debit Card</option>
-                    <option value="paypal">PayPal</option>
-                </select>
-            </div>
-            <div class="checkout-footer">
-                <div class="terms">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">Terms and Conditions</label>
+
+            <h3>Your Basket Items:</h3>
+            @foreach($products as $product)
+                <div class="checkout-item">
+                    <p>{{ $product->name }} (x{{ $product->pivot->quantity }})</p>
+                    <p>Price: £{{ number_format($product->price * $product->pivot->quantity, 2) }}</p>
                 </div>
-                <button type="button">Place Order</button>
+            @endforeach
+
+            <div class="total-section">
+                <p>Total: £{{ number_format($total, 2) }}</p>
             </div>
+
+            <form action="{{ route('checkout.process') }}" method="POST">
+            @csrf
+                <div class="checkout-step">
+                    <label for="customer-details">Customer Details</label>
+                    <input type="text" id="customer-details" name="customer_name" placeholder="Enter your name" required>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="checkout-step">
+                    <label for="address_line1">Address Line 1</label>
+                    <input type="text" id="address_line1" name="address_line1" placeholder="Enter address line 1" required>
+
+                    <label for="address_line2">Address Line 2</label>
+                    <input type="text" id="address_line2" name="address_line2" placeholder="Enter address line 2 (optional)">
+
+                    <label for="postcode">Postcode</label>
+                    <input type="text" id="postcode" name="postcode" placeholder="Enter your postcode" required>
+
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" placeholder="Enter your country" required>
+                </div>
+
+                <div class="checkout-step">
+                    <label for="payment-details">Payment Details</label>
+                    <select id="payment-details" name="payment_method" required>
+                        <option value="">Select payment method</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </div>
+
+                <div class="checkout-footer">
+                    <div class="terms">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">Terms and Conditions</label>
+                    </div>
+                    <button type="submit">Place Order</button>
+                </div>
+            </form>
         </div>
     </main>
 
