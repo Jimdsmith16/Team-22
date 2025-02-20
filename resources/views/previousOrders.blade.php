@@ -213,21 +213,23 @@
                 <h2>Previous Orders</h2>
 
                 @foreach($orders as $order)
-                <div class="order">
-                    <a target="_blank" href="{{ $order->image_link }}">
-                        <img src="{{ $order->image_link }}" alt="Product Image">
-                    </a>
-                    <div class="product-details">
-                        <p>{{$order->name}} ?></p>
-                        <p>Price: £{{ number_format($order->price,2) }}</p>
-                        <p>Quantity: {{$order->number_of_stock}}</p>
+                    <div class="order">
+                        <h3>Order #{{ $order->id }} - Delivery Date: {{ $order->estimated_delivery_date->toFormattedDateString() }}</h3>
+                        @foreach($order->products as $product)
+                            <div class="product-details">
+                                <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+                                <p>{{ $product->name }}</p>
+                                <p>Price: £{{ number_format($product->pivot->price, 2) }}</p>
+                                <p>Quantity: {{ $product->pivot->quantity }}</p>
+                            </div>
+                        @endforeach
+                        <p>Total for this order: £{{ number_format($order->total_price, 2) }}</p>
                     </div>
-                </div>
                 @endforeach
 
                 <div class="totals">
-                    <p>Total: {{$total_price}}</p>
-                    <p>Total orders: {{$total_orders}}</p>
+                    <p>Total spent: £{{ number_format($totalPrice, 2) }}</p>
+                    <p>Total orders: {{ $totalOrders }}</p>
                 </div>
             </section>
         </main>
