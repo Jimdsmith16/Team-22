@@ -329,11 +329,9 @@
                 </section>
 
                 <section id="order-history" class="section-content">
-                    <div class="user-dashboard-boxes">
-                        <div class="box">
-                            <span><strong>Order History:</strong> Your past orders will appear here.</span>
-                        </div>
-                    </div>
+                <h2>Order History</h2>
+                    <p>Your past orders will appear on the Previous Orders page.</p>
+                    <a href="{{ route('previous.orders') }}" class="btn">View Previous Orders</a>
                 </section>
 
                 <section id="address" class="section-content">
