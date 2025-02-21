@@ -363,7 +363,7 @@
                 <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
              <!-- Header Search Bar -->
                 <div class="search-bar">
-                <form action="#" method="GET">
+                <form action="{{route('products.search')}}" method="GET">
                     <input type="text" name="search" placeholder="Search Products...">
                     <button type="submit">Search</button>
                 </form>
