@@ -5,6 +5,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>About Us - GradeVault</title>
+      
       <style>
           /* General Reset */
           * {
@@ -237,7 +238,7 @@
       <!-- Header Section -->
       <div class="header">
           <div class="logo">
-              <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+          <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
           </div>
           <!-- Nav Bar -->
           <nav>

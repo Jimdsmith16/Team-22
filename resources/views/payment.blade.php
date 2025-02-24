@@ -184,7 +184,7 @@
     <div class="header">
       <div class="logo">
         <a href="index.html">
-          <img src="GV.png" alt="GradeVault Logo">
+        <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
         </a>
       </div>
       <!-- Header Nav Bar -->

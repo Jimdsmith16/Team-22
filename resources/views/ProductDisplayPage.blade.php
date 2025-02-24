@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Products</title>
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     </head>
     <body>
         <!-- Header Section -->
         <div class="header">
             <div class="logo">
-                <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+            <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
             </div>
             <!-- Header Nav Bar -->
             <nav>
@@ -27,6 +28,13 @@
                     <button type="submit">Search</button>
                 </form>
             </div>
+        </div>
+
+          <!-- Buttons to switch between views --> 
+       
+          <div class="view-buttons">
+            <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
+            <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
         </div>
 
         <!-- Content Section -->
@@ -67,5 +75,17 @@
             <p>Guard your Grades with GradeVault</p>
         </footer>
 
+        <!-- JavaScript for List/Grid View -->
+<script>
+    function listView() {
+        document.querySelector(".product-container").classList.add("list-view");
+        document.querySelector(".product-container").classList.remove("grid-view");
+    }
+
+    function gridView() {
+        document.querySelector(".product-container").classList.add("grid-view");
+        document.querySelector(".product-container").classList.remove("list-view");
+    }
+</script>
     </body>
 </html>

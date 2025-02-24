@@ -121,3 +121,41 @@ footer {
 footer p {
     margin: 5px 0;
 }
+/* List/Grid buttons positioning */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* empty space after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Grid layout */
+.grid-view .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* List layout */
+.list-view {
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-view .gallery {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.list-view .gallery img {
+    width: 100px;
+    height: auto;
+}
