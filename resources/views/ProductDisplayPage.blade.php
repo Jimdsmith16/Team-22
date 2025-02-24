@@ -28,12 +28,8 @@
                 </form>
             </div>
         </div>
-
-        <!-- Content Section -->
-        <div class="product-container">
-
-            <!-- Category Dropdown -->
-            <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
+        <!-- Category Dropdown -->
+        <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
                 <label for="category">Filter by Category:</label>
                 <select name="category" id="category" onchange="this.form.submit()">
                     <option value="">All Categories</option>
@@ -44,6 +40,11 @@
                     @endforeach
                 </select>
             </form>
+
+        <!-- Content Section -->
+        <div class="product-container">
+
+            
 
             @if($products->isEmpty())
                 <p>No products found in this category.</p>
