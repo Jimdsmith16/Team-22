@@ -68,5 +68,18 @@
             <p>Guard your Grades with GradeVault</p>
         </footer>
 
+         <!-- JavaScript for List/Grid View -->
+<script>
+    function listView() {
+        document.querySelector(".product-container").classList.add("list-view");
+        document.querySelector(".product-container").classList.remove("grid-view");
+    }
+
+    function gridView() {
+        document.querySelector(".product-container").classList.add("grid-view");
+        document.querySelector(".product-container").classList.remove("list-view");
+    }
+</script>
+
     </body>
 </html>
