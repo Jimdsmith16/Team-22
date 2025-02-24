@@ -28,6 +28,13 @@
                 </form>
             </div>
         </div>
+         <!-- Buttons to switch between views --> 
+       
+         <div class="view-buttons">
+            <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
+            <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
+        </div>
+
         <!-- Category Dropdown -->
         <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
                 <label for="category">Filter by Category:</label>
