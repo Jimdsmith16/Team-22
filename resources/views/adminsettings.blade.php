@@ -340,22 +340,314 @@
         .popup-close-btn:hover {
             background-color: #d32f2f;
         }
+
+        @media (max-width: 768px) {
+            #inventory .product-item {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #inventory .product-item {
+                width: 100%;
+            }
+        }
+
+        #inventory .product-item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+        }
+
+        .product-actions form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .product-field label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-field input,
+        .product-field textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            border: 1px solid #cccccc;
+            border-radius: 12px;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+
+        .product-field textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .product-field input:focus,
+        .product-field textarea:focus {
+            border-color: #02e652;
+            outline: none;
+        }
+
+        .submit-button1 {
+            width: 100%;
+            padding: 12px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .submit-button1:hover {
+            background-color: gold;
+            color: #000000;
+        }
+
+        .delete-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f44336;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .product-item .product-info {
+            margin-bottom: 20px;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-item {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            #inventory .product-item {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #inventory .product-item {
+                width: 100%;
+            }
+        }
+
+        #inventory {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .admin-dashboard-boxes {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-box-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-box {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 2px solid black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .dashboard-box h4 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .dashboard-box p {
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(7, 212, 68);
+        }
+
+
+        #inventory h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #inventory .product-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+
+        #inventory .product-list .product-item .product-image {
+            text-align: center;
+        }
+
+        #inventory .product-list .product-item .product-image img {
+            width: 150px;
+            height: auto;
+        }
+
+        #inventory .product-list .product-item .edit-button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #inventory .product-list .product-item .edit-button:hover {
+            background-color: #0056b3;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 450px;
+            max-width: 90%;
+            max-height: 80%;
+            position: relative;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .modal-content .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .product-field {
+            margin-bottom: 15px;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .product-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .product-field input,
+        #inventory .product-list .product-item .hidden-edit-form .product-field textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .submit-button1 {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .submit-button1:hover {
+            background-color: #218838;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .delete-button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #inventory .product-list .product-item .hidden-edit-form .delete-button:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
 <div id="settings">
     <div class="header">
         <div class="logo">
-        <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+            <img src="{{ asset('Images/GV.png') }}" alt="GradeVault Logo">
         </div>
 
         <nav>
             <div class="nav-links">
-                <a href="{{url('/')}}">Home</a>
-                <a href="{{url('tutor')}}">Tutors</a>
-                <a href="{{url('about')}}">About</a>
-                <a href="{{url('contact')}}">Contact Us</a>
-                <a href="{{url('products')}}">Products</a>
+                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ url('tutor') }}">Tutors</a>
+                <a href="{{ url('about') }}">About</a>
+                <a href="{{ url('contact') }}">Contact Us</a>
+                <a href="{{ url('products') }}">Products</a>
             </div>
             <div class="admin-info">
                 <a href="#">Hi {{ Auth::user()->name }}</a>
@@ -397,10 +689,11 @@
         </div>
 
         <div class="main-admin-content">
+            <!-- Admin Dashboard Section -->
             <section id="admin-dashboard-link" class="section-content">
                 <div class="user-edit-container">
                     <header>
-                        <h2> </h2>
+                        <h2>Edit Your Information</h2>
                     </header>
 
                     <form method="POST" action="{{ route('profile.update') }}">
@@ -409,7 +702,8 @@
 
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required />
+                            <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required
+                                aria-describedby="nameHelp" />
                             @error('name')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -417,13 +711,14 @@
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required />
+                            <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required
+                                aria-describedby="emailHelp" />
                             @error('email')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <button type="submit1" class="submit-button1">Update Information</button>
+                        <button type="submit" class="submit-button1">Update Information</button>
 
                         @if (session('status') === 'user-updated')
                             <p class="success-message">Information successfully updated.</p>
@@ -433,13 +728,115 @@
             </section>
 
             <section id="inventory" class="section-content">
+                <!-- Dashboard Boxes -->
                 <div class="admin-dashboard-boxes">
-                    <div class="box">
-                        <span><strong>Inventory:</strong> Inventory Management.</span>
+                    <div class="dashboard-box-container">
+                        <div class="dashboard-box">
+                            <h4>Total Products</h4>
+                            <p>{{ \App\Models\Product::query()->count() }}</p>
+                        </div>
+                        <div class="dashboard-box">
+                            <h4>Total Orders</h4>
+                            <p>Value</p>
+                        </div>
+                        <div class="dashboard-box">
+                            <h4>Another Metric</h4>
+                            <p>Value</p>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Products Section -->
+                <h3>Existing Products</h3>
+                <div class="product-list">
+                    @foreach($products as $product)
+                        <div class="product-item">
+                            <div class="product-image">
+                                <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+                            </div>
+                            <button onclick="toggleEditForm({{ $product->id }})" class="edit-button">Edit Product</button>
+
+                            <!-- Hidden Edit Form -->
+                            <div id="editForm_{{ $product->id }}" class="hidden-edit-form">
+                                <div class="modal-content">
+                                    <span onclick="closeEditForm({{ $product->id }})" class="close-button">&times;</span>
+                                    <h4>Edit Product Details</h4>
+                                    <form method="POST" action="{{ route('product.update', $product->id) }}">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <!-- Name -->
+                                        <div class="product-field">
+                                            <label for="name_{{ $product->id }}"><strong>Name:</strong></label>
+                                            <input type="text" id="name_{{ $product->id }}" name="name"
+                                                value="{{ $product->name }}" required aria-label="Product Name">
+                                        </div>
+
+                                        <!-- Description -->
+                                        <div class="product-field">
+                                            <label
+                                                for="description_{{ $product->id }}"><strong>Description:</strong></label>
+                                            <textarea id="description_{{ $product->id }}" name="description" required
+                                                aria-label="Product Description">{{ $product->description }}</textarea>
+                                        </div>
+
+                                        <!-- Alt Text -->
+                                        <div class="product-field">
+                                            <label for="alt_text_{{ $product->id }}"><strong>Alt Text:</strong></label>
+                                            <input type="text" id="alt_text_{{ $product->id }}" name="alt_text"
+                                                value="{{ $product->alt_text }}" required aria-label="Alt Text">
+                                        </div>
+
+                                        <!-- Price -->
+                                        <div class="product-field">
+                                            <label for="price_{{ $product->id }}"><strong>Price:</strong></label>
+                                            <input type="number" id="price_{{ $product->id }}" name="price"
+                                                value="{{ $product->price }}" required aria-label="Price">
+                                        </div>
+
+                                        <!-- Stock -->
+                                        <div class="product-field">
+                                            <label for="stock_{{ $product->id }}"><strong>Stock:</strong></label>
+                                            <input type="number" id="stock_{{ $product->id }}" name="stock"
+                                                value="{{ $product->number_of_stock }}" required aria-label="Stock">
+                                        </div>
+
+                                        <!-- Rating -->
+                                        <div class="product-field">
+                                            <label for="rating_{{ $product->id }}"><strong>Rating:</strong></label>
+                                            <input type="number" id="rating_{{ $product->id }}" name="average_rating"
+                                                value="{{ $product->average_rating }}" min="1" max="5" required
+                                                aria-label="Rating">
+                                        </div>
+
+                                        <!-- Category ID -->
+                                        <div class="product-field">
+                                            <label for="category_id_{{ $product->id }}"><strong>Category
+                                                    ID:</strong></label>
+                                            <input type="number" id="category_id_{{ $product->id }}" name="category_id"
+                                                value="{{ $product->category_id }}" required aria-label="Category ID">
+                                        </div>
+
+                                        <!-- Update Button -->
+                                        <button type="submit" class="submit-button1">Update Product</button>
+                                    </form>
+
+                                    <!-- Delete Product Form -->
+                                    <form id="deleteProductForm_{{ $product->id }}"
+                                        action="{{ route('product.destroy', $product->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="submit-button delete-button">Delete Product</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </section>
 
+            <!-- User Management Section -->
             <section id="user-management" class="section-content">
                 <div class="admin-dashboard-boxes">
                     <form method="POST" action="{{ route('user.add') }}">
@@ -477,23 +874,6 @@
                                         @method('DELETE')
                                         <button type="submit" class="submit-button delete-button">Delete</button>
                                     </form>
-                                    <div id="errorPopup" class="popup" style="display: none;">
-                                        <div class="popup-content">
-                                            <span class="close-btn" onclick="closePopup()">&times;</span>
-                                            <h3>Error</h3>
-                                            <p id="errorMessage"></p>
-                                            <button class="popup-close-btn" onclick="closePopup()">Close</button>
-                                        </div>
-                                    </div>
-                                    <div id="successPopup" class="popup" style="display: none;">
-                                        <div class="popup-content">
-                                            <span class="close-btn" onclick="closePopup()">&times;</span>
-                                            <h3>Success</h3>
-                                            <p id="successMessage"></p>
-                                            <button class="popup-close-btn" onclick="closePopup()">Close</button>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         @endforeach
@@ -501,10 +881,11 @@
                 </div>
             </section>
 
+            <!-- Address Section -->
             <section id="address" class="section-content">
                 <div class="address-container">
                     <header>
-                        <h2> </h2>
+                        <h2>Edit Address</h2>
                     </header>
 
                     <form method="POST" action="{{ route('address.update') }}">
@@ -514,7 +895,7 @@
                         <div class="form-group">
                             <label for="address_line1">New Address Line 1</label>
                             <input id="address_line1" name="address_line1" type="text"
-                                value="{{ old('address_line1') }}" required />
+                                value="{{ old('address_line1') }}" required aria-label="Address Line 1" />
                             @error('address_line1')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -523,7 +904,7 @@
                         <div class="form-group">
                             <label for="address_line2">New Address Line 2</label>
                             <input id="address_line2" name="address_line2" type="text"
-                                value="{{ old('address_line2') }}" />
+                                value="{{ old('address_line2') }}" aria-label="Address Line 2" />
                             @error('address_line2')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -531,7 +912,8 @@
 
                         <div class="form-group">
                             <label for="postcode">New Postcode</label>
-                            <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required />
+                            <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required
+                                aria-label="Postcode" />
                             @error('postcode')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -539,7 +921,8 @@
 
                         <div class="form-group">
                             <label for="country">New Country</label>
-                            <input id="country" name="country" type="text" value="{{ old('country') }}" required />
+                            <input id="country" name="country" type="text" value="{{ old('country') }}" required
+                                aria-label="Country" />
                             @error('country')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
@@ -554,6 +937,7 @@
                 </div>
             </section>
 
+            <!-- Payment Method Section -->
             <section id="payment-method" class="section-content">
                 <div class="admin-dashboard-boxes">
                     <div class="box">
@@ -562,6 +946,7 @@
                 </div>
             </section>
 
+            <!-- Security Section -->
             <section id="security" class="section-content">
                 <div class="password-container">
 
@@ -603,97 +988,109 @@
             </section>
         </div>
     </div>
+</div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('.sidebar-link');
-            const sections = document.querySelectorAll('.section-content');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('.section-content');
 
-            function hideAllSections() {
-                sections.forEach(section => section.style.display = 'none');
-            }
+        function hideAllSections() {
+            sections.forEach(section => section.style.display = 'none');
+        }
 
-            function resetActiveLinks() {
-                links.forEach(link => link.classList.remove('active'));
-            }
+        function resetActiveLinks() {
+            links.forEach(link => link.classList.remove('active'));
+        }
 
-            links.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    hideAllSections();
-                    resetActiveLinks();
+        links.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                hideAllSections();
+                resetActiveLinks();
 
-                    const targetSection = document.querySelector(link.getAttribute('href'));
-                    if (targetSection) {
-                        targetSection.style.display = 'block';
-                        link.classList.add('active');
-                    }
-                });
+                const targetSection = document.querySelector(link.getAttribute('href'));
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    link.classList.add('active');
+                }
             });
-
-            hideAllSections();
-            const defaultSection = document.querySelector('#admin-dashboard-link');
-            defaultSection.style.display = 'block';
-            document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
         });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteUserForms = document.querySelectorAll('.delete-button');
+        hideAllSections();
+        const defaultSection = document.querySelector('#admin-dashboard-link');
+        defaultSection.style.display = 'block';
+        document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
+    });
+</script>
 
-            deleteUserForms.forEach((deleteButton) => {
-                deleteButton.addEventListener('click', function (event) {
-                    event.preventDefault();
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteUserForms = document.querySelectorAll('.delete-button');
 
-                    var formData = new FormData(deleteButton.closest('form'));
+        deleteUserForms.forEach((deleteButton) => {
+            deleteButton.addEventListener('click', function (event) {
+                event.preventDefault();
 
-                    fetch(deleteButton.closest('form').action, {
-                        method: 'POST',
-                        body: formData,
+                var formData = new FormData(deleteButton.closest('form'));
+
+                fetch(deleteButton.closest('form').action, {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccessPopup('User deleted successfully.');
+                        } else {
+                            showErrorPopup(data.message);
+                        }
                     })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                showSuccessPopup('User deleted successfully.');
-                            } else {
-                                showErrorPopup(data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            showErrorPopup('An error occurred while deleting the user.');
-                        });
-                });
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showErrorPopup('An error occurred while deleting the user.');
+                    });
             });
-
-            function showErrorPopup(message) {
-                document.getElementById('errorMessage').textContent = message;
-                document.getElementById('errorPopup').style.display = 'flex';
-            }
-
-            function showSuccessPopup(message) {
-                document.getElementById('successMessage').textContent = message;
-                document.getElementById('successPopup').style.display = 'flex';
-            }
-
-            const closeButtons = document.querySelectorAll('.popup-close-btn');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', closePopup);
-            });
-
-            function closePopup() {
-                document.getElementById('errorPopup').style.display = 'none';
-                document.getElementById('successPopup').style.display = 'none';
-                location.reload();
-            }
         });
 
+        function showErrorPopup(message) {
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorPopup').style.display = 'flex';
+        }
 
-    </script>
-    </body>
+        function showSuccessPopup(message) {
+            document.getElementById('successMessage').textContent = message;
+            document.getElementById('successPopup').style.display = 'flex';
+        }
+
+        const closeButtons = document.querySelectorAll('.popup-close-btn');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closePopup);
+        });
+
+        function closePopup() {
+            document.getElementById('errorPopup').style.display = 'none';
+            document.getElementById('successPopup').style.display = 'none';
+            location.reload();
+        }
+    });
+
+
+    function toggleEditForm(productId) {
+        var form = document.getElementById('editForm_' + productId);
+        form.style.display = 'flex';
+    }
+
+
+    function closeEditForm(productId) {
+        var form = document.getElementById('editForm_' + productId);
+        form.style.display = 'none';
+    }
+
+</script>
+</body>
 
 </html>

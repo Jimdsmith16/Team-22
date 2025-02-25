@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Address;
 use Illuminate\Database\QueryException;
+use App\Models\Product;
+
 
 class ProfileController extends Controller
 {
@@ -91,12 +93,15 @@ class ProfileController extends Controller
 
     public function showAdminDashboard(): View
     {
-        $users = User::all(); 
-        $totalUsers = $users->count(); 
-    
-        return view('adminsettings', compact('users', 'totalUsers'));
+        $users = User::all();
+        $totalUsers = $users->count();
+        $products = Product::all();
+
+
+        return view('adminsettings', compact('users', 'totalUsers', 'products'));
     }
-    
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -118,20 +123,20 @@ class ProfileController extends Controller
     public function updateUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
-    
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
-    
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
-    
+
         return redirect()->back()->with('success', 'User updated successfully!');
     }
-    
+
     public function destroyUser($id)
     {
         try {
@@ -144,12 +149,18 @@ class ProfileController extends Controller
             if ($user->hasActiveOrders()) {
                 return response()->json(['success' => false, 'message' => 'Unable to delete user. User has an active order.']);
             }
-    
+
             $user->delete();
             return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
         } catch (QueryException $e) {
             return response()->json(['success' => false, 'message' => 'Unable to delete user. User has an active order.']);
         }
     }
-    
+    public function showInventory()
+    {
+        $products = Product::all();
+
+        return view('adminsettings', compact('products'));
+    }
+
 }

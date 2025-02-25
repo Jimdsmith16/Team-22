@@ -20,6 +20,16 @@
                 <a href="{{url('about')}}">About</a>
                 <a href="{{url('contact')}}">Contact Us</a>
                 <a href="{{url('products')}}">Products</a>
+                @auth
+                    @if(auth()->user()->type === 'admin')
+                        <a href="{{ url('adminsettings') }}">Settings</a>
+                    @else
+                        <a href="{{ url('usersettings') }}">Settings</a>
+                    @endif
+                @else
+                    <a href="{{ url('login') }}">Login</a>
+                @endauth
+            </nav>
             </nav>
             <!-- Header Search Bar -->
             <div class="search-bar">
