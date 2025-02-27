@@ -13,7 +13,17 @@ class Product extends Model
     protected $primaryKey = "id";
     public $timestamps = false;
 
-
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'alt_text',
+        'number_of_stock',
+        'image_link',
+        'average_rating',
+        'category_id'
+    ];
+    
     //Shows what baskets this product is in.
     public function baskets() {
         return $this->belongsToMany(Basket::class, 'basket_product')->withPivot('quantity');

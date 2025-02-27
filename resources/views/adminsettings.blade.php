@@ -201,9 +201,27 @@
             outline: none;
         }
 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 0.9rem;
+            border: 1px solid #cccccc;
+            border-radius: 12px;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+            height: 150px;
+            resize: none;
+        }
+
+        .form-group textarea:focus {
+            border-color: #02e652;
+            outline: none;
+        }
+
 
         .submit-button,
-        .submit-button1 {
+        .submit-button1 
+        .delete-button-product {
             width: 100%;
             padding: 12px;
             background-color: #000000;
@@ -217,7 +235,8 @@
         }
 
         .submit-button:hover,
-        .submit-button1:hover {
+        .submit-button1:hover
+        .delete-button-product:hover {
             background-color: gold;
             color: #000000;
         }
@@ -540,21 +559,6 @@
             height: auto;
         }
 
-        #inventory .product-list .product-item .edit-button {
-            display: block;
-            margin: 10px auto;
-            padding: 8px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #inventory .product-list .product-item .edit-button:hover {
-            background-color: #0056b3;
-        }
-
         #inventory .product-list .product-item .hidden-edit-form {
             display: none;
             position: fixed;
@@ -607,7 +611,7 @@
             border-radius: 4px;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .submit-button1 {
+        #inventory .product-list .product-item .hidden-edit-form .submit-button1 .delete-button-product {
             padding: 10px 20px;
             background-color: #28a745;
             color: white;
@@ -616,11 +620,11 @@
             border-radius: 4px;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .submit-button1:hover {
+        #inventory .product-list .product-item .hidden-edit-form .submit-button1:hover .delete-button-product {
             background-color: #218838;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .delete-button {
+        #inventory .product-list .product-item .hidden-edit-form .delete-button-product {
             padding: 10px 20px;
             background-color: #dc3545;
             color: white;
@@ -629,8 +633,54 @@
             border-radius: 4px;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .delete-button:hover {
+        #inventory .product-list .product-item .hidden-edit-form .delete-button-product:hover {
             background-color: #c82333;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .popup-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #UserSuccessPopup .popup-content {
+            border: 2px solid #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        #UserSuccessPopup .popup-content p {
+            color: #388e3c;
+        }
+
+        #UserErrorPopup .popup-content {
+            border: 2px solid #f44336;
+            background-color: #ffebee;
+        }
+
+        #UserErrorPopup .popup-content p {
+            color: #d32f2f;
         }
     </style>
 </head>
@@ -735,16 +785,70 @@
                             <h4>Total Products</h4>
                             <p>{{ \App\Models\Product::query()->count() }}</p>
                         </div>
-                        <div class="dashboard-box">
-                            <h4>Total Orders</h4>
-                            <p>Value</p>
-                        </div>
-                        <div class="dashboard-box">
-                            <h4>Another Metric</h4>
-                            <p>Value</p>
-                        </div>
                     </div>
                 </div>
+
+                <h3>Add New Product</h3>
+                <form method="POST" action="{{ route('product.store') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Product Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="number" id="price" name="price" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alt_text">Alt Text</label>
+                        <input type="text" id="alt_text" name="alt_text" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock Number</label>
+                        <input type="number" id="stock" name="number_of_stock" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_link">Image Link</label>
+                        <input type="text" id="image_link" name="image_link" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input type="number" id="rating" name="average_rating" min="1" max="5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category_id">Category ID</label>
+                        <input type="number" id="category_id" name="category_id" required>
+                    </div>
+
+                    <button type="submit" class="submit-button1">Add Product</button>
+                </form>
+                <!-- Success Popup -->
+                <div id="successPopup" class="popup" style="display: none;">
+                    <div class="popup-content">
+                        <span class="popup-close-btn" onclick="closePopup()">×</span>
+                        <p id="successMessage"></p>
+                    </div>
+                </div>
+
+                <!-- Error Popup -->
+                <div id="errorPopup" class="popup" style="display: none;">
+                    <div class="popup-content">
+                        <span class="popup-close-btn" onclick="closePopup()">×</span>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
+
 
                 <!-- Products Section -->
                 <h3>Existing Products</h3>
@@ -754,7 +858,8 @@
                             <div class="product-image">
                                 <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
                             </div>
-                            <button onclick="toggleEditForm({{ $product->id }})" class="edit-button">Edit Product</button>
+                            <button onclick="toggleEditForm({{ $product->id }})" class="submit-button1">Edit
+                                Product</button>
 
                             <!-- Hidden Edit Form -->
                             <div id="editForm_{{ $product->id }}" class="hidden-edit-form">
@@ -827,7 +932,7 @@
                                         style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="submit-button delete-button">Delete Product</button>
+                                        <button type="button" class="delete-button-product">Delete Product</button>
                                     </form>
                                 </div>
                             </div>
@@ -872,7 +977,7 @@
                                     <form id="deleteUserForm" action="{{ route('user.destroy', $user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="submit-button delete-button">Delete</button>
+                                        <button type="button" class="delete-button-user">Delete User</button>
                                     </form>
                                 </div>
                             </div>
@@ -880,6 +985,24 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Success Popup -->
+            <div id="UserSuccessPopup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <p id="successMessage">Successfully removed.</p>
+                    <button class="popup-close-btn">x</button>
+                </div>
+            </div>
+
+            <!-- Error Popup -->
+            <div id="UserErrorPopup" class="popup" style="display:none;">
+                <div class="popup-content">
+                    <p id="errorMessage">Unable to delete this user</p>
+                    <button class="popup-close-btn">x</button>
+                </div>
+            </div>
+
+
 
             <!-- Address Section -->
             <section id="address" class="section-content">
@@ -1022,14 +1145,12 @@
 
         hideAllSections();
         const defaultSection = document.querySelector('#admin-dashboard-link');
-        defaultSection.style.display = 'block';
-        document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
-    });
-</script>
+        if (defaultSection) {
+            defaultSection.style.display = 'block';
+            document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
+        }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteUserForms = document.querySelectorAll('.delete-button');
+        const deleteUserForms = document.querySelectorAll('.delete-button-user');
 
         deleteUserForms.forEach((deleteButton) => {
             deleteButton.addEventListener('click', function (event) {
@@ -1044,7 +1165,8 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            showSuccessPopup('User deleted successfully.');
+                            showSuccessPopup(data.message);
+                            deleteButton.closest('.user-item').remove();
                         } else {
                             showErrorPopup(data.message);
                         }
@@ -1056,14 +1178,42 @@
             });
         });
 
+        const deleteProductForms = document.querySelectorAll('.delete-button-product');
+
+        deleteProductForms.forEach((deleteButton) => {
+            deleteButton.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(deleteButton.closest('form'));
+
+                fetch(deleteButton.closest('form').action, {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccessPopup(data.message);
+                            deleteButton.closest('.product-item').remove();
+                        } else {
+                            showErrorPopup(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showErrorPopup('An error occurred while deleting the product.');
+                    });
+            });
+        });
+
         function showErrorPopup(message) {
             document.getElementById('errorMessage').textContent = message;
-            document.getElementById('errorPopup').style.display = 'flex';
+            document.getElementById('UserErrorPopup').style.display = 'flex';
         }
 
         function showSuccessPopup(message) {
             document.getElementById('successMessage').textContent = message;
-            document.getElementById('successPopup').style.display = 'flex';
+            document.getElementById('UserSuccessPopup').style.display = 'flex';
         }
 
         const closeButtons = document.querySelectorAll('.popup-close-btn');
@@ -1072,25 +1222,24 @@
         });
 
         function closePopup() {
-            document.getElementById('errorPopup').style.display = 'none';
-            document.getElementById('successPopup').style.display = 'none';
+            document.getElementById('UserErrorPopup').style.display = 'none';
+            document.getElementById('UserSuccessPopup').style.display = 'none';
             location.reload();
         }
     });
-
 
     function toggleEditForm(productId) {
         var form = document.getElementById('editForm_' + productId);
         form.style.display = 'flex';
     }
 
-
     function closeEditForm(productId) {
         var form = document.getElementById('editForm_' + productId);
         form.style.display = 'none';
     }
-
 </script>
+
+
 </body>
 
 </html>

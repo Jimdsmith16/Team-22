@@ -16,6 +16,8 @@ Route::get('/products/category/{category}', [ProductController::class, 'findByCa
 Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
 Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
 
 // Public pages
 Route::get('/', function () { return view('GVMain'); });
