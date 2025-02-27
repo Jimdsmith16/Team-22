@@ -68,8 +68,12 @@ class OrderController extends Controller
             //Return order from the transaction
             return $order;
         });
+
+        //Store total price and order in current session
+        session(['total_price' => $totalPrice]);
+        session(['order_id' => $order->id]);
     
-        return redirect()->route('order.confirmation', ['order' => $order->id]);
+        return redirect()->route('payment.page');
     }
 
 
@@ -80,4 +84,17 @@ class OrderController extends Controller
         return view('GVOrderConfirmation', compact('order'));
     }
 
+    public function showPaymentPage()
+    {
+        $totalPrice = session('total_price');
+
+        return view('payment', compact('totalPrice'));
+    }
+
+    public function processPayment(Request $request)
+    {
+        $orderId = session('order_id');
+
+        return redirect()->route('order.confirmation', ['order' => $orderId]);
+    }
 }
