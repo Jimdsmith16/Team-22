@@ -210,7 +210,7 @@
       <h1>Secure Payment</h1>
       <p>Complete your payment to access GradeVault services securely and quickly.</p>
 
-      <form action="/payment" method="post">
+      <form action="{{ route('payment.process') }}" method="post">
         @csrf
         <label for="name">Name on Card:</label>
         <input type="text" id="name" name="name" placeholder="Enter cardholder's name" required>
@@ -225,7 +225,7 @@
         <input type="password" id="cvv" name="cvv" placeholder="123" required>
 
         <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" value="${{ number_format($amount, 2) }}" readonly>
+        <input type="text" id="amount" name="amount" value="${{ number_format($totalPrice, 2) }}" readonly>
 
         <button type="submit">Make Payment</button>
       </form>
