@@ -14,12 +14,11 @@
             font-family: Arial, sans-serif;
         }
 
-        /* General Page and Body Styling */
         body {
             background-color: #fff;
             color: #333;
         }
-                  /* dark mode review */
+        /* dark mode review */
         .dark-mode {
             background-color: #121212;
             color: #fff;
@@ -33,8 +32,7 @@
         /* Header Styling */
         .header {
             background-color: #000;
-            padding: 0 15px;
-            height: 60px;
+            padding: 15px 20px;
             color: #fff;
             display: flex;
             justify-content: space-between;
