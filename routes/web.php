@@ -31,6 +31,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [BasketController::class, 'viewCheckout'])->name('checkout.page');
     Route::post('/checkout/process', [OrderController::class, 'processCheckout'])->name('checkout.process');
 
+    // Payment page
+    Route::get('/payment', [OrderController::class, 'showPaymentPage'])->name('payment.page');
+    Route::post('/payment/process', [OrderController::class, 'processPayment'])->name('payment.process');
+
     // Basket routes
     Route::get('/basket', [BasketController::class, 'viewBasket']);
     Route::post('/basket/add', [BasketController::class, 'addToBasket'])->name('basket.add');
