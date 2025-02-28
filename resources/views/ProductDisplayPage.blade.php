@@ -52,7 +52,7 @@
 
             <!-- Category Dropdown -->
             <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
-                <label for="category">Filter by Category:</label>
+                <label for="category">Filter by Category:</label> <p></p>
                 <select name="category" id="category" onchange="this.form.submit()">
                     <option value="">All Categories</option>
                     @foreach ($categories as $category)
