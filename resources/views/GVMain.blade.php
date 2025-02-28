@@ -14,25 +14,17 @@
             font-family: Arial, sans-serif;
         }
 
+        /* General Page and Body Styling */
         body {
             background-color: #fff;
             color: #333;
-        }
-        /* dark mode review */
-        .dark-mode {
-            background-color: #121212;
-            color: #fff;
-        }
-        .dark-mode .review-box {
-            background-color: #333;
-            color: #fff;
-            border-color: #555;
         }
 
         /* Header Styling */
         .header {
             background-color: #000;
-            padding: 15px 20px;
+            padding: 0 15px;
+            height: 60px;
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -47,15 +39,10 @@
             max-height: 100%;
         }
 
-        .header nav {
-            display: flex;
-            gap: 40px;
-        }
-
-
         .header nav a {
             color: #fff;
             text-decoration: none;
+            margin: 0 10px;
             transition: color 0.3s ease;
         }
 
@@ -66,25 +53,6 @@
         .search-bar input[type="text"] {
             padding: 5px;
             font-size: 1em;
-        }
-         /* Dark Mode Button */
-         .dark-mode-button {
-         background: none;
-          border: none;
-            color: white;
-            font-size: 1em;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .dark-mode-button:hover {
-            text-decoration: underline;
-        }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         /* Body Styling */
@@ -192,7 +160,7 @@
             max-width: 800px;
         }
 
-                .review-box {
+        .review-box {
             background-color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -211,11 +179,13 @@
 
         .review-box .review-text {
             font-size: 1em;
+            color: #333;
             margin: 10px 0;
         }
 
         .review-box .review-author {
             font-style: italic;
+            color: #666;
         }
 
         /* Footer Styling */
@@ -244,75 +214,120 @@
 
         /* Switch styling */
         .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 10px;
+              position: relative;
+              display: inline-block;
+              width: 50px;
+              height: 24px;
+              margin-left: 10px;
+          }
+
+          .switch input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+          }
+
+          .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #878686;
+              transition: 0.4s;
+              border-radius: 24px;
+          }
+
+          .slider:before {
+              position: absolute;
+              content: "";
+              height: 18px;
+              width: 18px;
+              left: 4px;
+              bottom: 3px;
+              background-color: rgb(6, 0, 0);
+              transition: 0.4s;
+              border-radius: 50%;
+          }
+
+          input:checked + .slider {
+              background-color: #878686;
+          }
+
+          input:checked + .slider:before {
+              transform: translateX(24px);
+          }
+
+          .tooltip {
+              position: relative;
+              
+          }
+          .font-toggle-container {
+    position: fixed;
+    right: 17px;
+    bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none; /* Remove background */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove border radius */
+    box-shadow: none; /* Remove shadow */
+    transition: transform 0.01s ease-in-out;
+}
+
+
+
+          .tooltip .tooltip-text {
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              visibility: hidden;
+              background-color: black;
+              color: #fff;
+              text-align: center;
+              padding: 6px;
+              border-radius: 5px;
+              position: absolute;
+              top: 25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.7em;
+              white-space: nowrap;
+          }
+
+          .tooltip:hover .tooltip-text {
+              visibility: visible;
+          }
+
+          .dark-mode .dark-mode-button {
+    background-color: #444; /* Dark gray background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+        .dark-mode-button:hover {
+            text-decoration: underline;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #878686;
-            transition: 0.4s;
-            border-radius: 24px;
-        }
+.dark-mode .content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 4px;
-            bottom: 3px;
-            background-color: rgb(6, 0, 0);
-            transition: 0.4s;
-            border-radius: 50%;
-        }
+.dark-mode .header, .dark-mode .footer {
+    background-color: #333;
+}
 
-        input:checked + .slider {
-            background-color: #878686;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltip-text {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            visibility: hidden;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            padding: 6px;
-            border-radius: 5px;
-            position: absolute;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7em;
-            white-space: nowrap;
-        }
-
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-        }
+.dark-mode .header nav a {
+    color: #ffffff;
+}
     </style>
 </head>
 
@@ -320,7 +335,7 @@
     <!-- Header Section -->
     <div class="header">
         <div class="logo">
-        <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+            <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
         </div>
         <!-- Header Nav Bar -->
         <nav>
@@ -336,17 +351,10 @@
                     <a href="{{ url('usersettings') }}">Settings</a>
                 @endif
             @else
-                <a href="{{ url('login') }}">Login</a>
+                <a href="{{ url('login') }}">Log In / Sign Up</a>
             @endauth
-            <div class="tooltip">
-                <label class="switch">
-                    <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                    <span class="slider round"></span>
-                </label>
-                <span class="tooltip-text">Toggle Font Size</span>
-            </div>
+            
         </nav>
-    </div>
 
         <div class="basket-container">
             @auth
@@ -357,18 +365,25 @@
             </div>
             @endauth
 
-    <!-- Header Dark mode -->
-    <div class="header-container">
-        <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
-        <!-- Header Search Bar -->
-        <div class="search-bar">
-            <form action="{{route('products.search')}}" method="GET">
-            <input type="text" name="search" placeholder="Search Products...">
-            <button type="submit">Search</button>
-        </form>
+            <!-- Header Search Bar -->
+            <div class="search-bar">
+                <form action="{{route('products.search')}}" method="GET">
+                    <input type="text" name="search" placeholder="Search Products...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </div>
-    
+    <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+</div>
 
     <!-- Content Section -->
     <div class="bestseller-header">Bestsellers</div>
@@ -422,47 +437,49 @@
     </div>
 
     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            const darkMode = localStorage.getItem("darkMode") === "enabled";
-            if (darkMode) {
-                document.body.classList.add("dark-mode");
-            }
-        });
-
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            const isDarkMode = document.body.classList.contains("dark-mode");
-            localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
-        }
-        let slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            const slides = document.getElementsByClassName("mySlides1");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 3000);
-        }
-
         document.addEventListener("DOMContentLoaded", function () {
-            const savedFontSize = localStorage.getItem("pageFontSize");
-            const fontToggle = document.getElementById("fontToggle");
+              const savedFontSize = localStorage.getItem("pageFontSize");
+              const fontToggle = document.getElementById("fontToggle");
 
-            if (savedFontSize === "20px") {
-                document.body.style.fontSize = "20px";
-                fontToggle.checked = true;
-            }
+              if (savedFontSize === "20px") {
+                  document.body.style.fontSize = "20px";
+                  fontToggle.checked = true;
+              }
 
-            window.toggleFontSize = function () {
-                const isLarge = fontToggle.checked;
-                document.body.style.fontSize = isLarge ? "20px" : "16px";
-                localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
-            };
-        })
+              window.toggleFontSize = function () {
+                  const isLarge = fontToggle.checked;
+                  document.body.style.fontSize = isLarge ? "20px" : "16px";
+                  localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+              };
+          });
+
+          document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
+
     </script>
 </body>
 
