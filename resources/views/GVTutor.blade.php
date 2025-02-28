@@ -3,8 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Order Confirmation - GradeVault</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Tutors - GradeVault</title>
         <style>
             /* General Reset */
             * {
@@ -56,6 +55,23 @@
             .header nav a:hover {
                 color: gold;
             }
+            .search-bar button {
+    padding: 3px 5px; /* Match padding */
+    font-size: 0.7em; /* Match font size */
+    background-color: #fff; /* White background like the contact form */
+    color: #333; /* Dark text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: auto;
+    height: auto;
+}
+
+.search-bar button:hover {
+    background-color: #e7e9fc; /* Match hover background */
+    border-color: #999; /* Match hover border */
+}
+
+
 
             .search-bar input[type="text"] {
                 padding: 5px;
@@ -176,79 +192,136 @@
                 margin: 0;
                 font-size: 0.9em;
             }
-            
-            /* Switch Styling */
+
             .switch {
-                position: relative;
-                display: inline-block;
-                width: 50px;
-                height: 24px;
-                margin-left: 10px;
-            }
+              position: relative;
+              display: inline-block;
+              width: 50px;
+              height: 24px;
+              margin-left: 10px;
+          }
 
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
+          .switch input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+          }
 
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #878686;
-                transition: 0.4s;
-                border-radius: 24px;
-            }
+          .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #878686;
+              transition: 0.4s;
+              border-radius: 24px;
+          }
 
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 18px;
-                width: 18px;
-                left: 4px;
-                bottom: 3px;
-                background-color: rgb(6, 0, 0);
-                transition: 0.4s;
-                border-radius: 50%;
-            }
+          .slider:before {
+              position: absolute;
+              content: "";
+              height: 18px;
+              width: 18px;
+              left: 4px;
+              bottom: 3px;
+              background-color: rgb(6, 0, 0);
+              transition: 0.4s;
+              border-radius: 50%;
+          }
 
-            input:checked + .slider {
-                background-color: #878686;
-            }
+          input:checked + .slider {
+              background-color: #878686;
+          }
 
-            input:checked + .slider:before {
-                transform: translateX(24px);
-            }
+          input:checked + .slider:before {
+              transform: translateX(24px);
+          }
 
-            /* Tooltip Styling */
-            .tooltip {
-                position: relative;
-                display: inline-block;
-            }
+          .tooltip {
+              position: relative;
+              
+          }
+          .font-toggle-container {
+    position: fixed;
+    bottom: 80px; /* Adjust the distance from the footer */
+    left: 690px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 0;
+    z-index: 1000;
+}
 
-            .tooltip .tooltip-text {
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                visibility: hidden;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                padding: 6px;
-                border-radius: 5px;
-                position: absolute;
-                top: 25px;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 0.7em;
-                white-space: nowrap;
-            }
 
-            .tooltip:hover .tooltip-text {
-                visibility: visible;
-            }
+
+          .tooltip .tooltip-text {
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              visibility: hidden;
+              background-color: black;
+              color: #fff;
+              text-align: center;
+              padding: 6px;
+              border-radius: 5px;
+              position: absolute;
+              top: 25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.7em;
+              white-space: nowrap;
+          }
+
+          .tooltip:hover .tooltip-text {
+              visibility: visible;
+          }
+
+          .dark-mode .dark-mode-button {
+    background-color: #444; /* Dark gray background */
+    color: black;
+    padding: 3px 6px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.dark-mode-button {
+    background-color: #fff; /* White background like input fields */
+    color: #333; /* Dark text for readability */
+    padding: 1px 1px; /* Adjusted padding to match input fields */
+    font-size: 0.85em; /* Keep the font consistent */
+    border: 1px solid black; /* Light gray border similar to inputs */
+    
+    cursor: pointer;
+   
+    height: auto;
+    width: auto;
+}
+
+.dark-mode-button:hover {
+    background-color: #e7e9fc; /* Light hover effect like input fields */
+    border-color: #999; /* Slightly darker border on hover */
+}
+
+
+        .dark-mode {
+    background-color: #121212;
+    color:rgb(6, 0, 0);
+}
+
+.dark-mode .content {
+    background-color: #1e1e1e;
+    color:rgb(5, 0, 0);
+}
+
+.dark-mode .header, .dark-mode .footer {
+    background-color: #333;
+}
+
+.dark-mode .header nav a {
+    color: #ffffff;
+}
         </style>
     </head>
 
@@ -274,13 +347,6 @@
                 @else
                     <a href="{{ url('login') }}">Login</a>
                 @endauth
-                <div class="tooltip">
-                    <label class="switch">
-                        <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="tooltip-text">Toggle Font Size</span>
-                </div>
             </nav>
             <!-- Header Search Bar -->
             <div class="search-bar">
@@ -290,6 +356,16 @@
               </form>
           </div>
         </div>
+        <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+</div>
 
         <!-- Content Section -->
         <div class="bestseller-header">Math Tutors</div>
@@ -370,21 +446,47 @@
             };
 
             document.addEventListener("DOMContentLoaded", function () {
-                const savedFontSize = localStorage.getItem("pageFontSize");
-                const fontToggle = document.getElementById("fontToggle");
+              const savedFontSize = localStorage.getItem("pageFontSize");
+              const fontToggle = document.getElementById("fontToggle");
 
-                if (savedFontSize === "20px") {
-                    document.body.style.fontSize = "20px";
-                    fontToggle.checked = true;
-                }
-            });
+              if (savedFontSize === "20px") {
+                  document.body.style.fontSize = "20px";
+                  fontToggle.checked = true;
+              }
 
-            function toggleFontSize() {
-                const fontToggle = document.getElementById("fontToggle");
-                const isLarge = fontToggle.checked;
-                document.body.style.fontSize = isLarge ? "20px" : "16px";
-                localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
-            }
+              window.toggleFontSize = function () {
+                  const isLarge = fontToggle.checked;
+                  document.body.style.fontSize = isLarge ? "20px" : "16px";
+                  localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+              };
+          });
+
+          document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
         </script>
     </body>
 </html>
