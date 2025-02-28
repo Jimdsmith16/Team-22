@@ -346,6 +346,7 @@
                 <span class="tooltip-text">Toggle Font Size</span>
             </div>
         </nav>
+    </div>
 
         <div class="basket-container">
             @auth
@@ -356,18 +357,18 @@
             </div>
             @endauth
 
-            <!-- Header Dark mode -->
-            <div class="header-container">
-                <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
-             <!-- Header Search Bar -->
-                <div class="search-bar">
-                <form action="{{route('products.search')}}" method="GET">
-                    <input type="text" name="search" placeholder="Search Products...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+    <!-- Header Dark mode -->
+    <div class="header-container">
+        <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+        <!-- Header Search Bar -->
+        <div class="search-bar">
+            <form action="{{route('products.search')}}" method="GET">
+            <input type="text" name="search" placeholder="Search Products...">
+            <button type="submit">Search</button>
+        </form>
         </div>
-        </div>
+    </div>
+    
 
     <!-- Content Section -->
     <div class="bestseller-header">Bestsellers</div>
