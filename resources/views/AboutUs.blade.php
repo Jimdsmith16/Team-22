@@ -230,6 +230,37 @@
               visibility: visible;
           }
 
+          .dark-mode .dark-mode-button {
+    background-color: #444; /* Dark gray background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+        .dark-mode-button:hover {
+            text-decoration: underline;
+        }
+
+        .dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.dark-mode .header, .dark-mode .footer {
+    background-color: #333;
+}
+
+.dark-mode .header nav a {
+    color: #ffffff;
+}
+
+
         
       </style>
   </head>
@@ -273,6 +304,7 @@
         </label>
         <span class="tooltip-text">Toggle Font Size</span>
     </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
 </div>
       <div class="content">
           <img src="{{asset('Images/abtLogo.jpg')}}" alt="About Us">
@@ -353,8 +385,22 @@
         });
     });
 
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
+
+
           
       </script>
   </body>
   </html>
-
