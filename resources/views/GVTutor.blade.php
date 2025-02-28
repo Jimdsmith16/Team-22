@@ -14,10 +14,16 @@
                 font-family: Arial, sans-serif;
             }
 
+            html, body {
+                height: 100%;
+            }
+
             /* General Body and Page Styling */
             body {
                 background-color: #fff;
                 color: #333;
+                display: flex;
+                flex-direction: column;
             }
 
             /* Header Styling */
@@ -152,7 +158,8 @@
                 color: #fff;
                 text-align: center;
                 padding: 15px 0;
-                margin-top: 20px;
+                margin-top: auto;
+                width: 100%;
             }
 
             .footer p {
@@ -169,7 +176,7 @@
                 margin: 0;
                 font-size: 0.9em;
             }
-
+            
             /* Switch Styling */
             .switch {
                 position: relative;
