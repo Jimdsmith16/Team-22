@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\ReviewController;
 
 // Publicly accessible product-related routes
 Route::get('/products', [ProductController::class, 'list']);
@@ -17,6 +18,9 @@ Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->
 Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
+Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
 
 
 // Public pages
