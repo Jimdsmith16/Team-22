@@ -117,28 +117,27 @@
 
     /* Footer Styling */
     .footer {
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      padding: 15px 0;
-      margin-top: 20px;
-      width: 100%;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: auto;
+        width: 100%;
     }
 
     .footer p {
-      margin: 5px 0;
+        margin: 5px 0;
     }
 
     .footer .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
     }
 
     .footer .contact-info p {
-      margin: 0;
-      font-size: 0.9em;
+        margin: 0;
+        font-size: 0.9em;
     }
 
     .switch {
@@ -217,11 +216,6 @@
       .header nav {
         flex-wrap: wrap;
         justify-content: center;
-      }
-
-      .footer .contact-info {
-        flex-direction: column;
-        text-align: center;
       }
 
       .content {
