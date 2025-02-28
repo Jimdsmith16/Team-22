@@ -438,6 +438,27 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".mySlides1");
+    
+    function showSlides() {
+        slides.forEach((slide, index) => {
+            slide.style.display = "none";
+        });
+
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000); // Change slide every 3 seconds
+    }
+
+    showSlides();
+});
+    
+        document.addEventListener("DOMContentLoaded", function () {
               const savedFontSize = localStorage.getItem("pageFontSize");
               const fontToggle = document.getElementById("fontToggle");
 
