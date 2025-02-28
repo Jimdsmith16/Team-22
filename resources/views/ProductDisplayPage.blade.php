@@ -77,13 +77,15 @@
             @endif
         </div>
 
-        <!-- Footer Section -->
-        <footer>
-            <p>Contact us</p>
-            <p>Telephone: 0788635240</p>
-            <p>Email: GradeVault@gmail.com</p>
+        <!-- Footer Styling -->
+        <div class="footer">
+            <div class="contact-info">
+                <p>Contact us</p>
+                <p>Telephone: 123-456-7890</p>
+                <p>Email: info@gradevault.com</p>
+            </div>
             <p>Guard your Grades with GradeVault</p>
-        </footer>
+        </div>
 
         <!-- JavaScript for List/Grid View -->
 <script>
