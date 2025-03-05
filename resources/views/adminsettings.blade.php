@@ -220,11 +220,10 @@
 
 
         .submit-button,
-        .submit-button1 
-        .delete-button-product {
+        .submit-button1  {
             width: 100%;
             padding: 12px;
-            background-color: #000000;
+            background-color:rgb(0, 0, 0);
             color: #ffffff;
             border: none;
             border-radius: 12px;
@@ -235,8 +234,7 @@
         }
 
         .submit-button:hover,
-        .submit-button1:hover
-        .delete-button-product:hover {
+        .submit-button1:hover {
             background-color: gold;
             color: #000000;
         }
@@ -611,31 +609,7 @@
             border-radius: 4px;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .submit-button1 .delete-button-product {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        #inventory .product-list .product-item .hidden-edit-form .submit-button1:hover .delete-button-product {
-            background-color: #218838;
-        }
-
-        #inventory .product-list .product-item .hidden-edit-form .delete-button-product {
-            padding: 10px 20px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        #inventory .product-list .product-item .hidden-edit-form .delete-button-product:hover {
-            background-color: #c82333;
-        }
+       
 
         .popup {
             display: none;
@@ -681,6 +655,38 @@
 
         #UserErrorPopup .popup-content p {
             color: #d32f2f;
+        }
+        .delete-button-user{
+            width: 100%;
+            padding: 12px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .delete-button-user:hover {
+            background-color: gold;
+            color: #000000;
+        }
+        .delete-button-product {
+            width: 100%;
+            padding: 12px;
+            background-color:rgb(211, 47, 47);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .delete-button-product:hover {
+            background-color: gold;
+            color: #000000;
         }
     </style>
 </head>
