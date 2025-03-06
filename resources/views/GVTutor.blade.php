@@ -322,6 +322,16 @@
 .dark-mode .header nav a {
     color: #ffffff;
 }
+.basket-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+}
+
+.basket-icon a {
+    font-size: 24px; /* Adjust icon size */
+    text-decoration: none;
+}
         </style>
     </head>
 
@@ -348,13 +358,24 @@
                     <a href="{{ url('login') }}">Login</a>
                 @endauth
             </nav>
+            <div class="basket-container">
+            @auth
+            <div class="basket-icon">
+                <a href="{{ url('basket') }}">
+                    🛒
+                </a>
+            </div>
+            @endauth
+
             <!-- Header Search Bar -->
             <div class="search-bar">
-              <form action="{{route('products.search')}}" method="GET">
-                  <input type="text" name="search" placeholder="Search Products...">
-                  <button type="submit">Search</button>
-              </form>
-          </div>
+                <form action="{{route('products.search')}}" method="GET">
+                    <input type="text" name="search" placeholder="Search Products...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+          
         </div>
         <div class="font-toggle-container">
     <div class="tooltip">
