@@ -171,6 +171,7 @@ body {
     position: relative;
     bottom: 0;
     font-size: 0.9em;
+    margin-top: auto;
 }
 
 .footer .contact-info {
