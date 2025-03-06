@@ -167,6 +167,31 @@
             .close:hover {
                 color: red;
             }
+                    .apply-section {
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        .apply-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .apply-section form input, .apply-section form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+             .disclaimer {
+            font-size: 0.7em;
+            color: #555;
+            margin-top: 10px;
+        }
 
             /* Footer Styling */
             .footer {
@@ -279,7 +304,7 @@
           }
 
           .dark-mode .dark-mode-button {
-    background-color: #444; /* Dark gray background */
+    background-color: #444; 
     color: black;
     padding: 3px 6px;
     font-size: 14px;
@@ -287,11 +312,11 @@
 }
 
 .dark-mode-button {
-    background-color: #fff; /* White background like input fields */
-    color: #333; /* Dark text for readability */
-    padding: 1px 1px; /* Adjusted padding to match input fields */
-    font-size: 0.85em; /* Keep the font consistent */
-    border: 1px solid black; /* Light gray border similar to inputs */
+    background-color: #fff; 
+    color: #333; 
+    padding: 1px 1px; 
+    font-size: 0.85em; 
+    border: 1px solid black; 
     
     cursor: pointer;
    
@@ -300,8 +325,8 @@
 }
 
 .dark-mode-button:hover {
-    background-color: #e7e9fc; /* Light hover effect like input fields */
-    border-color: #999; /* Slightly darker border on hover */
+    background-color: #e7e9fc; 
+    border-color: #999; 
 }
 
 
@@ -417,6 +442,66 @@
                 <p>Price: £30 Per Hour</p>
                 <button onclick="openModal()">Contact</button>
             </div>
+        </div>      
+        
+        <div class="bestseller-header">English Tutors</div>
+        <div class="profile-container">
+            <div class="card">
+                <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
+                <h1>Elliot Fraser</h1>
+                <p class="title">English Tutor</p>
+                <p> University of Leeds </p>
+                <p>Price: £50 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
+
+            <div class="card">
+                <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
+                <h1>Freya Mitchelll</h1>
+                <p class="title">English Tutor</p>
+                <p>University of Edinburgh</p>
+                <p>Price: £30 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
+
+            <div class="card">
+                <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
+                <h1>Amelia Anderson</h1>
+                <p class="title">English Tutor</p>
+                <p>King's College London</p>
+                <p>Price: £35 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
+        </div>       
+        
+        <div class="bestseller-header">Science Tutors</div>
+        <div class="profile-container">
+            <div class="card">
+                <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
+                <h1>Ruben Clarke</h1>
+                <p class="title">Science Tutor</p>
+                <p>University of Southamption</p>
+                <p>Price: £40 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
+
+            <div class="card">
+                <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
+                <h1>Harriet Walsh</h1>
+                <p class="title">Science Tutor</p>
+                <p>Durham University</p>
+                <p>Price: £55 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
+
+            <div class="card">
+                <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
+                <h1>Nathen Brookes</h1>
+                <p class="title">Science Tutor</p>
+                <p>University of Warwick</p>
+                <p>Price: £25 Per Hour</p>
+                <button onclick="openModal()">Contact</button>
+            </div>
         </div>
 
         <!-- Modal for Contact -->
@@ -439,6 +524,22 @@
                 </form>
             </div>
         </div>
+    <!-- Modal for Application -->
+            <div class="apply-section">
+        <h2>Apply to Become a Tutor</h2>
+        <form action="https://formspree.io/f/mdkodzeb" method="POST">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="degrees" placeholder="Degrees and Qualifications" required>
+            <select name="payment-plan">
+                <option value="monthly">Monthly - $10/month</option>
+                <option value="yearly">Yearly - $98.99/year</option>
+            </select>
+            <button type="submit">Submit Application</button>
+        </form>
+                 <p class="disclaimer">We provide a way of advertising your business; we do not handle communication and/or payment with clients.</p>
+    </div>
+
 
         <!-- Footer Styling -->
         <div class="footer">
