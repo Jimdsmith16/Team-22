@@ -328,6 +328,16 @@
 .dark-mode .header nav a {
     color: #ffffff;
 }
+.basket-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+}
+
+.basket-icon a {
+    font-size: 24px; /* Adjust icon size */
+    text-decoration: none;
+}
     </style>
 </head>
 
