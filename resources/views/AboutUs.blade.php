@@ -197,7 +197,7 @@
           .font-toggle-container {
     position: fixed;
     right: 17px;
-    bottom: 28px;
+    bottom: 40px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -230,34 +230,26 @@
               visibility: visible;
           }
 
-          .dark-mode .dark-mode-button {
-    background-color: #444; /* Dark gray background */
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-
-        .dark-mode-button:hover {
-            text-decoration: underline;
-        }
-
-        .dark-mode {
-    background-color: #121212;
-    color: #ffffff;
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #121212; /* Dark background for body */
+    color: #ffffff; /* Light text color */
 }
 
 .dark-mode .content {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: #1e1e1e; /* Darker background for content */
+    color: #ffffff; /* Light text color */
 }
 
 .dark-mode .header, .dark-mode .footer {
-    background-color: #333;
+    background-color: #333; /* Dark background for header and footer */
 }
 
 .dark-mode .header nav a {
-    color: #ffffff;
+    color: #ffffff; /* Light text color for nav links */
+}
+html.dark-mode {
+    background-color: #121212; /* Match the body background */
 }
 
 .basket-container {
@@ -411,15 +403,16 @@
 
     if (darkModeEnabled) {
         document.body.classList.add("dark-mode");
+        document.documentElement.classList.add("dark-mode"); 
     }
 
     document.querySelector(".dark-mode-button").addEventListener("click", function () {
         document.body.classList.toggle("dark-mode");
+        document.documentElement.classList.toggle("dark-mode");
         const isDarkMode = document.body.classList.contains("dark-mode");
         localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
     });
 });
-
 
           
       </script>
