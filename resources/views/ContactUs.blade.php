@@ -275,7 +275,16 @@
         flex: 1;
       }
     }
+    .basket-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+}
 
+.basket-icon a {
+    font-size: 24px; /* Adjust icon size */
+    text-decoration: none;
+}
 
 
 
@@ -306,13 +315,23 @@
       <a href="{{ url('login') }}">Login</a>
     @endauth
     </nav>
-    <!-- Header Search Bar -->
-    <div class="search-bar">
-      <form action="{{route('products.search')}}" method="GET">
-        <input type="text" name="search" placeholder="Search Products...">
-        <button type="submit">Search</button>
-      </form>
-    </div>
+    <div class="basket-container">
+            @auth
+            <div class="basket-icon">
+                <a href="{{ url('basket') }}">
+                    🛒
+                </a>
+            </div>
+            @endauth
+
+            <!-- Header Search Bar -->
+            <div class="search-bar">
+                <form action="{{route('products.search')}}" method="GET">
+                    <input type="text" name="search" placeholder="Search Products...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
   </div>
 
   <div class="font-toggle-container">
