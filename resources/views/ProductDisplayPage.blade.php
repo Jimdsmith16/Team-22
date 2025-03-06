@@ -361,41 +361,64 @@ footer p {
 .dark-mode .header nav a {
     color: #ffffff;
 }
+.basket-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+}
+
+.basket-icon a {
+    font-size: 24px; /* Adjust icon size */
+    text-decoration: none;
+}
 
         </style>
     </head>
     <body>
-        <!-- Header Section -->
-        <div class="header">
-            <div class="logo">
-            <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
-            </div>
-            <!-- Header Nav Bar -->
-            <nav>
-                <a href="{{url('/')}}">Home</a>
-                <a href="{{url('tutor')}}">Tutors</a>
-                <a href="{{url('about')}}">About</a>
-                <a href="{{url('contact')}}">Contact Us</a>
-                <a href="{{url('products')}}">Products</a>
-                @auth
-                    @if(auth()->user()->type === 'admin')
-                        <a href="{{ url('adminsettings') }}">Settings</a>
-                    @else
-                        <a href="{{ url('usersettings') }}">Settings</a>
-                    @endif
-                @else
-                    <a href="{{ url('login') }}">Login</a>
-                @endauth
-            </nav>
-            </nav>
-            <!-- Header Search Bar -->
-            <div class="search-bar">
-                <form action="{{route('products.search')}}" method="GET">
-                    <input type="text" name="search" placeholder="Search Products...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+    <!-- Header Section -->
+<div class="header">
+    <div class="logo">
+        <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+    </div>
+    
+    <!-- Header Nav Bar -->
+    <nav>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
+        @auth
+            @if(auth()->user()->type === 'admin')
+                <a href="{{ url('adminsettings') }}">Settings</a>
+            @else
+                <a href="{{ url('usersettings') }}">Settings</a>
+            @endif
+        @else
+            <a href="{{ url('login') }}">Login</a>
+        @endauth
+    </nav>
+
+    <!-- Basket Icon + Search Bar -->
+    <div class="basket-container">
+        @auth
+        <div class="basket-icon">
+            <a href="{{ url('basket') }}">
+                🛒
+            </a>
         </div>
+        @endauth
+
+        <!-- Header Search Bar -->
+        <div class="search-bar">
+            <form action="{{route('products.search')}}" method="GET">
+                <input type="text" name="search" placeholder="Search Products...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
         <div class="font-toggle-container">
     <div class="tooltip">
