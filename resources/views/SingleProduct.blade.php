@@ -68,14 +68,7 @@ body {
     color: gold;
 }
 
-.search-bar {
-    display: flex;
-}
 
-.search-bar input[type="text"] {
-    padding: 5px;
-    font-size: 1em;
-}
 
 /* Basket Title */
 .basket-title {
@@ -340,40 +333,75 @@ body {
         width: 100%;
         text-align: center;
     }
+}
+/* Basket + Search Bar Container */
+.basket-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns contents to the left */
+    gap: 10px; /* Spacing between basket icon and search bar */
+}
 
-    
+/* Basket Icon */
+.basket-icon {
+    display: flex;
+    align-items: center;
+}
+
+.basket-icon a {
+    font-size: 24px;
+    text-decoration: none;
+}
+
+/* Search Bar */
+
+.search-bar input[type="text"] {
+    padding: 5px;
+    font-size: 1em;
 }
 
         </style>
     </head>
     <body>
         <!-- Header Section -->
-        <div class="header">
-            <div class="logo">
-                <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
-            </div>
-            <!-- Header Nav Bar -->
-            <nav>
-                <a href="{{url('/')}}">Home</a>
-                <a href="{{url('tutor')}}">Tutors</a>
-                <a href="{{url('about')}}">About</a>
-                <a href="{{url('contact')}}">Contact Us</a>
-                <a href="{{url('products')}}">Products</a>
-                @auth
-                    <a href="{{ url('usersettings') }}">Settings</a>
-                @else
-                    <a href="{{ url('login') }}">Log In / Sign Up</a>
-                @endauth 
-            </nav>
-            <!-- Header Search Bar -->
-            <div class="search-bar">
-                <form action="{{route('products.search')}}" method="GET">
-                    <input type="text" name="search" placeholder="Search Products...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+<div class="header">
+    <div class="logo">
+        <a href="/"><img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+    </div>
+
+    <!-- Header Nav Bar -->
+    <nav>
+        <a href="{{url('/')}}">Home</a>
+        <a href="{{url('tutor')}}">Tutors</a>
+        <a href="{{url('about')}}">About</a>
+        <a href="{{url('contact')}}">Contact Us</a>
+        <a href="{{url('products')}}">Products</a>
+        @auth
+            <a href="{{ url('usersettings') }}">Settings</a>
+        @else
+            <a href="{{ url('login') }}">Log In / Sign Up</a>
+        @endauth 
+    </nav>
+
+    <!-- Basket Icon + Search Bar Container -->
+    <div class="basket-search-container">
+        @auth
+        <div class="basket-icon">
+            <a href="{{ url('basket') }}">🛒</a>
         </div>
-        <div class="font-toggle-container">
+        @endauth
+
+        <div class="search-bar">
+            <form action="{{route('products.search')}}" method="GET">
+                <input type="text" name="search" placeholder="Search Products...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+       
+    <div class="font-toggle-container">
     <div class="tooltip">
         <label class="switch">
             <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
