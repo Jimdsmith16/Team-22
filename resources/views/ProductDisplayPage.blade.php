@@ -371,6 +371,10 @@ footer p {
     font-size: 24px; /* Adjust icon size */
     text-decoration: none;
 }
+.search-bar input[type="text"] {
+    padding: 5px;
+    font-size: 1em;
+}
 
         </style>
     </head>
