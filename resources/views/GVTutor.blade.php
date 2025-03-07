@@ -270,8 +270,8 @@
           }
           .font-toggle-container {
     position: fixed;
-    bottom: 80px; /* Adjust the distance from the footer */
-    left: 690px;
+    bottom: 30px; 
+    left: 680px;
     display: flex;
     justify-content: center;
     align-items: center;
