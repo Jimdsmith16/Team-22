@@ -360,6 +360,90 @@ body {
     padding: 5px;
     font-size: 1em;
 }
+#reviews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.review-heading{
+    letter-spacing: 1px;
+    margin: 30px 0px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.review-heading h1{
+    font-size: 2.2rem;
+    font-weight: 500;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+}
+.review-heading span{
+    font-size: 1.3rem;
+    color: #000;
+    margin-bottom:2px ;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.review-box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.review-box{
+    width: 500px;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    margin: 15px;
+    cursor: pointer;
+}
+.profile.img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.profile-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.profile{
+    display: flex;
+    flex-direction: column;
+}
+.name-user strong{
+color: #3d3d3d ;
+font-size: 1.1rem;
+letter-spacing: 0.5px;
+}
+.name-user span{
+    color: #979797;
+    font-size: 0.8rem;
+}
+.cus-reviews{
+    color: yellow;
+}
+.box-top{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.client-comment p{
+font-size: 0.9rem;
+
+}
 
         </style>
     </head>
@@ -436,11 +520,13 @@ body {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300&display=swap" rel="stylesheet">
+<!--- using font awesome -->
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
         <!-- Review Section ----------------------------> 
             <section id= "reviews">
                 <!--- heading --->
                 <div class ="review-heading" > 
-                    <span> Comments </span>
+                    <span> Reviews </span>
                     <h1> Customer Says..</h1> 
 </div>
 
@@ -465,10 +551,90 @@ body {
                 
             </div>
             <!-- reviews-->
-            <div class="cus-reviews"></div>
-</div>
-            
+            <div class="cus-reviews">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i> <!--- Empty star--->
+            </div>
+        </div> 
+            <!---comments---> 
+            <div class="client-comment">
+            <p>Lorem ipsum dolor sit amet. Ex odio excepturi est nesciunt dolore sed explicabo repudiandae aut debitis similique vel dolore corporis sed deserunt mollitia ut autem voluptatem. Aut nobis quod eos soluta velit sit nostrum inventore ut enim pariatur. </p>
+
+            </div>
+
     </div>
+
+     <!-- BOX-2--->
+     <div class="review-box">
+
+<!-- top-->
+<div class="box-top">
+    <!--- profile -->
+    <div class="profile">
+        <!--img--->
+        <div class="profile-img">
+        </div>
+        <!-- name-and-username-->
+        <div class ="nam-user">
+            <strong> Rory Morris</strong>
+            <span>@R_morris</span>
+        </div>
+        
+    </div>
+    <!-- reviews-->
+    <div class="cus-reviews">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i> <!--- Empty star--->
+    </div>
+</div>
+    <!---comments---> 
+    <div class="client-comment">
+    <p>Lorem ipsum dolor sit amet. Ex odio excepturi est nesciunt dolore sed explicabo repudiandae aut debitis similique vel dolore corporis sed deserunt mollitia ut autem voluptatem. Aut nobis quod eos soluta velit sit nostrum inventore ut enim pariatur. </p>
+
+    </div>
+
+</div>
+
+ <!-- BOX-3--->
+ <div class="review-box">
+
+<!-- top-->
+<div class="box-top">
+    <!--- profile -->
+    <div class="profile">
+        <!--img--->
+        <div class="profile-img">
+        </div>
+        <!-- name-and-username-->
+        <div class ="nam-user">
+            <strong> Marina Krueger</strong>
+            <span>@Mk_96</span>
+        </div>
+        
+    </div>
+    <!-- reviews-->
+    <div class="cus-reviews">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i> <!--- Empty star--->
+    </div>
+</div>
+    <!---comments---> 
+    <div class="client-comment">
+    <p>Lorem ipsum dolor sit amet. Ex odio excepturi est nesciunt dolore sed explicabo repudiandae aut debitis similique vel dolore corporis sed deserunt mollitia ut autem voluptatem. Aut nobis quod eos soluta velit sit nostrum inventore ut enim pariatur. </p>
+
+    </div>
+
+</div>
+
 
 
 </section>
