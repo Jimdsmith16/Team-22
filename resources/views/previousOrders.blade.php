@@ -223,7 +223,7 @@
                                 <p>Quantity: {{ $product->pivot->quantity }}</p>
                             </div>
                         @endforeach
-                        <p>Total for this order: £{{ number_format($order->total_price, 2) }}</p>
+                        <p>Total for this order: £{{ number_format($product->price * $product->pivot->quantity, 2) }}</p>
                     </div>
                 @endforeach
 
