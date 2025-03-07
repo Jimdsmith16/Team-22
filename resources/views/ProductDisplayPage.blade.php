@@ -435,14 +435,7 @@ footer p {
     <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
 </div>
 
-          
-       
-          
-
-        <!-- Content Section -->
-        <div class="product-container">
-
-            <!-- Category Dropdown -->
+         <!-- Category Dropdown -->
             <form action="{{ route('products.byCategory') }}" method="GET" class="category-filter">
                 <label for="category">Filter by Category:</label>
                 <select name="category" id="category" onchange="this.form.submit()">
@@ -453,7 +446,14 @@ footer p {
                         </option>
                     @endforeach
                 </select>
-            </form>
+            </form>  
+       
+          
+
+        <!-- Content Section -->
+        <div class="product-container">
+
+           
             <div class="view-buttons">
             <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
             <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
