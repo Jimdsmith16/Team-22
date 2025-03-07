@@ -11,13 +11,15 @@ use App\Http\Controllers\ReviewController;
 
 // Publicly accessible product-related routes
 Route::get('/products', [ProductController::class, 'list']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
 Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
-Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
-Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+'); 
+
+// Product management routes
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+Route::put('/product/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+')->name('product.update');
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])->where('id', '[0-9]+')->name('product.destroy');
 
 Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
