@@ -43,6 +43,14 @@ class ProductController extends Controller
         return view('ProductDisplayPage', compact('products', 'categories'));
     }
 
+    public function findByCategory($id) {
+        $products = $id
+            ? Product::where('category_id', $id)->get()
+            : Product::all();
+        $categories = Category::all();
+        return view('ProductDisplayPage', compact('products', 'categories'));
+    }
+
     // Finds all products with similar names.
     public function search(Request $request)
     {
