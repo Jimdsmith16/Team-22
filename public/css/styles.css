@@ -138,7 +138,7 @@ footer p {
 }
 /* List/Grid buttons positioning */
 .column {
-    float: left;
+    float:inline-end;
     width: 50%;
     padding: 10px;
 }
