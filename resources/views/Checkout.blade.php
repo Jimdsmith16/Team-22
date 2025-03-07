@@ -13,19 +13,20 @@
               font-family: Arial, sans-serif;
           }
 
-          /* General Page and Body Styling */
-          html,
-          body {
-              height: 100%;
-              background-color: #f5f5f5;
-              color: #333;
-          }
+          html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
-          body {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-          }
+main {
+    flex: 1;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
           /* Header Styling */
           .header {
@@ -77,171 +78,207 @@
             width: 100%;
         }
 
-        .checkout-container {
-            background-color: #e7e9fc;
-            width: 90%;
-            max-width: 600px;
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            font-size: 1.3em;
-        }
+       /* Fix checkout layout to prevent basket from being pushed down */
+.checkout-wrapper {
+    display: flex;
+    justify-content: space-between; /* Ensures form and basket stay side by side */
+    align-items: flex-start;
+    width: 90%; /* Allow the section to take more width */
+    max-width: 1200px; /* Keep the layout balanced */
+    margin: 100px auto 20px;
+    padding: 20px;
+    gap: 20px; /* Adjust spacing between form and basket */
+}
 
-        .checkout-container h2 {
-            margin-bottom: 20px;
-            color: #000;
-        }
+/* Updated Checkout Form Styling */
+.checkout-form {
+    flex: 1;
+    max-width: 550px; /* Adjusted width */
+    min-width: 400px;
+    background-color: #e7e9fc;
+    padding: 25px; /* Reduced padding */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds spacing between elements */
+}
 
-        .checkout-step {
-            margin-bottom: 15px;
-            text-align: left;
-        }
+.checkout-step input,
+.checkout-step select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
 
-        .checkout-step label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
 
-        .checkout-step input, .checkout-step select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    /* Spacing adjustments within form elements */
+.checkout-step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Increased spacing between inputs */
+    margin-bottom: 15px; /* Adds spacing between form sections */
+}
 
-        .checkout-footer {
-            margin-top: 20px;
-        }
 
-        .checkout-footer .terms {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
+.checkout-step label {
+    font-size: 1em;
+    font-weight: bold;
+}
+    
+    .basket-summary {
+    width: 350px; /* Fixed width to prevent it from getting pushed down */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevents it from shrinking */
+}
+    .basket-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
 
-        .checkout-footer input {
-            margin-right: 5px;
-        }
+    .checkout-item {
+        background-color: #ffffff;
+        padding: 12px;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
 
-        .checkout-container button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #000;
-            color: white;
-            font-size: 1em;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .item-name {
+        font-weight: bold;
+        color: #000;
+        font-size: 0.85em;
+    }
 
-        .checkout-container button:hover {
-            opacity: 0.7;
-        } 
+    .quantity {
+        font-weight: normal;
+        color: #666;
+        font-size: 0.8em;
+    }
 
-          /* Footer Styling */
-          .footer {
-                background-color: #000;
-                color: #fff;
-                text-align: center;
-                padding: 15px 0;
-                margin-top: 20px;
-                width: 100%;
-                left: 0;
-                right: 0;
-                position: absolute;
-            }
+    .item-price {
+        margin-top: 3px;
+        color: #333;
+        font-size: 0.85em;
+    }
 
-            .footer p {
-                margin: 5px 0;
-            }
+    .total-section {
+        padding: 10px;
+        background-color: #e7e9fc;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #000;
+    }
 
-            .footer .contact-info {
-                display: flex;
-                justify-content: center;
-                gap: 15px;
-            }
+    .checkout-footer {
+    text-align: center;
+    margin-top: 10px; /* Reduced margin */
+}
 
-            .footer .contact-info p {
-                margin: 0;
-                font-size: 0.9em;
-            }
-        /* Switch Styling */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 10px;
-        }
+    .checkout-footer button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background-color: #000;
+        color: white;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+    .checkout-footer button:hover {
+        opacity: 0.7;
+    }
+    .terms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #878686;
-            transition: 0.4s;
-            border-radius: 24px;
-        }
+    /* Footer Styling */
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    width: 100%;
+}
+    .footer .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 4px;
-            bottom: 3px;
-            background-color: rgb(6, 0, 0);
-            transition: 0.4s;
-            border-radius: 50%;
-        }
+    .footer .contact-info p {
+        margin: 0;
+        font-size: 0.9em;
+    }
+       
+.switch {
+              position: relative;
+              display: inline-block;
+              width: 50px;
+              height: 24px;
+              margin-left: 10px;
+          }
 
-        input:checked + .slider {
-            background-color: #878686;
-        }
+          .switch input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+          }
 
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
+          .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #878686;
+              transition: 0.4s;
+              border-radius: 24px;
+          }
 
-        /* Tooltip Styling */
-        .tooltip {
-            position: relative;
-            
-        }
+          .slider:before {
+              position: absolute;
+              content: "";
+              height: 18px;
+              width: 18px;
+              left: 4px;
+              bottom: 3px;
+              background-color: rgb(6, 0, 0);
+              transition: 0.4s;
+              border-radius: 50%;
+          }
 
-        .tooltip .tooltip-text {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            visibility: hidden;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            padding: 6px;
-            border-radius: 5px;
-            position: absolute;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7em;
-            white-space: nowrap;
-        }
+          input:checked + .slider {
+              background-color: #878686;
+          }
 
-        
-        .font-toggle-container {
+          input:checked + .slider:before {
+              transform: translateX(24px);
+          }
+
+          .tooltip {
+              position: relative;
+              
+          }
+          .font-toggle-container {
     position: fixed;
-    right: 25px;
-    bottom: 50px;
+    right: 17px;
+    bottom: 28px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -249,11 +286,59 @@
     padding: 0; /* Remove padding */
     border-radius: 0; /* Remove border radius */
     box-shadow: none; /* Remove shadow */
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.01s ease-in-out;
 }
 
-.tooltip:hover .tooltip-text {
-    visibility: visible;
+
+
+          .tooltip .tooltip-text {
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              visibility: hidden;
+              background-color: black;
+              color: #fff;
+              text-align: center;
+              padding: 6px;
+              border-radius: 5px;
+              position: absolute;
+              top: 25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.7em;
+              white-space: nowrap;
+          }
+
+          .tooltip:hover .tooltip-text {
+              visibility: visible;
+          }
+
+          .dark-mode .dark-mode-button {
+    background-color: #444; /* Dark gray background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+        .dark-mode-button:hover {
+            text-decoration: underline;
+        }
+
+        .dark-mode {
+    background-color: #121212;
+    color:rgb(10, 10, 10);
+}
+
+.dark-mode .content {
+    background-color: #1e1e1e;
+    color:rgb(8, 8, 8);
+}
+
+.dark-mode .header, .dark-mode .footer {
+    background-color: #333;
+}
+
+.dark-mode .header nav a {
+    color: #ffffff;
 }
 
     </style>
@@ -297,68 +382,73 @@
         </label>
         <span class="tooltip-text">Toggle Font Size</span>
     </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
 </div>
 
 
-
-    <!-- Content Section -->
-    <main>
-        <div class="checkout-container">
-            <h2>Checkout</h2>
-
-            <h3>Your Basket Items:</h3>
-            @foreach($products as $product)
-                <div class="checkout-item">
-                    <p>{{ $product->name }} (x{{ $product->pivot->quantity }})</p>
-                    <p>Price: £{{ number_format($product->price * $product->pivot->quantity, 2) }}</p>
-                </div>
-            @endforeach
-
-            <div class="total-section">
-                <p>Total: £{{ number_format($total, 2) }}</p>
+<!-- Basket & Checkout Layout -->
+<div class="checkout-wrapper">
+    <!-- Customer Details Form (Centered) -->
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <form action="{{ route('checkout.process') }}" method="POST">
+            @csrf
+            <div class="checkout-step">
+                <label for="customer-details">Customer Details</label>
+                <input type="text" id="customer-details" name="customer_name" placeholder="Enter your name" required>
             </div>
 
-            <form action="{{ route('checkout.process') }}" method="POST">
-            @csrf
-                <div class="checkout-step">
-                    <label for="customer-details">Customer Details</label>
-                    <input type="text" id="customer-details" name="customer_name" placeholder="Enter your name" required>
+            <div class="checkout-step">
+                <label for="address_line1">Address Line 1</label>
+                <input type="text" id="address_line1" name="address_line1" placeholder="Enter address line 1" required>
+
+                <label for="address_line2">Address Line 2</label>
+                <input type="text" id="address_line2" name="address_line2" placeholder="Enter address line 2 (optional)">
+
+                <label for="postcode">Postcode</label>
+                <input type="text" id="postcode" name="postcode" placeholder="Enter your postcode" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="Enter your country" required>
+            </div>
+
+            <div class="checkout-step">
+                <label for="payment-details">Payment Details</label>
+                <select id="payment-details" name="payment_method" required>
+                    <option value="">Select payment method</option>
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <div class="checkout-footer">
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the Terms and Conditions</label>
                 </div>
+                <button type="submit">Place Order</button>
+            </div>
+        </form>
+    </div>
 
-                <!-- Shipping Address -->
-                <div class="checkout-step">
-                    <label for="address_line1">Address Line 1</label>
-                    <input type="text" id="address_line1" name="address_line1" placeholder="Enter address line 1" required>
-
-                    <label for="address_line2">Address Line 2</label>
-                    <input type="text" id="address_line2" name="address_line2" placeholder="Enter address line 2 (optional)">
-
-                    <label for="postcode">Postcode</label>
-                    <input type="text" id="postcode" name="postcode" placeholder="Enter your postcode" required>
-
-                    <label for="country">Country</label>
-                    <input type="text" id="country" name="country" placeholder="Enter your country" required>
+    <!-- Basket Items (Right Side) -->
+    <div class="basket-summary">
+        <h3>Your Basket</h3>
+        <div class="basket-items">
+            @foreach($products as $product)
+            <div class="checkout-item">
+                <div class="item-details">
+                    <p class="item-name">{{ $product->name }} <span class="quantity">(x{{ $product->pivot->quantity }})</span></p>
+                    <p class="item-price">£{{ number_format($product->price * $product->pivot->quantity, 2) }}</p>
                 </div>
-
-                <div class="checkout-step">
-                    <label for="payment-details">Payment Details</label>
-                    <select id="payment-details" name="payment_method" required>
-                        <option value="">Select payment method</option>
-                        <option value="card">Credit/Debit Card</option>
-                        <option value="paypal">PayPal</option>
-                    </select>
-                </div>
-
-                <div class="checkout-footer">
-                    <div class="terms">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">Terms and Conditions</label>
-                    </div>
-                    <button type="submit">Place Order</button>
-                </div>
-            </form>
+            </div>
+            @endforeach
         </div>
-    </main>
+        <div class="total-section">
+            <p><strong>Total:</strong> £{{ number_format($total, 2) }}</p>
+        </div>
+    </div>
+</div>
 
     <!-- Footer Section -->
     <footer>
@@ -366,7 +456,7 @@
             <div class="contact-info">
                 <p>Contact us</p>
                 <p>Telephone: 123 456 7890</p>
-                <p>Email: Gradevault06@gmail.com</p>
+                <p>Email: info@gradevault.com</p>
             </div>
             <p>Guard your Grades with GradeVault</p>
         </div>
@@ -396,10 +486,25 @@
             let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             let scrollPercentage = scrollY / maxScroll; 
 
-            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            let moveAmount = scrollPercentage * 80; // Adjust the floating effect amount
             fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
+
     </script>
 
 </body>
