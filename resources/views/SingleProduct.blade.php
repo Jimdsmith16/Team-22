@@ -432,6 +432,47 @@ body {
                 <button>Buy Now</button>
             </div>
         </div>
+<!-- poppins font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300&display=swap" rel="stylesheet">
+        <!-- Review Section ----------------------------> 
+            <section id= "reviews">
+                <!--- heading --->
+                <div class ="review-heading" > 
+                    <span> Comments </span>
+                    <h1> Customer Says..</h1> 
+</div>
+
+<!--reviews-box-container-->
+<div class="review-box-container">
+
+    <!-- BOX-1--->
+    <div class="review-box">
+
+        <!-- top-->
+        <div class="box-top">
+            <!--- profile -->
+            <div class="profile">
+                <!--img--->
+                <div class="profile-img">
+                </div>
+                <!-- name-and-username-->
+                <div class ="nam-user">
+                    <strong> Sally Bennett</strong>
+                    <span>@sallybennet</span>
+                </div>
+                
+            </div>
+            <!-- reviews-->
+            <div class="cus-reviews"></div>
+</div>
+            
+    </div>
+
+
+</section>
+
 
         <!-- Footer Section -->
         <div class="footer">
