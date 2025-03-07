@@ -418,9 +418,9 @@
     </div>
 
     <div class="button-container">
-        <button class="maths">Maths</button>
-        <button class="english">English</button>
-        <button class="science">Science</button>
+        <a class="maths" href="{{route('products.category', 2)}}">Maths</a>
+        <a class="english" href="{{route('products.category', 1)}}">English</a>
+        <a class="science" href="{{route('products.category', 3)}}">Science</a>
     </div>
 
     <div class="ratings-container">
