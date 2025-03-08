@@ -163,28 +163,30 @@ footer p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
-    gap: 20px;
+    padding: 0px;
+    gap: 15px;
     max-width: 1000px;
     margin: 0 auto;
     transition: all 0.3s ease-in-out;
 }
-/* Align category filter and buttons in center */
+
 /* Ensure the category filter and buttons are aligned */
 .category-filter {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 5px;
-    margin-left: 5px;
+    margin-bottom: 5px;  
+    margin-left: 180px;
 }
 .view-buttons {
     display: flex;
-    justify-content: flex-start; /* Align buttons to the left */
-    gap: 8px; /* Small gap between buttons */
-    margin-top: 40px; /* Moves buttons slightly up */
-    margin-left: -150px; /* Moves buttons slightly to the left */
+    justify-content: flex-start; /* Aligns buttons to the left */
+    gap: 8px;
+    margin-top: 10px; /* Adjust spacing from category filter */
+    margin-left: 182px; /* Reset margin so it doesn't push products */
+    position: relative; /* Keeps buttons positioned properly */
 }
+
 
 /* Fix button size and prevent stretching */
 .view-buttons button {
@@ -447,18 +449,15 @@ footer p {
                     @endforeach
                 </select>
             </form>  
-       
-          
+
+           
+    <div class="view-buttons">
+        <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
+        <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
+    </div>
 
         <!-- Content Section -->
         <div class="product-container">
-
-           
-            <div class="view-buttons">
-            <button onclick="listView()"><i class="fa fa-bars"></i> List</button>
-            <button onclick="gridView()"><i class="fa fa-th-large"></i> Grid</button>
-        </div>
-
             @if($products->isEmpty())
                 <p>No products found in this category.</p>
             @else
