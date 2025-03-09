@@ -433,6 +433,51 @@ body {
             </div>
         </div>
 
+        <!-- Review Section -->
+        <form action="{{ route('review.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}"> <!-- Use the authenticated user's ID -->
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+            <label for="rating">Rating (1-5):</label>
+            <select name="rating" required>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Poor</option>
+                <option value="1">1 - Terrible</option>
+            </select>
+
+            <label for="description">Your Review:</label>
+            <textarea name="description" required></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <!-- Display Reviews -->
+        <h2>Customer Reviews</h2>
+
+        @if($product->reviews->count() > 0)
+            @foreach($product->reviews as $review)
+                <div class="review">
+                    <p><strong>Rating:</strong> {{ $review->rating }}/5</p>
+                    <p><strong>Review:</strong> {{ $review->description }}</p>
+                    <p><strong>By:</strong> {{ $review->user->name ?? 'Anonymous' }}</p>
+                    
+                    <!-- Delete button (only if admin or user is the owner of the review) -->
+                    @if(Auth::check() && Auth::id() == $review->user_id)
+                    <form action="{{ route('review.destroy', $review->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+                </div>
+            @endforeach
+        @else
+            <p>No reviews yet. Be the first to review this product!</p>
+        @endif
+
         <!-- Footer Section -->
         <div class="footer">
             <div class="contact-info">
