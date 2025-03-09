@@ -29,4 +29,9 @@ class Product extends Model
         return $this->belongsToMany(Basket::class, 'basket_product')->withPivot('quantity');
     }
 
+    //Shows what reviews this product has.
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
 }
