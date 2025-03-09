@@ -12,7 +12,7 @@ class ProductController extends Controller
     // Shows the product corresponding to the given ID.
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('reviews.user')->findOrFail($id);
         return view("SingleProduct", compact("product"));
     }
 
