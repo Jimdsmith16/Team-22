@@ -14,7 +14,7 @@ Route::get('/products', [ProductController::class, 'list']);
 Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
 Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
-Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+'); 
+Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show'); 
 
 // Product management routes
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
