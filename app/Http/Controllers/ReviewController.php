@@ -11,9 +11,10 @@ use App\Models\Review;
 class ReviewController extends Controller
 {
     //Shows the review linked to the given ID. Needs to be overwritten.
-    public function show($id) {
-        $project = Review::find($id);
-        return view("/show", array("review" => $review));
+    public function show($product_id) {
+        $product = Product::findOrFail($product_id);
+        $reviews = Review::where('product_id', $product_id)->get();
+        return view("SingleProduct", compact('product', 'reviews'));
     }
 
     //Shows all reviews.
@@ -28,23 +29,17 @@ class ReviewController extends Controller
             'description' => 'required|string',
             'rating' => 'required|numeric|min:1|max:5',
         ]);
-        Review::create([
-            'user_id' => $request->user_id,
-            'product_id' => $request->product_id,
-            'description' => $request->description,
-            'rating' => $request->rating,
-        ]);
-        return view("SingleProduct", compact(Product::find($request->product_id)));
+        Review::create($request->all());
+
+        return redirect()->route('product.show', ['id' => $request->product_id])->with('success', 'Review submitted successfully!');
     }
 
+    //Delete a review
     public function destroy($id) {
-        try {
-            $review = Review::findOrFail($id);
-            $product_id = $review->product_id;
-            $review->delete();
-            return view("SingleProduct", compact(Product::find($product_id)));
-        } catch (\Exception $e) {
-            return view("ProductDisplayPage", compact(Product::all(), Category::all()));
-        }
+        $review = Review::findOrFail($id);
+        $product_id = $review->product_id;
+        $review->delete();
+        
+        return redirect()->route('product.show', ['id' => $product_id])->with('success', 'Review deleted successfully!');
     }
 }
