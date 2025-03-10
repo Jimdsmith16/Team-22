@@ -12,7 +12,7 @@ use App\Http\Controllers\ReviewController;
 // Publicly accessible product-related routes
 Route::get('/products', [ProductController::class, 'list']);
 Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
-Route::get('/products/category/{category}', [ProductController::class, 'findByCategory']);
+Route::get('/products/category/{category}', [ProductController::class, 'findByCategory'])->name('products.category');
 Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
 Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show'); 
 
