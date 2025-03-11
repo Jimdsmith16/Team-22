@@ -220,10 +220,10 @@
 
 
         .submit-button,
-        .submit-button1  {
+        .submit-button1 {
             width: 100%;
             padding: 12px;
-            background-color:rgb(0, 0, 0);
+            background-color: rgb(0, 0, 0);
             color: #ffffff;
             border: none;
             border-radius: 12px;
@@ -609,7 +609,7 @@
             border-radius: 4px;
         }
 
-       
+
 
         .popup {
             display: none;
@@ -656,7 +656,8 @@
         #UserErrorPopup .popup-content p {
             color: #d32f2f;
         }
-        .delete-button-user{
+
+        .delete-button-user {
             width: 100%;
             padding: 12px;
             background-color: #000000;
@@ -668,14 +669,16 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
+
         .delete-button-user:hover {
             background-color: gold;
             color: #000000;
         }
+
         .delete-button-product {
             width: 100%;
             padding: 12px;
-            background-color:rgb(211, 47, 47);
+            background-color: rgb(211, 47, 47);
             color: #ffffff;
             border: none;
             border-radius: 12px;
@@ -684,6 +687,7 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
+
         .delete-button-product:hover {
             background-color: gold;
             color: #000000;
@@ -1008,8 +1012,6 @@
                 </div>
             </div>
 
-
-
             <!-- Address Section -->
             <section id="address" class="section-content">
                 <div class="address-container">
@@ -1022,26 +1024,29 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label for="address_line1">New Address Line 1</label>
+                            <label for="address_line1">Address Line 1</label>
                             <input id="address_line1" name="address_line1" type="text"
-                                value="{{ old('address_line1') }}" required aria-label="Address Line 1" />
+                                value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
+                                required aria-label="Address Line 1" />
                             @error('address_line1')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="address_line2">New Address Line 2</label>
+                            <label for="address_line2">Address Line 2</label>
                             <input id="address_line2" name="address_line2" type="text"
-                                value="{{ old('address_line2') }}" aria-label="Address Line 2" />
+                                value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
+                                aria-label="Address Line 2" />
                             @error('address_line2')
                                 <span class="error-message">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="postcode">New Postcode</label>
-                            <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required
+                            <label for="postcode">Postcode</label>
+                            <input id="postcode" name="postcode" type="text"
+                                value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
                                 aria-label="Postcode" />
                             @error('postcode')
                                 <span class="error-message">{{ $message }}</span>
@@ -1049,8 +1054,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="country">New Country</label>
-                            <input id="country" name="country" type="text" value="{{ old('country') }}" required
+                            <label for="country">Country</label>
+                            <input id="country" name="country" type="text"
+                                value="{{ old('country', auth()->user()->address->country ?? '') }}" required
                                 aria-label="Country" />
                             @error('country')
                                 <span class="error-message">{{ $message }}</span>
