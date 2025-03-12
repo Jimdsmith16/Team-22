@@ -334,58 +334,64 @@
                     <a href="{{ route('previous.orders') }}" class="btn">View Previous Orders</a>
                 </section>
 
-                <section id="address" class="section-content">
-                    <div class="address-container">
-                        <header>
-                            <h2> </h2>
-                        </header>
+            <section id="address" class="section-content">
+                <div class="address-container">
+                    <header>
+                        <h2>Edit Address</h2>
+                    </header>
 
-                        <form method="POST" action="{{ route('address.update') }}">
-                            @csrf
-                            @method('PUT')
+                    <form method="POST" action="{{ route('address.update') }}">
+                        @csrf
+                        @method('PUT')
 
-                            <div class="form-group">
-                                <label for="address_line1">New Address Line 1</label>
-                                <input id="address_line1" name="address_line1" type="text"
-                                    value="{{ old('address_line1') }}" required />
-                                @error('address_line1')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="address_line1">Address Line 1</label>
+                            <input id="address_line1" name="address_line1" type="text"
+                                value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
+                                required aria-label="Address Line 1" />
+                            @error('address_line1')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-                            <div class="form-group">
-                                <label for="address_line2">New Address Line 2</label>
-                                <input id="address_line2" name="address_line2" type="text"
-                                    value="{{ old('address_line2') }}" />
-                                @error('address_line2')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="address_line2">Address Line 2</label>
+                            <input id="address_line2" name="address_line2" type="text"
+                                value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
+                                aria-label="Address Line 2" />
+                            @error('address_line2')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-                            <div class="form-group">
-                                <label for="postcode">New Postcode</label>
-                                <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required />
-                                @error('postcode')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="postcode">Postcode</label>
+                            <input id="postcode" name="postcode" type="text"
+                                value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
+                                aria-label="Postcode" />
+                            @error('postcode')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-                            <div class="form-group">
-                                <label for="country">New Country</label>
-                                <input id="country" name="country" type="text" value="{{ old('country') }}" required />
-                                @error('country')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input id="country" name="country" type="text"
+                                value="{{ old('country', auth()->user()->address->country ?? '') }}" required
+                                aria-label="Country" />
+                            @error('country')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-                            <button type="submit" class="submit-button">Update Address</button>
+                        <button type="submit" class="submit-button">Update Address</button>
 
-                            @if (session('status') === 'address-updated')
-                                <p class="success-message">Address successfully updated.</p>
-                            @endif
-                        </form>
-                    </div>
-                </section>
+                        @if (session('status') === 'address-updated')
+                            <p class="success-message">Address successfully updated.</p>
+                        @endif
+                    </form>
+                </div>
+            </section>
 
                 <section id="payment-method" class="section-content">
                     <div class="user-dashboard-boxes">
