@@ -101,57 +101,63 @@
             color: black;
         }
 
-        .info-rectangle {
-            width: 80%;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 40px;
-            background-color: #D9E4F5;
-            color: #000000;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 1.2em;
-            border: 1.5px solid #000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .button-container {
-            display: flex;
-            justify-content: space-around;
-            margin: 17px auto;
-            max-width: 800px;
-            gap: 40px;
-        }
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+}
 
-        .button-container button {
-            flex: 1;
-            padding: 50px 0;
-            font-size: 1.5em;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            background-color: #606297;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.button-container a {
+    display: inline-block;
+    text-align: center;
+    flex: 1;
+    max-width: 150px; /* Restrict button width */
+    padding: 15px;
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none; /* Removes underline */
+    border: none;
+    border-radius: 50px; /* Rounded buttons */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-        .button-container .maths {
-            background-color: #606297;
-        }
+.maths {
+    background: linear-gradient(135deg, #606297, #4c5dd5);
+}
 
-        .button-container .english {
-            background-color: #2D306A;
-        }
+.english {
+    background: linear-gradient(135deg, #2D306A, #6A67CE);
+}
 
-        .button-container .science {
-            background-color: #0E125B;
-        }
+.science {
+    background: linear-gradient(135deg, #0E125B, #4a90e2);
+}
 
-        .button-container button:hover {
-            opacity: 0.8;
-        }
+.button-container a:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
 
+
+
+            /* Information Box */
+            .info-rectangle {
+                max-width: 400px;
+                margin: 25px auto;
+                padding: 20px;
+                background: #d9e4f5;
+                text-align: center;
+                font-size: 1.2em;
+                border-radius: 8px;
+                border: 1.5px solid #000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
         .ratings-container {
             display: flex;
             justify-content: space-around;
