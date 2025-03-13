@@ -367,7 +367,7 @@
                     <a href="{{ url('usersettings') }}">Settings</a>
                 @endif
             @else
-                <a href="{{ url('login') }}">Log In / Sign Up</a>
+                <a href="{{ url('login') }}">Login</a>
             @endauth
             
         </nav>
