@@ -56,10 +56,10 @@
                 color: gold;
             }
             .search-bar button {
-    padding: 3px 5px; /* Match padding */
-    font-size: 0.7em; /* Match font size */
-    background-color: #fff; /* White background like the contact form */
-    color: #333; /* Dark text color */
+    padding: 3px 5px;
+    font-size: 0.7em; 
+    background-color: #fff; 
+    color: #333;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     width: auto;
@@ -67,8 +67,8 @@
 }
 
 .search-bar button:hover {
-    background-color: #e7e9fc; /* Match hover background */
-    border-color: #999; /* Match hover border */
+    background-color: #e7e9fc;
+    border-color: #999; 
 }
 
 
@@ -350,11 +350,11 @@
 .basket-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust spacing */
+    gap: 10px; 
 }
 
 .basket-icon a {
-    font-size: 24px; /* Adjust icon size */
+    font-size: 24px;
     text-decoration: none;
 }
         </style>
