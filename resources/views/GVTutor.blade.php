@@ -447,7 +447,7 @@
         <div class="bestseller-header">English Tutors</div>
         <div class="profile-container">
             <div class="card">
-                <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
+                <img src="{{asset('Images/Elliot.jpg')}}" alt="John Doe">
                 <h1>Elliot Fraser</h1>
                 <p class="title">English Tutor</p>
                 <p> University of Leeds </p>
@@ -456,7 +456,7 @@
             </div>
 
             <div class="card">
-                <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
+                <img src="{{asset('Images/Freya.jpg')}}" alt="Jane Harris">
                 <h1>Freya Mitchelll</h1>
                 <p class="title">English Tutor</p>
                 <p>University of Edinburgh</p>
@@ -465,7 +465,7 @@
             </div>
 
             <div class="card">
-                <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
+                <img src="{{asset('Images/Amelia.jpg')}}" alt="Annie Brown">
                 <h1>Amelia Anderson</h1>
                 <p class="title">English Tutor</p>
                 <p>King's College London</p>
@@ -477,7 +477,7 @@
         <div class="bestseller-header">Science Tutors</div>
         <div class="profile-container">
             <div class="card">
-                <img src="{{asset('Images/John.jpeg')}}" alt="John Doe">
+                <img src="{{asset('Images/Ruben.jpeg')}}" alt="John Doe">
                 <h1>Ruben Clarke</h1>
                 <p class="title">Science Tutor</p>
                 <p>University of Southamption</p>
@@ -486,7 +486,7 @@
             </div>
 
             <div class="card">
-                <img src="{{asset('Images/Jane.jpg')}}" alt="Jane Harris">
+                <img src="{{asset('Images/Harriet.jpg')}}" alt="Jane Harris">
                 <h1>Harriet Walsh</h1>
                 <p class="title">Science Tutor</p>
                 <p>Durham University</p>
@@ -495,7 +495,7 @@
             </div>
 
             <div class="card">
-                <img src="{{asset('Images/Annie.jpg')}}" alt="Annie Brown">
+                <img src="{{asset('Images/Nathen.jpg')}}" alt="Annie Brown">
                 <h1>Nathen Brookes</h1>
                 <p class="title">Science Tutor</p>
                 <p>University of Warwick</p>
