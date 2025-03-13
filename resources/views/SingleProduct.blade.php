@@ -239,8 +239,8 @@ body {
           }
           .font-toggle-container {
     position: fixed;
-    bottom: 78px; /* Adjust the distance from the footer */
-    left: 690px;
+    bottom: 15px; /* Adjust the distance from the footer */
+    left: 680px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -301,6 +301,39 @@ body {
 .dark-mode .header nav a {
     color: #ffffff;
 }
+
+/* Dark Mode Adjustments */
+.dark-mode .review-section h2 {
+    color: #ffffff; /* Ensures "Customer Reviews" is white in dark mode */
+}
+
+.dark-mode .review {
+    background: #1e1e1e; /* Darker background for reviews */
+    color: #fff; /* White text */
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure rating text is visible in dark mode */
+.dark-mode .review p {
+    color: #ffffff !important; /* Forces all text in reviews to be white */
+}
+
+.dark-mode .review strong {
+    color: #ffffff !important; /* Ensures bold text is also white */
+}
+
+.dark-mode .review .rating {
+    color: #ffcc00 !important; /* Sets the star rating text to gold */
+}
+
+.dark-mode .review-avatar {
+    background: #3a7bd5; /* Adjusts avatar color for dark mode */
+}
+
+.dark-mode .review button {
+    background-color: #ff4d4d; /* Keeps the delete button red */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header {
@@ -360,6 +393,142 @@ body {
     padding: 5px;
     font-size: 1em;
 }
+
+/* Review Form Styling */
+.review-form {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-form h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0 5px;
+    color: #444;
+}
+
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.review-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.review-form select:focus,
+.review-form textarea:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(26, 115, 232, 0.3);
+}
+
+/* Submit Button */
+.review-form button {
+    width: 100%;
+    background-color: #1a73e8;
+    color: #fff;
+    font-size: 1em;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.review-form button:hover {
+    background-color: #0c54b0;
+}
+/* Review Section Styling */
+.review-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.review-section h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Individual Review Cards */
+.review {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* Avatar Placeholder */
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    background: #1a73e8;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* Review Text */
+.review-content {
+    flex-grow: 1;
+}
+
+.review p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #444;
+}
+
+.review strong {
+    color: #222;
+}
+
+/* Delete Button */
+.review button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.review button:hover {
+    background-color: #d43f3f;
+}
+
 
         </style>
     </head>
@@ -433,37 +602,47 @@ body {
             </div>
         </div>
 
-        <!-- Review Section -->
-        <form action="{{ route('review.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="user_id" value="{{ Auth::id() }}"> <!-- Use the authenticated user's ID -->
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
+       <!-- Review Form -->
+<form action="{{ route('review.store') }}" method="POST" class="review-form">
+    @csrf
+    <h2>Leave a Review</h2>
+    
+    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-            <label for="rating">Rating (1-5):</label>
-            <select name="rating" required>
-                <option value="5">5 - Excellent</option>
-                <option value="4">4 - Good</option>
-                <option value="3">3 - Average</option>
-                <option value="2">2 - Poor</option>
-                <option value="1">1 - Terrible</option>
-            </select>
+    <label for="rating">Rating (1-5):</label>
+    <select name="rating" required>
+        <option value="5">5 - Excellent</option>
+        <option value="4">4 - Good</option>
+        <option value="3">3 - Average</option>
+        <option value="2">2 - Poor</option>
+        <option value="1">1 - Terrible</option>
+    </select>
 
-            <label for="description">Your Review:</label>
-            <textarea name="description" required></textarea>
+    <label for="description">Your Review:</label>
+    <textarea name="description" placeholder="Write your thoughts here..." required></textarea>
 
-            <button type="submit">Submit Review</button>
-        </form>
+    <button type="submit">Submit Review</button>
+</form>
 
-        <!-- Display Reviews -->
-        <h2>Customer Reviews</h2>
+<!-- Review Section -->
+<div class="review-section">
+    <h2>Customer Reviews</h2>
 
-        @if($product->reviews->count() > 0)
-            @foreach($product->reviews as $review)
-                <div class="review">
-                    <p><strong>Rating:</strong> {{ $review->rating }}/5</p>
+    @if($product->reviews->count() > 0)
+        @foreach($product->reviews as $review)
+            <div class="review">
+                <!-- Avatar with first letter of user name -->
+                <div class="review-avatar">
+                    {{ substr($review->user->name ?? 'A', 0, 1) }}
+                </div>
+
+                <!-- Review Content -->
+                <div class="review-content">
+                    <p><strong>Rating:</strong> ⭐ {{ $review->rating }}/5</p>
                     <p><strong>Review:</strong> {{ $review->description }}</p>
                     <p><strong>By:</strong> {{ $review->user->name ?? 'Anonymous' }}</p>
-                    
+
                     <!-- Delete button (only if admin or user is the owner of the review) -->
                     @if(Auth::check() && Auth::id() == $review->user_id)
                     <form action="{{ route('review.destroy', $review->id) }}" method="POST">
@@ -471,12 +650,14 @@ body {
                         @method('DELETE')
                         <button type="submit">Delete</button>
                     </form>
-                @endif
+                    @endif
                 </div>
-            @endforeach
-        @else
-            <p>No reviews yet. Be the first to review this product!</p>
-        @endif
+            </div>
+        @endforeach
+    @else
+        <p>No reviews yet. Be the first to review this product!</p>
+    @endif
+</div>
 
         <!-- Footer Section -->
         <div class="footer">
@@ -535,3 +716,5 @@ body {
         </script>
     </body>
 </html>
+
+
