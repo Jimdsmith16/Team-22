@@ -23,15 +23,21 @@ class Product extends Model
         'average_rating',
         'category_id'
     ];
-    
+
     //Shows what baskets this product is in.
-    public function baskets() {
+    public function baskets()
+    {
         return $this->belongsToMany(Basket::class, 'basket_product')->withPivot('quantity');
     }
 
     //Shows what reviews this product has.
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(Review::class);
+    }
+    public function stockRequests()
+    {
+        return $this->hasMany(StockRequest::class);
     }
 
 }

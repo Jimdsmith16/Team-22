@@ -8,13 +8,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StockRequestController;
 
 // Publicly accessible product-related routes
 Route::get('/products', [ProductController::class, 'list']);
 Route::get('/products/name/{name}', [ProductController::class, 'findByName']);
 Route::get('/products/category/{category}', [ProductController::class, 'findByCategory'])->name('products.category');
 Route::get('/products/filter', [ProductController::class, 'filterByCategory'])->name('products.byCategory');
-Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show'); 
+Route::get('/products/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show');
 
 // Product management routes
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
@@ -26,12 +27,18 @@ Route::post('/review/store', [ReviewController::class, 'store'])->name('review.s
 
 
 // Public pages
-Route::get('/', function () { return view('GVMain'); });
-Route::get('/about', function () { return view('AboutUs'); });
-Route::get('/tutor', function () { return view('GVTutor'); });
-Route::get('/contact', function () { return view('ContactUs'); });
-Route::get('/login', function () { return view('login'); });
-Route::get('/register', function () { return view('register'); });
+Route::get('/', function () {
+    return view('GVMain'); });
+Route::get('/about', function () {
+    return view('AboutUs'); });
+Route::get('/tutor', function () {
+    return view('GVTutor'); });
+Route::get('/contact', function () {
+    return view('ContactUs'); });
+Route::get('/login', function () {
+    return view('login'); });
+Route::get('/register', function () {
+    return view('register'); });
 
 // Protected routes requiring authentication
 Route::middleware(['auth'])->group(function () {
@@ -54,8 +61,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders', [OrderController::class, 'addOrder']);
     Route::get('/order-confirmation/{order}', [OrderController::class, 'orderConfirmation'])->name('order.confirmation');
 
+    // Stock Request Routes
+    Route::resource('stockRequests', StockRequestController::class);
+    Route::put('stockRequests/{id}/approve', [StockRequestController::class, 'approve'])->name('stockRequests.approve');
+
+    // Order Product Requests
+    Route::post('/request-stock', [OrderController::class, 'addProductToOrder'])->name('stock.request');
+
     // User and admin settings
-    Route::get('/usersettings', function () { return view('usersettings'); });
+    Route::get('/usersettings', function () {
+        return view('usersettings'); });
     Route::get('/adminsettings', function () {
         return auth()->user() && auth()->user()->type === 'admin' ? view('adminsettings') : redirect('/');
     });

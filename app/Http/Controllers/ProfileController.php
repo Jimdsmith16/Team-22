@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use App\Models\Address;
 use Illuminate\Database\QueryException;
 use App\Models\Product;
+use App\Models\StockRequest;
 
 
 class ProfileController extends Controller
@@ -96,9 +97,9 @@ class ProfileController extends Controller
         $users = User::all();
         $totalUsers = $users->count();
         $products = Product::all();
+        $stockRequests = StockRequest::where('status', 'pending')->get(); 
 
-
-        return view('adminsettings', compact('users', 'totalUsers', 'products'));
+        return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests'));
     }
 
 

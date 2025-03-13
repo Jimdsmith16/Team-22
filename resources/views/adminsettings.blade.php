@@ -692,6 +692,82 @@
             background-color: gold;
             color: #000000;
         }
+
+        #stock-requests-section {
+            padding: 20px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+
+        #stock-requests-section h1 {
+            font-size: 28px;
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        #stock-requests-section .alert {
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #e0f7fa;
+            color: #00796b;
+            padding: 15px;
+        }
+
+        #stock-requests-section table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        #stock-requests-section th,
+        #stock-requests-section td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        #stock-requests-section th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #stock-requests-section td {
+            background-color: #f9f9f9;
+        }
+
+        #stock-requests-section tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        #stock-requests-section tr:hover {
+            background-color: #e1e1e1;
+        }
+
+        #stock-requests-section button.btn-success {
+            background-color:rgb(7, 212, 68);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            color: #fff;
+        }
+
+        #stock-requests-section button.btn-success:hover {
+            background-color: #218838;
+        }
+
+        #stock-requests-section button.btn-success:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -790,6 +866,50 @@
             <section id="inventory" class="section-content">
                 <!-- Dashboard Boxes -->
                 <div class="admin-dashboard-boxes">
+                    <div id="stock-requests-section" class="container">
+                        <h1>Stock Requests</h1>
+
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User ID</th>
+                                    <th>Product ID</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($stockRequests as $stockRequest)
+                                    <tr>
+                                        <td>{{ $stockRequest->id }}</td>
+                                        <td>{{ $stockRequest->user_id }}</td>
+                                        <td>{{ $stockRequest->product_id }}</td>
+                                        <td>{{ $stockRequest->quantity }}</td>
+                                        <td>{{ $stockRequest->status }}</td>
+                                        <td>{{ $stockRequest->created_at }}</td>
+                                        <td>
+                                            <form action="{{ route('stockRequests.approve', $stockRequest->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-success" {{ $stockRequest->status == 'approved' ? 'disabled' : '' }}>Approve</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="dashboard-box-container">
                         <div class="dashboard-box">
                             <h4>Total Products</h4>
@@ -797,7 +917,6 @@
                         </div>
                     </div>
                 </div>
-
                 <h3>Add New Product</h3>
                 <form method="POST" action="{{ route('product.store') }}">
                     @csrf
@@ -909,13 +1028,6 @@
                                                 value="{{ $product->price }}" required aria-label="Price">
                                         </div>
 
-                                        <!-- Stock -->
-                                        <div class="product-field">
-                                            <label for="stock_{{ $product->id }}"><strong>Stock:</strong></label>
-                                            <input type="number" id="stock_{{ $product->id }}" name="stock"
-                                                value="{{ $product->number_of_stock }}" required aria-label="Stock">
-                                        </div>
-
                                         <!-- Rating -->
                                         <div class="product-field">
                                             <label for="rating_{{ $product->id }}"><strong>Rating:</strong></label>
@@ -943,6 +1055,26 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="delete-button-product">Delete Product</button>
+                                    </form>
+
+                                    <form method="POST" action="{{ route('stock.request') }}">
+                                        @csrf
+                                        <div class="product-field">
+                                            <label for="stock_{{ $product->id }}"><strong>Current Stock
+                                                    Level:</strong></label>
+                                            <span id="stock_{{ $product->id }}">{{ $product->number_of_stock }}</span>
+                                        </div>
+
+                                        <div class="product-field">
+                                            <label for="stock_quantity_{{ $product->id }}"><strong>Stock
+                                                    Quantity:</strong></label>
+                                            <input type="number" id="stock_quantity_{{ $product->id }}" name="quantity"
+                                                required min="1" aria-label="Stock Quantity">
+                                        </div>
+
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                                        <button type="submit" class="submit-button1">Request Stock</button>
                                     </form>
                                 </div>
                             </div>
