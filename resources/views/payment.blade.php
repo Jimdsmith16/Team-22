@@ -362,7 +362,7 @@ footer p {
     </div>
 
     <div class="input-group">
-      <input type="text" id="amount" name="amount" value="${{ number_format($totalPrice, 2) }}" readonly>
+      <input type="text" id="amount" name="amount" value="£{{ number_format($totalPrice, 2) }}" readonly>
       <label for="amount">Amount</label>
     </div>
 
