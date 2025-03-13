@@ -700,12 +700,13 @@
         }
 
         #stock-requests-section h1 {
-            font-size: 28px;
+            font-size: 25px;
             color: #222;
             margin-bottom: 20px;
             font-weight: 600;
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid rgb(0, 0, 0);
             padding-bottom: 10px;
+            text-align: center;
         }
 
         #stock-requests-section .alert {
@@ -731,7 +732,7 @@
         }
 
         #stock-requests-section th {
-            background-color: #007bff;
+            background-color: rgb(0, 0, 0);
             color: #fff;
             font-weight: bold;
             text-transform: uppercase;
@@ -750,7 +751,7 @@
         }
 
         #stock-requests-section button.btn-success {
-            background-color:rgb(7, 212, 68);
+            background-color: rgb(0, 0, 0);
             border: none;
             padding: 10px 20px;
             font-size: 16px;
@@ -761,7 +762,7 @@
         }
 
         #stock-requests-section button.btn-success:hover {
-            background-color: #218838;
+            background-color: gold;
         }
 
         #stock-requests-section button.btn-success:disabled {
@@ -801,6 +802,9 @@
             </a>
             <a href="#inventory" class="sidebar-link">
                 <ion-icon name="clipboard"></ion-icon> <span>Inventory</span>
+            </a>
+            <a href="#Stock" class="sidebar-link">
+                <ion-icon name="bar-chart"></ion-icon> <span>Stock Management</span>
             </a>
             <a href="#user-management" class="sidebar-link">
                 <ion-icon name="person"></ion-icon> <span>User Management</span>
@@ -866,50 +870,6 @@
             <section id="inventory" class="section-content">
                 <!-- Dashboard Boxes -->
                 <div class="admin-dashboard-boxes">
-                    <div id="stock-requests-section" class="container">
-                        <h1>Stock Requests</h1>
-
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>User ID</th>
-                                    <th>Product ID</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($stockRequests as $stockRequest)
-                                    <tr>
-                                        <td>{{ $stockRequest->id }}</td>
-                                        <td>{{ $stockRequest->user_id }}</td>
-                                        <td>{{ $stockRequest->product_id }}</td>
-                                        <td>{{ $stockRequest->quantity }}</td>
-                                        <td>{{ $stockRequest->status }}</td>
-                                        <td>{{ $stockRequest->created_at }}</td>
-                                        <td>
-                                            <form action="{{ route('stockRequests.approve', $stockRequest->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-success" {{ $stockRequest->status == 'approved' ? 'disabled' : '' }}>Approve</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
                     <div class="dashboard-box-container">
                         <div class="dashboard-box">
                             <h4>Total Products</h4>
@@ -1080,6 +1040,52 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </section>
+
+            <section id="Stock" class="section-content" style="display: none;">
+                <div id="stock-requests-section" class="container">
+                    <h1>Stock Requests</h1>
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>Product ID</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($stockRequests as $stockRequest)
+                                <tr>
+                                    <td>{{ $stockRequest->id }}</td>
+                                    <td>{{ $stockRequest->user_id }}</td>
+                                    <td>{{ $stockRequest->product_id }}</td>
+                                    <td>{{ $stockRequest->quantity }}</td>
+                                    <td>{{ $stockRequest->status }}</td>
+                                    <td>{{ $stockRequest->created_at }}</td>
+                                    <td>
+                                        <form action="{{ route('stockRequests.approve', $stockRequest->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success" {{ $stockRequest->status == 'approved' ? 'disabled' : '' }}>Approve</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -1266,11 +1272,15 @@
         const sections = document.querySelectorAll('.section-content');
 
         function hideAllSections() {
-            sections.forEach(section => section.style.display = 'none');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
         }
 
         function resetActiveLinks() {
-            links.forEach(link => link.classList.remove('active'));
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
         }
 
         links.forEach(link => {
