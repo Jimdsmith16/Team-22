@@ -477,7 +477,7 @@
         <div class="bestseller-header">Science Tutors</div>
         <div class="profile-container">
             <div class="card">
-                <img src="{{asset('Images/Ruben.jpeg')}}" alt="John Doe">
+                <img src="{{asset('Images/Ruben.jpg')}}" alt="John Doe">
                 <h1>Ruben Clarke</h1>
                 <p class="title">Science Tutor</p>
                 <p>University of Southamption</p>
