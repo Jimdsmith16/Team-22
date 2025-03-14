@@ -598,7 +598,6 @@ body {
                     <input type="number" name="quantity" value="1" min="1">
                     <button type="submit" class="add-to-basket-btn">Add to Basket</button>
                 </form>
-                <button>Buy Now</button>
             </div>
         </div>
 
