@@ -22,23 +22,17 @@ Route::post('/product/store', [ProductController::class, 'store'])->name('produc
 Route::put('/product/{id}', [ProductController::class, 'update'])->where('id', '[0-9]+')->name('product.update');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->where('id', '[0-9]+')->name('product.destroy');
 
-Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
+// Reviews
 Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
-
+Route::delete('/review/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 
 // Public pages
-Route::get('/', function () {
-    return view('GVMain'); });
-Route::get('/about', function () {
-    return view('AboutUs'); });
-Route::get('/tutor', function () {
-    return view('GVTutor'); });
-Route::get('/contact', function () {
-    return view('ContactUs'); });
-Route::get('/login', function () {
-    return view('login'); });
-Route::get('/register', function () {
-    return view('register'); });
+Route::view('/', 'GVMain');
+Route::view('/about', 'AboutUs');
+Route::view('/tutor', 'GVTutor');
+Route::view('/contact', 'ContactUs');
+Route::view('/login', 'login');
+Route::view('/register', 'register');
 
 // Protected routes requiring authentication
 Route::middleware(['auth'])->group(function () {
@@ -68,25 +62,26 @@ Route::middleware(['auth'])->group(function () {
     // Order Product Requests
     Route::post('/request-stock', [OrderController::class, 'addProductToOrder'])->name('stock.request');
 
-    // User and admin settings
-    Route::get('/usersettings', function () {
-        return view('usersettings'); });
-    Route::get('/adminsettings', function () {
-        return auth()->user() && auth()->user()->type === 'admin' ? view('adminsettings') : redirect('/');
-    });
+    // User settings
+    Route::view('/usersettings', 'usersettings');
 
     // Profile updates
-    Route::put('/user/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/user/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/address/update', [ProfileController::class, 'updateAddress'])->name('address.update');
 });
 
-// Authentication and admin routes
+// Admin-only routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/adminsettings', [ProfileController::class, 'showAdminDashboard'])
+        ->name('admin.settings');
+});
+
+// Authentication and profile routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+Route::post('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
 Route::post('/user/add', [ProfileController::class, 'store'])->name('user.add');
-Route::put('/user/update/{id}', [ProfileController::class, 'update'])->name('user.update');
-Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->name('user.destroy');
-Route::get('/adminsettings', [ProfileController::class, 'showAdminDashboard'])->name('admin.settings');
+Route::put('/user/update/{id}', [ProfileController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
+Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->where('id', '[0-9]+')->name('user.destroy');
 
 // Search route (publicly accessible)
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');

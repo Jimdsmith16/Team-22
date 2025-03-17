@@ -13,6 +13,7 @@ use App\Models\Address;
 use Illuminate\Database\QueryException;
 use App\Models\Product;
 use App\Models\StockRequest;
+use Illuminate\Support\Facades\Log;
 
 
 class ProfileController extends Controller
@@ -94,14 +95,27 @@ class ProfileController extends Controller
 
     public function showAdminDashboard(): View
     {
+        if (!auth()->check()) {
+            Log::error('User is not authenticated');
+            abort(403, 'Unauthorized access');
+        }
+    
+        $user = auth()->user();
+        Log::info('Authenticated User', ['user' => $user]);
+    
+        if ($user->type !== 'admin') {
+            Log::error('User is not an admin', ['user' => $user]);
+            abort(403, 'Unauthorized access');
+        }
+    
         $users = User::all();
         $totalUsers = $users->count();
         $products = Product::all();
-        $stockRequests = StockRequest::where('status', 'pending')->get(); 
-
+        $stockRequests = StockRequest::where('status', 'pending')->get();
+    
         return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests'));
     }
-
+    
 
     public function store(Request $request)
     {
