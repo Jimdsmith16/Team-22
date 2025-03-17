@@ -235,6 +235,53 @@
                     padding: 15px 10px;
                 }
             }
+            .view-orders-btn {
+    display: inline-block;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, #000000, #333333);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 15px; /* Moves the button down */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    min-width: 200px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.view-orders-btn:hover {
+    background: linear-gradient(135deg, gold, #ffcc00);
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 18px rgba(255, 215, 0, 0.4);
+}
+
+.view-orders-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+.order-history-text {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px; /* Adds space below the text */
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+
         </style>
     </head>
 
@@ -329,69 +376,64 @@
                 </section>
 
                 <section id="order-history" class="section-content">
-                <h2>Order History</h2>
-                    <p>Your past orders will appear on the Previous Orders page.</p>
-                    <a href="{{ route('previous.orders') }}" class="btn">View Previous Orders</a>
+    <h2>Order History</h2>
+    <p class="order-history-text">Your past orders will be displayed here.</p>
+    <a href="{{ route('previous.orders') }}" class="btn view-orders-btn">View Previous Orders</a>
+</section>
+
+
+                <section id="address" class="section-content">
+                    <div class="address-container">
+                        <header>
+                            <h2> </h2>
+                        </header>
+
+                        <form method="POST" action="{{ route('address.update') }}">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label for="address_line1">New Address Line 1</label>
+                                <input id="address_line1" name="address_line1" type="text"
+                                    value="{{ old('address_line1') }}" required />
+                                @error('address_line1')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address_line2">New Address Line 2</label>
+                                <input id="address_line2" name="address_line2" type="text"
+                                    value="{{ old('address_line2') }}" />
+                                @error('address_line2')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="postcode">New Postcode</label>
+                                <input id="postcode" name="postcode" type="text" value="{{ old('postcode') }}" required />
+                                @error('postcode')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="country">New Country</label>
+                                <input id="country" name="country" type="text" value="{{ old('country') }}" required />
+                                @error('country')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <button type="submit" class="submit-button">Update Address</button>
+
+                            @if (session('status') === 'address-updated')
+                                <p class="success-message">Address successfully updated.</p>
+                            @endif
+                        </form>
+                    </div>
                 </section>
-
-            <section id="address" class="section-content">
-                <div class="address-container">
-                    <header>
-                        <h2>Edit Address</h2>
-                    </header>
-
-                    <form method="POST" action="{{ route('address.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="address_line1">Address Line 1</label>
-                            <input id="address_line1" name="address_line1" type="text"
-                                value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
-                                required aria-label="Address Line 1" />
-                            @error('address_line1')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address_line2">Address Line 2</label>
-                            <input id="address_line2" name="address_line2" type="text"
-                                value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
-                                aria-label="Address Line 2" />
-                            @error('address_line2')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="postcode">Postcode</label>
-                            <input id="postcode" name="postcode" type="text"
-                                value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
-                                aria-label="Postcode" />
-                            @error('postcode')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <input id="country" name="country" type="text"
-                                value="{{ old('country', auth()->user()->address->country ?? '') }}" required
-                                aria-label="Country" />
-                            @error('country')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="submit-button">Update Address</button>
-
-                        @if (session('status') === 'address-updated')
-                            <p class="success-message">Address successfully updated.</p>
-                        @endif
-                    </form>
-                </div>
-            </section>
 
                 <section id="payment-method" class="section-content">
                     <div class="user-dashboard-boxes">
