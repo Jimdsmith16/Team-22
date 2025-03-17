@@ -417,7 +417,6 @@ main {
                 <select id="payment-details" name="payment_method" required>
                     <option value="">Select payment method</option>
                     <option value="card">Credit/Debit Card</option>
-                    <option value="paypal">PayPal</option>
                 </select>
             </div>
 
