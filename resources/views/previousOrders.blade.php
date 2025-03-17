@@ -5,20 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Previous Orders</title>
         <style>
-            /* General Reset */
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: Arial, sans-serif;
-            }
+           html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
 
-            /* General Page and Body Styling */
-            body {
-                background-color: #F5F5F5;
-                color: #333;
-            }
+.content {
+    flex: 1; /* Pushes footer down when there's less content */
+}
 
+            
             /* Header Styling */
             .header {
                 background-color: #000;
@@ -56,120 +54,238 @@
                 padding: 5px;
                 font-size: 1em;
             }
-        
-            /* Body Styling */
-            .content {
-                max-width: 800px;
-                margin: 20px auto;
-                padding: 20px;
-                background-color: #e7e9fc;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                border-radius: 10px;
-                text-align: center;
-            }
-            
-            .content img {
-                max-width: 100%;
-                height: auto;
-                margin-bottom: 20px; 
-            }
-            
-            .content p {
-                margin: 15px 0;
-                line-height: 1.6;
-            }
+/* Ensure Previous Orders container is properly spaced */
+.content {
+    max-width: 900px;
+    margin: 80px auto 30px;
+    background-color: #e7e9fc;
+    
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-            /* Footer Styling */
+/* Add proper spacing to order boxes */
+.order {
+    background: #f9f9f9;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 13px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    margin-bottom: 30px; /* Increased margin to prevent overlap */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ensure product details don't overlap */
+.product-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eef2ff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 15px 0; /* More margin for spacing */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+}
+
+
+.order:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.order h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+
+.product-details img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.product-info p {
+    margin: 2px 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin-top: 15px;
+    color: #222;
+}
+
             .footer {
-                background-color: #000;
-                color: #fff;
-                text-align: center;
-                padding: 15px 0;
-                margin-top: 20px;
-            }
-        
-            footer {
-                background-color: black;
-                color: white;
-                text-align: center;
-                padding: 10px;
-                width: 100%;
-                margin-top: 40px;
-            }
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto; /* Pushes footer to bottom */
+}
 
-            footer p {
-                margin: 5px 0;
-            }
-            .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-            margin-left: 10px;
-            }
 
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
+    .footer p {
+      margin: 5px 0;
+    }
 
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #878686   ;
-                transition: 0.4s;
-                border-radius: 24px;
-            }
+    .footer .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 18px;
-                width: 18px;
-                left: 4px;
-                bottom: 3px;
-                background-color: rgb(6, 0, 0);
-                transition: 0.4s;
-                border-radius: 50%;
-            }
+    .footer .contact-info p {
+      margin: 0;
+      font-size: 0.9em;
+    }
 
-            input:checked + .slider {
-                background-color: #878686;
-            }
+    .switch {
+              position: relative;
+              display: inline-block;
+              width: 50px;
+              height: 24px;
+              margin-left: 10px;
+          }
 
-            input:checked + .slider:before {
-                transform: translateX(24px);
-            }
+          .switch input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+          }
 
-            .tooltip {
-                position: relative;
-                display: inline-block;
-            }
+          .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #878686;
+              transition: 0.4s;
+              border-radius: 24px;
+          }
 
-            .tooltip .tooltip-text {
-                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-                visibility: hidden;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                padding: 6px;
-                border-radius: 5px;
-                position: absolute;
-                top: 25px;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 0.7em;
-                white-space: nowrap;
-            }
+          .slider:before {
+              position: absolute;
+              content: "";
+              height: 18px;
+              width: 18px;
+              left: 4px;
+              bottom: 3px;
+              background-color: rgb(6, 0, 0);
+              transition: 0.4s;
+              border-radius: 50%;
+          }
 
-            .tooltip:hover .tooltip-text {
-                visibility: visible;
-            }
+          input:checked + .slider {
+              background-color: #878686;
+          }
+
+          input:checked + .slider:before {
+              transform: translateX(24px);
+          }
+
+          .tooltip {
+              position: relative;
+              
+          }
+          .font-toggle-container {
+    position: fixed;
+    bottom: 30px; /* Adjust the distance from the footer */
+    left: 680px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 0;
+    z-index: 1000;
+    
+}
+
+
+
+          .tooltip .tooltip-text {
+              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+              visibility: hidden;
+              background-color: black;
+              color: #fff;
+              text-align: center;
+              padding: 6px;
+              border-radius: 5px;
+              position: absolute;
+              top: 25px;
+              left: 50%;
+              transform: translateX(-50%);
+              font-size: 0.7em;
+              white-space: nowrap;
+          }
+
+          .tooltip:hover .tooltip-text {
+              visibility: visible;
+          }
+
+          /* DARK MODE GENERAL STYLES */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Ensure all text and links are readable */
+.dark-mode a,
+.dark-mode p,
+.dark-mode h1,
+.dark-mode h3,
+.dark-mode .total {
+    color:rgb(11, 11, 11);
+}
+
+/* HEADER & FOOTER */
+.dark-mode .header,
+.dark-mode .footer {
+    background-color: #333;
+    
+}
+
+.dark-mode .header nav a {
+    color: white;
+}
+/* Change 'Previous Orders' text to black in dark mode */
+.dark-mode h2 {
+    color: black;
+}
+
+/* Match footer background color with header in dark mode */
+.dark-mode .footer {
+    background-color: #333;
+    color: white; /* Ensure footer text is white */
+}
+
+/* Ensure all footer text stays white */
+.dark-mode .footer p {
+    color: white;
+}
+
         </style>
     </head>
     <body>
@@ -190,14 +306,18 @@
                 @else
                 <a href="{{ url('login') }}">Log In / Sign Up</a>
                 @endauth
-                <div class="tooltip">
-                    <label class="switch">
-                        <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="tooltip-text">Toggle Font Size</span>
-                </div>
             </nav>
+            <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+</div>
+
             <!-- Header Search Bar -->
             <div class="search-bar">
                 <form action="{{route('products.search')}}" method="GET">
@@ -207,32 +327,26 @@
             </div>
         </div>
 
-        <!-- Content Section -->
-        <main>
-            <section class="previous-orders">
-                <h2>Previous Orders</h2>
+        <div class="content">
+        <h2>Previous Orders</h2>
+        @foreach($orders as $order)
+            <div class="order">
+                <h3>Order {{ $order->id }} - Delivery Date: {{ $order->estimated_delivery_date->toFormattedDateString() }}</h3>
+                @foreach($order->products as $product)
+                <div class="product-details">
+    <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+    <div class="product-info">
+        <p>{{ $product->name }}</p>
+        <p>Price: £{{ number_format($product->pivot->price, 2) }}</p>
+        <p>Quantity: {{ $product->pivot->quantity }}</p>
+    </div>
+</div>
 
-                @foreach($orders as $order)
-                    <div class="order">
-                        <h3>Order #{{ $order->id }} - Delivery Date: {{ $order->estimated_delivery_date->toFormattedDateString() }}</h3>
-                        @foreach($order->products as $product)
-                            <div class="product-details">
-                                <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
-                                <p>{{ $product->name }}</p>
-                                <p>Price: £{{ number_format($product->pivot->price, 2) }}</p>
-                                <p>Quantity: {{ $product->pivot->quantity }}</p>
-                            </div>
-                        @endforeach
-                        <p>Total for this order: £{{ number_format($order->products->sum(fn($p) => $p->pivot->price * $p->pivot->quantity), 2) }}</p>
-                    </div>
                 @endforeach
-
-                <div class="totals">
-                    <p>Total spent: £{{ number_format($totalPrice, 2) }}</p>
-                    <p>Total orders: {{ $totalOrders }}</p>
-                </div>
-            </section>
-        </main>
+                <p class="total">Total: £{{ number_format($order->products->sum(fn($p) => $p->pivot->price * $p->pivot->quantity), 2) }}</p>
+            </div>
+        @endforeach
+    </div>
 
         <!-- Footer Section -->
         <div class="footer">
@@ -243,22 +357,51 @@
             </div>
             <p>Guard your Grades with GradeVault</p>
         </div>
+       
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            const savedFontSize = localStorage.getItem("pageFontSize");
-            const fontToggle = document.getElementById("fontToggle");
+    document.addEventListener("DOMContentLoaded", function () {
+              const savedFontSize = localStorage.getItem("pageFontSize");
+              const fontToggle = document.getElementById("fontToggle");
 
-            if (savedFontSize === "20px") {
-                document.body.style.fontSize = "20px";
-                fontToggle.checked = true;
-            }
+              if (savedFontSize === "20px") {
+                  document.body.style.fontSize = "20px";
+                  fontToggle.checked = true;
+              }
 
-            window.toggleFontSize = function () {
-                const isLarge = fontToggle.checked;
-                document.body.style.fontSize = isLarge ? "20px" : "16px";
-                localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
-            };
-            })
-        </script>
+              window.toggleFontSize = function () {
+                  const isLarge = fontToggle.checked;
+                  document.body.style.fontSize = isLarge ? "20px" : "16px";
+                  localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+              };
+          });
+
+          document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
+
+  </script>
     </body>
 </html>
