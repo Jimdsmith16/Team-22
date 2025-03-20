@@ -532,8 +532,8 @@
             <input type="email" name="email" placeholder="Email" required>
             <input type="text" name="degrees" placeholder="Degrees and Qualifications" required>
             <select name="payment-plan">
-                <option value="monthly">Monthly - $10/month</option>
-                <option value="yearly">Yearly - $98.99/year</option>
+                <option value="monthly">Monthly - £10/month</option>
+                <option value="yearly">Yearly - £98.99/year</option>
             </select>
             <button type="submit">Submit Application</button>
         </form>
