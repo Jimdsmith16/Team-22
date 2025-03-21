@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GradeVault Admin Settings</title>
     <style>
         * {
@@ -16,8 +16,7 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
         .header {
@@ -80,11 +79,8 @@
         }
 
         .grid-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            height: calc(100vh - 60px);
             margin-top: 60px;
-            overflow: hidden;
+            height: calc(100vh - 60px);
         }
 
         .sidebar {
@@ -94,10 +90,13 @@
             flex-direction: column;
             align-items: center;
             padding-top: 20px;
-            height: 100%;
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
             overflow-y: auto;
+            z-index: 5;
         }
 
         .sidebar a {
@@ -120,6 +119,8 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            margin-left: 250px;
+            height: calc(100vh - 60px);
         }
 
         .section-content {
@@ -218,7 +219,6 @@
             outline: none;
         }
 
-
         .submit-button,
         .submit-button1 {
             width: 100%;
@@ -241,12 +241,20 @@
 
         @media (max-width: 768px) {
             .grid-container {
-                grid-template-columns: 60px 1fr;
+                margin-top: 60px;
+            }
+
+            .sidebar {
+                width: 60px;
             }
 
             .sidebar a {
                 font-size: 12px;
                 padding: 15px 10px;
+            }
+
+            .main-admin-content {
+                margin-left: 60px;
             }
         }
 
@@ -418,7 +426,6 @@
             transition: border 0.3s ease;
         }
 
-
         .product-field textarea {
             height: 150px;
             resize: none;
@@ -534,7 +541,6 @@
             color: rgb(7, 212, 68);
         }
 
-
         #inventory h3 {
             font-size: 24px;
             margin-bottom: 20px;
@@ -608,8 +614,6 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
-
 
         .popup {
             display: none;
@@ -769,631 +773,615 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+
+        .password-container .error-message {
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #e0f7fa;
+            color: #00796b;
+            padding: 15px;
+        }
+
+        .password-container .alert {
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #e0f7fa;
+            color: #00796b;
+            padding: 15px;
+        }
     </style>
 </head>
 
-<div id="settings">
-    <div class="header">
-        <div class="logo">
-            <img src="{{ asset('Images/GV.png') }}" alt="GradeVault Logo">
+<body>
+    <div id="settings">
+        <div class="header">
+            <div class="logo">
+                <img src="{{ asset('Images/GV.png') }}" alt="GradeVault Logo" />
+            </div>
+            <nav>
+                <div class="nav-links">
+                    <a href="{{ url('/') }}">Home</a>
+                    <a href="{{ url('tutor') }}">Tutors</a>
+                    <a href="{{ url('about') }}">About</a>
+                    <a href="{{ url('contact') }}">Contact Us</a>
+                    <a href="{{ url('products') }}">Products</a>
+                </div>
+                <div class="admin-info">
+                    <a href="#">Hi {{ Auth::user()->name }}</a>
+                    <a href="#">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </a>
+                </div>
+            </nav>
         </div>
 
-        <nav>
-            <div class="nav-links">
-                <a href="{{ url('/') }}">Home</a>
-                <a href="{{ url('tutor') }}">Tutors</a>
-                <a href="{{ url('about') }}">About</a>
-                <a href="{{ url('contact') }}">Contact Us</a>
-                <a href="{{ url('products') }}">Products</a>
-            </div>
-            <div class="admin-info">
-                <a href="#">Hi {{ Auth::user()->name }}</a>
-                <a href="#">
-                    <ion-icon name="person-outline"></ion-icon>
+        <div class="grid-container">
+            <div class="sidebar">
+                <a href="#admin-dashboard-link" class="sidebar-link">
+                    <ion-icon name="apps"></ion-icon> <span>Admin Dashboard</span>
                 </a>
-            </div>
-        </nav>
-    </div>
-
-    <div class="grid-container">
-        <div class="sidebar">
-            <a href="#admin-dashboard-link" class="sidebar-link">
-                <ion-icon name="apps"></ion-icon> <span>Admin Dashboard</span>
-            </a>
-            <a href="#inventory" class="sidebar-link">
-                <ion-icon name="clipboard"></ion-icon> <span>Inventory</span>
-            </a>
-            <a href="#Stock" class="sidebar-link">
-                <ion-icon name="bar-chart"></ion-icon> <span>Stock Management</span>
-            </a>
-            <a href="#user-management" class="sidebar-link">
-                <ion-icon name="person"></ion-icon> <span>User Management</span>
-            </a>
-            <a href="#address" class="sidebar-link">
-                <ion-icon name="navigate-circle"></ion-icon> <span>Edit Address</span>
-            </a>
-            <a href="#payment-method" class="sidebar-link">
-                <ion-icon name="card"></ion-icon> <span>Payment Method</span>
-            </a>
-            <a href="#security" class="sidebar-link">
-                <ion-icon name="lock-closed"></ion-icon> <span>Security</span>
-            </a>
-            <a href="#" id="logout-link"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <ion-icon name="exit"></ion-icon> <span>Logout</span>
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div>
-
-        <div class="main-admin-content">
-            <!-- Admin Dashboard Section -->
-            <section id="admin-dashboard-link" class="section-content">
-                <div class="user-edit-container">
-                    <header>
-                        <h2>Edit Your Information</h2>
-                    </header>
-
-                    <form method="POST" action="{{ route('profile.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required
-                                aria-describedby="nameHelp" />
-                            @error('name')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required
-                                aria-describedby="emailHelp" />
-                            @error('email')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="submit-button1">Update Information</button>
-
-                        @if (session('status') === 'user-updated')
-                            <p class="success-message">Information successfully updated.</p>
-                        @endif
-                    </form>
-                </div>
-            </section>
-
-            <section id="inventory" class="section-content">
-                <!-- Dashboard Boxes -->
-                <div class="admin-dashboard-boxes">
-                    <div class="dashboard-box-container">
-                        <div class="dashboard-box">
-                            <h4>Total Products</h4>
-                            <p>{{ \App\Models\Product::query()->count() }}</p>
-                        </div>
-                    </div>
-                </div>
-                <h3>Add New Product</h3>
-                <form method="POST" action="{{ route('product.store') }}">
+                <a href="#inventory" class="sidebar-link">
+                    <ion-icon name="clipboard"></ion-icon> <span>Inventory</span>
+                </a>
+                <a href="#Stock" class="sidebar-link">
+                    <ion-icon name="bar-chart"></ion-icon> <span>Stock Management</span>
+                </a>
+                <a href="#user-management" class="sidebar-link">
+                    <ion-icon name="person"></ion-icon> <span>User Management</span>
+                </a>
+                <a href="#address" class="sidebar-link">
+                    <ion-icon name="navigate-circle"></ion-icon> <span>Edit Address</span>
+                </a>
+                <a href="#payment-method" class="sidebar-link">
+                    <ion-icon name="card"></ion-icon> <span>Payment Method</span>
+                </a>
+                <a href="#security" class="sidebar-link">
+                    <ion-icon name="lock-closed"></ion-icon> <span>Security</span>
+                </a>
+                <a href="#" id="logout-link"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <ion-icon name="exit"></ion-icon> <span>Logout</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
-                    <div class="form-group">
-                        <label for="name">Product Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" id="price" name="price" step="0.01" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="alt_text">Alt Text</label>
-                        <input type="text" id="alt_text" name="alt_text" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="stock">Stock Number</label>
-                        <input type="number" id="stock" name="number_of_stock" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="image_link">Image Link</label>
-                        <input type="text" id="image_link" name="image_link" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rating">Rating</label>
-                        <input type="number" id="rating" name="average_rating" min="1" max="5" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="category_id">Category ID</label>
-                        <input type="number" id="category_id" name="category_id" required>
-                    </div>
-
-                    <button type="submit" class="submit-button1">Add Product</button>
                 </form>
-                <!-- Success Popup -->
-                <div id="successPopup" class="popup" style="display: none;">
-                    <div class="popup-content">
-                        <span class="popup-close-btn" onclick="closePopup()">×</span>
-                        <p id="successMessage"></p>
-                    </div>
-                </div>
+            </div>
 
-                <!-- Error Popup -->
-                <div id="errorPopup" class="popup" style="display: none;">
-                    <div class="popup-content">
-                        <span class="popup-close-btn" onclick="closePopup()">×</span>
-                        <p id="errorMessage"></p>
-                    </div>
-                </div>
-
-
-                <!-- Products Section -->
-                <h3>Existing Products</h3>
-                <div class="product-list">
-                    @foreach($products as $product)
-                        <div class="product-item">
-                            <div class="product-image">
-                                <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
+            <div class="main-admin-content">
+                <!-- Admin Dashboard Section -->
+                <section id="admin-dashboard-link" class="section-content">
+                    <div class="user-edit-container">
+                        <header>
+                            <h2>Edit Your Information</h2>
+                        </header>
+                        <form method="POST" action="{{ route('profile.update') }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required
+                                    aria-describedby="nameHelp" />
+                                @error('name')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <button onclick="toggleEditForm({{ $product->id }})" class="submit-button1">Edit
-                                Product</button>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required
+                                    aria-describedby="emailHelp" />
+                                @error('email')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <button type="submit" class="submit-button1">Update Information</button>
+                            @if (session('status') === 'user-updated')
+                                <p class="success-message">Information successfully updated.</p>
+                            @endif
+                        </form>
+                    </div>
+                </section>
 
-                            <!-- Hidden Edit Form -->
-                            <div id="editForm_{{ $product->id }}" class="hidden-edit-form">
-                                <div class="modal-content">
-                                    <span onclick="closeEditForm({{ $product->id }})" class="close-button">&times;</span>
-                                    <h4>Edit Product Details</h4>
-                                    <form method="POST" action="{{ route('product.update', $product->id) }}">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <!-- Name -->
-                                        <div class="product-field">
-                                            <label for="name_{{ $product->id }}"><strong>Name:</strong></label>
-                                            <input type="text" id="name_{{ $product->id }}" name="name"
-                                                value="{{ $product->name }}" required aria-label="Product Name">
-                                        </div>
-
-                                        <!-- Description -->
-                                        <div class="product-field">
-                                            <label
-                                                for="description_{{ $product->id }}"><strong>Description:</strong></label>
-                                            <textarea id="description_{{ $product->id }}" name="description" required
-                                                aria-label="Product Description">{{ $product->description }}</textarea>
-                                        </div>
-
-                                        <!-- Alt Text -->
-                                        <div class="product-field">
-                                            <label for="alt_text_{{ $product->id }}"><strong>Alt Text:</strong></label>
-                                            <input type="text" id="alt_text_{{ $product->id }}" name="alt_text"
-                                                value="{{ $product->alt_text }}" required aria-label="Alt Text">
-                                        </div>
-
-                                        <!-- Price -->
-                                        <div class="product-field">
-                                            <label for="price_{{ $product->id }}"><strong>Price:</strong></label>
-                                            <input type="number" id="price_{{ $product->id }}" name="price"
-                                                value="{{ $product->price }}" required aria-label="Price">
-                                        </div>
-
-                                        <!-- Rating -->
-                                        <div class="product-field">
-                                            <label for="rating_{{ $product->id }}"><strong>Rating:</strong></label>
-                                            <input type="number" id="rating_{{ $product->id }}" name="average_rating"
-                                                value="{{ $product->average_rating }}" min="1" max="5" required
-                                                aria-label="Rating">
-                                        </div>
-
-                                        <!-- Category ID -->
-                                        <div class="product-field">
-                                            <label for="category_id_{{ $product->id }}"><strong>Category
-                                                    ID:</strong></label>
-                                            <input type="number" id="category_id_{{ $product->id }}" name="category_id"
-                                                value="{{ $product->category_id }}" required aria-label="Category ID">
-                                        </div>
-
-                                        <!-- Update Button -->
-                                        <button type="submit" class="submit-button1">Update Product</button>
-                                    </form>
-
-                                    <!-- Delete Product Form -->
-                                    <form id="deleteProductForm_{{ $product->id }}"
-                                        action="{{ route('product.destroy', $product->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="delete-button-product">Delete Product</button>
-                                    </form>
-
-                                    <form method="POST" action="{{ route('stock.request') }}">
-                                        @csrf
-                                        <div class="product-field">
-                                            <label for="stock_{{ $product->id }}"><strong>Current Stock
-                                                    Level:</strong></label>
-                                            <span id="stock_{{ $product->id }}">{{ $product->number_of_stock }}</span>
-                                        </div>
-
-                                        <div class="product-field">
-                                            <label for="stock_quantity_{{ $product->id }}"><strong>Stock
-                                                    Quantity:</strong></label>
-                                            <input type="number" id="stock_quantity_{{ $product->id }}" name="quantity"
-                                                required min="1" aria-label="Stock Quantity">
-                                        </div>
-
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-
-                                        <button type="submit" class="submit-button1">Request Stock</button>
-                                    </form>
+                <!-- Inventory Section -->
+                <section id="inventory" class="section-content">
+                    <!-- Dashboard Boxes -->
+                    <div class="admin-dashboard-boxes">
+                        <div class="dashboard-box-container">
+                            <div class="dashboard-box">
+                                <h4>Total Products</h4>
+                                <p>{{ \App\Models\Product::query()->count() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Add New Product</h3>
+                    <form method="POST" action="{{ route('product.store') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Product Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" id="price" name="price" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="alt_text">Alt Text</label>
+                            <input type="text" id="alt_text" name="alt_text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock Number</label>
+                            <input type="number" id="stock" name="number_of_stock" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image_link">Image Link</label>
+                            <input type="text" id="image_link" name="image_link" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <input type="number" id="rating" name="average_rating" min="1" max="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Category ID</label>
+                            <input type="number" id="category_id" name="category_id" required>
+                        </div>
+                        <button type="submit" class="submit-button1">Add Product</button>
+                    </form>
+                    <!-- Success Popup -->
+                    <div id="successPopup" class="popup" style="display: none;">
+                        <div class="popup-content">
+                            <span class="popup-close-btn" onclick="closePopup()">×</span>
+                            <p id="successMessage"></p>
+                        </div>
+                    </div>
+                    <!-- Error Popup -->
+                    <div id="errorPopup" class="popup" style="display: none;">
+                        <div class="popup-content">
+                            <span class="popup-close-btn" onclick="closePopup()">×</span>
+                            <p id="errorMessage"></p>
+                        </div>
+                    </div>
+                    <!-- Products Section -->
+                    <h3>Existing Products</h3>
+                    <div class="product-list">
+                        @foreach($products as $product)
+                            <div class="product-item">
+                                <div class="product-image">
+                                    <img src="{{ $product->image_link }}" alt="{{ $product->alt_text }}">
                                 </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </section>
-
-            <section id="Stock" class="section-content" style="display: none;">
-                <div id="stock-requests-section" class="container">
-                    <h1>Stock Requests</h1>
-
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>User ID</th>
-                                <th>Product ID</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                                <th>Created At</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($stockRequests as $stockRequest)
-                                <tr>
-                                    <td>{{ $stockRequest->id }}</td>
-                                    <td>{{ $stockRequest->user_id }}</td>
-                                    <td>{{ $stockRequest->product_id }}</td>
-                                    <td>{{ $stockRequest->quantity }}</td>
-                                    <td>{{ $stockRequest->status }}</td>
-                                    <td>{{ $stockRequest->created_at }}</td>
-                                    <td>
-                                        <form action="{{ route('stockRequests.approve', $stockRequest->id) }}"
-                                            method="POST">
+                                <button onclick="toggleEditForm({{ $product->id }})" class="submit-button1">Edit
+                                    Product</button>
+                                <!-- Hidden Edit Form -->
+                                <div id="editForm_{{ $product->id }}" class="hidden-edit-form">
+                                    <div class="modal-content">
+                                        <span onclick="closeEditForm({{ $product->id }})"
+                                            class="close-button">&times;</span>
+                                        <h4>Edit Product Details</h4>
+                                        <form method="POST" action="{{ route('product.update', $product->id) }}">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-success" {{ $stockRequest->status == 'approved' ? 'disabled' : '' }}>Approve</button>
+                                            <div class="product-field">
+                                                <label for="name_{{ $product->id }}"><strong>Name:</strong></label>
+                                                <input type="text" id="name_{{ $product->id }}" name="name"
+                                                    value="{{ $product->name }}" required aria-label="Product Name">
+                                            </div>
+                                            <div class="product-field">
+                                                <label
+                                                    for="description_{{ $product->id }}"><strong>Description:</strong></label>
+                                                <textarea id="description_{{ $product->id }}" name="description" required
+                                                    aria-label="Product Description">{{ $product->description }}</textarea>
+                                            </div>
+                                            <div class="product-field">
+                                                <label for="alt_text_{{ $product->id }}"><strong>Alt Text:</strong></label>
+                                                <input type="text" id="alt_text_{{ $product->id }}" name="alt_text"
+                                                    value="{{ $product->alt_text }}" required aria-label="Alt Text">
+                                            </div>
+                                            <div class="product-field">
+                                                <label for="price_{{ $product->id }}"><strong>Price:</strong></label>
+                                                <input type="number" id="price_{{ $product->id }}" name="price"
+                                                    value="{{ $product->price }}" required aria-label="Price">
+                                            </div>
+                                            <div class="product-field">
+                                                <label for="rating_{{ $product->id }}"><strong>Rating:</strong></label>
+                                                <input type="number" id="rating_{{ $product->id }}" name="average_rating"
+                                                    value="{{ $product->average_rating }}" min="1" max="5" required
+                                                    aria-label="Rating">
+                                            </div>
+                                            <div class="product-field">
+                                                <label for="category_id_{{ $product->id }}"><strong>Category
+                                                        ID:</strong></label>
+                                                <input type="number" id="category_id_{{ $product->id }}" name="category_id"
+                                                    value="{{ $product->category_id }}" required aria-label="Category ID">
+                                            </div>
+                                            <button type="submit" class="submit-button1">Update Product</button>
                                         </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- User Management Section -->
-            <section id="user-management" class="section-content">
-                <div class="admin-dashboard-boxes">
-                    <form method="POST" action="{{ route('user.add') }}">
-                        @csrf
-                        <div class="form-group">
-                            <input type="text" name="name" id="name" placeholder="Full Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" placeholder="Password" required>
-                        </div>
-                        <button type="submit" class="submit-button1">Add User</button>
-                    </form>
-
-                    <h3>Existing Users</h3>
-                    <div class="user-list">
-                        @foreach($users as $user)
-                            <div class="user-item">
-                                <div class="user-info">
-                                    <p><strong>Name:</strong> {{ $user->name }}</p>
-                                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                                </div>
-                                <div class="user-actions">
-                                    <form method="POST" action="{{ route('user.update', $user->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="text" name="name" value="{{ $user->name }}" required>
-                                        <input type="email" name="email" value="{{ $user->email }}" required>
-                                        <button type="submit" class="submit-button1">Update</button>
-                                    </form>
-                                    <form id="deleteUserForm" action="{{ route('user.destroy', $user->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="delete-button-user">Delete User</button>
-                                    </form>
+                                        <!-- Delete Product Form -->
+                                        <form id="deleteProductForm_{{ $product->id }}"
+                                            action="{{ route('product.destroy', $product->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="delete-button-product">Delete Product</button>
+                                        </form>
+                                        <form method="POST" action="{{ route('stock.request') }}">
+                                            @csrf
+                                            <div class="product-field">
+                                                <label for="stock_{{ $product->id }}"><strong>Current Stock
+                                                        Level:</strong></label>
+                                                <span id="stock_{{ $product->id }}">{{ $product->number_of_stock }}</span>
+                                            </div>
+                                            <div class="product-field">
+                                                <label for="stock_quantity_{{ $product->id }}"><strong>Stock
+                                                        Quantity:</strong></label>
+                                                <input type="number" id="stock_quantity_{{ $product->id }}" name="quantity"
+                                                    required min="1" aria-label="Stock Quantity">
+                                            </div>
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="submit-button1">Request Stock</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Success Popup -->
-            <div id="UserSuccessPopup" class="popup" style="display:none;">
-                <div class="popup-content">
-                    <p id="successMessage">Successfully removed.</p>
-                    <button class="popup-close-btn">x</button>
-                </div>
-            </div>
-
-            <!-- Error Popup -->
-            <div id="UserErrorPopup" class="popup" style="display:none;">
-                <div class="popup-content">
-                    <p id="errorMessage">Unable to delete this user</p>
-                    <button class="popup-close-btn">x</button>
-                </div>
-            </div>
-
-            <!-- Address Section -->
-            <section id="address" class="section-content">
-                <div class="address-container">
-                    <header>
-                        <h2>Edit Address</h2>
-                    </header>
-
-                    <form method="POST" action="{{ route('address.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="address_line1">Address Line 1</label>
-                            <input id="address_line1" name="address_line1" type="text"
-                                value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
-                                required aria-label="Address Line 1" />
-                            @error('address_line1')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address_line2">Address Line 2</label>
-                            <input id="address_line2" name="address_line2" type="text"
-                                value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
-                                aria-label="Address Line 2" />
-                            @error('address_line2')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="postcode">Postcode</label>
-                            <input id="postcode" name="postcode" type="text"
-                                value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
-                                aria-label="Postcode" />
-                            @error('postcode')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <input id="country" name="country" type="text"
-                                value="{{ old('country', auth()->user()->address->country ?? '') }}" required
-                                aria-label="Country" />
-                            @error('country')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="submit-button">Update Address</button>
-
-                        @if (session('status') === 'address-updated')
-                            <p class="success-message">Address successfully updated.</p>
+                <!-- Stock Management Section -->
+                <section id="Stock" class="section-content" style="display: none;">
+                    <div id="stock-requests-section" class="container">
+                        <h1>Stock Requests</h1>
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
                         @endif
-                    </form>
-                </div>
-            </section>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User ID</th>
+                                    <th>Product ID</th>
+                                    <th>Image</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($stockRequests as $stockRequest)
+                                    <tr>
+                                        <td>{{ $stockRequest->id }}</td>
+                                        <td>{{ $stockRequest->user_id }}</td>
+                                        <td>{{ $stockRequest->product_id }}</td>
+                                        <td>
+                                            @if($stockRequest->product)
+                                                <img src="{{ $stockRequest->product->image_link }}"
+                                                    alt="{{ $stockRequest->product->alt_text }}"
+                                                    style="width: 100px; height: auto;">
+                                            @endif
+                                        </td>
+                                        <td>{{ $stockRequest->quantity }}</td>
+                                        <td>{{ $stockRequest->status }}</td>
+                                        <td>
+                                            <form action="{{ route('stockRequests.approve', $stockRequest->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-success" {{ $stockRequest->status == 'approved' ? 'disabled' : '' }}>Approve</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
 
-            <!-- Payment Method Section -->
-            <section id="payment-method" class="section-content">
-                <div class="admin-dashboard-boxes">
-                    <div class="box">
-                        <span><strong>Payment Method:</strong> Manage your payment methods here.</span>
+                <!-- User Management Section -->
+                <section id="user-management" class="section-content">
+                    <div class="admin-dashboard-boxes">
+                        <form method="POST" action="{{ route('user.add') }}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="text" name="name" id="name" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="submit-button1">Add User</button>
+                        </form>
+                        <h3>Existing Users</h3>
+                        <div class="user-list">
+                            @foreach($users as $user)
+                                <div class="user-item">
+                                    <div class="user-info">
+                                        <p><strong>Name:</strong> {{ $user->name }}</p>
+                                        <p><strong>Email:</strong> {{ $user->email }}</p>
+                                    </div>
+                                    <div class="user-actions">
+                                        <form method="POST" action="{{ route('user.update', $user->id) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="text" name="name" value="{{ $user->name }}" required>
+                                            <input type="email" name="email" value="{{ $user->email }}" required>
+                                            <button type="submit" class="submit-button1">Update</button>
+                                        </form>
+                                        <form id="deleteUserForm" action="{{ route('user.destroy', $user->id) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="delete-button-user">Delete User</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Success Popup -->
+                <div id="UserSuccessPopup" class="popup" style="display:none;">
+                    <div class="popup-content">
+                        <p id="successMessage">Successfully removed.</p>
+                        <button class="popup-close-btn">x</button>
                     </div>
                 </div>
-            </section>
 
-            <!-- Security Section -->
-            <section id="security" class="section-content">
-                <div class="password-container">
-
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="current_password">Current Password</label>
-                            <input id="current_password" name="current_password" type="password" required />
-                            @error('current_password')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">New Password</label>
-                            <input id="password" name="password" type="password" required />
-                            @error('password')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password_confirmation">Confirm New Password</label>
-                            <input id="password_confirmation" name="password_confirmation" type="password" required />
-                            @error('password_confirmation')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="submit-button">Save</button>
-
-                        @if (session('status') === 'password-updated')
-                            <p class="success-message">Password successfully updated.</p>
-                        @endif
-                    </form>
+                <!-- Error Popup -->
+                <div id="UserErrorPopup" class="popup" style="display:none;">
+                    <div class="popup-content">
+                        <p id="errorMessage">Unable to delete this user</p>
+                        <button class="popup-close-btn">x</button>
+                    </div>
                 </div>
-            </section>
+
+                <!-- Address Section -->
+                <section id="address" class="section-content">
+                    <div class="address-container">
+                        <header>
+                            <h2>Edit Address</h2>
+                        </header>
+                        <form method="POST" action="{{ route('address.update') }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="address_line1">Address Line 1</label>
+                                <input id="address_line1" name="address_line1" type="text"
+                                    value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
+                                    required aria-label="Address Line 1" />
+                                @error('address_line1')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="address_line2">Address Line 2</label>
+                                <input id="address_line2" name="address_line2" type="text"
+                                    value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
+                                    aria-label="Address Line 2" />
+                                @error('address_line2')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="postcode">Postcode</label>
+                                <input id="postcode" name="postcode" type="text"
+                                    value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
+                                    aria-label="Postcode" />
+                                @error('postcode')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input id="country" name="country" type="text"
+                                    value="{{ old('country', auth()->user()->address->country ?? '') }}" required
+                                    aria-label="Country" />
+                                @error('country')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <button type="submit" class="submit-button">Update Address</button>
+                            @if (session('status') === 'address-updated')
+                                <p class="success-message">Address successfully updated.</p>
+                            @endif
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Payment Method Section -->
+                <section id="payment-method" class="section-content">
+                    <div class="admin-dashboard-boxes">
+                        <div class="box">
+                            <span><strong>Payment Method:</strong> Manage your payment methods here.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Security Section -->
+                <section id="security" class="section-content">
+                    <div class="password-container">
+                        <form method="POST" action="{{ route('password.update') }}#security">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="current_password">Current Password</label>
+                                <input id="current_password" name="current_password" type="password" required />
+                                @error('current_password')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input id="password" name="password" type="password" required />
+                                @error('password')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirm New Password</label>
+                                <input id="password_confirmation" name="password_confirmation" type="password"
+                                    required />
+                                @error('password_confirmation')
+                                    <span class="error-message">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <button type="submit" class="submit-button">Save</button>
+                            @if(session('status') === 'password-updated')
+                                <div class="alert">
+                                    Password successfully updated.
+                                </div>
+                            @endif
+                        </form>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
-</div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.sidebar-link');
+            const sections = document.querySelectorAll('.section-content');
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.sidebar-link');
-        const sections = document.querySelectorAll('.section-content');
+            function hideAllSections() {
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+            }
 
-        function hideAllSections() {
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
-        }
+            function resetActiveLinks() {
+                links.forEach(link => {
+                    link.classList.remove('active');
+                });
+            }
 
-        function resetActiveLinks() {
-            links.forEach(link => {
-                link.classList.remove('active');
-            });
-        }
-
-        links.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
+            function showSectionFromHash() {
+                const hash = window.location.hash.substring(1);
                 hideAllSections();
                 resetActiveLinks();
 
-                const targetSection = document.querySelector(link.getAttribute('href'));
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                    link.classList.add('active');
+                if (hash) {
+                    const targetSection = document.getElementById(hash);
+                    const activeLink = document.querySelector(`.sidebar-link[href="#${hash}"]`);
+                    if (targetSection) {
+                        targetSection.style.display = 'block';
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                } else {
+                    document.getElementById('admin-dashboard-link').style.display = 'block';
+                    document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
                 }
+                window.scrollTo(0, 0);
+            }
+
+            showSectionFromHash();
+
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    window.location.hash = targetId;
+                    showSectionFromHash();
+                });
             });
-        });
 
-        hideAllSections();
-        const defaultSection = document.querySelector('#admin-dashboard-link');
-        if (defaultSection) {
-            defaultSection.style.display = 'block';
-            document.querySelector('.sidebar-link[href="#admin-dashboard-link"]').classList.add('active');
-        }
+            window.addEventListener('hashchange', showSectionFromHash);
 
-        const deleteUserForms = document.querySelectorAll('.delete-button-user');
+            const deleteUserForms = document.querySelectorAll('.delete-button-user');
 
-        deleteUserForms.forEach((deleteButton) => {
-            deleteButton.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                var formData = new FormData(deleteButton.closest('form'));
-
-                fetch(deleteButton.closest('form').action, {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            showSuccessPopup(data.message);
-                            deleteButton.closest('.user-item').remove();
-                        } else {
-                            showErrorPopup(data.message);
-                        }
+            deleteUserForms.forEach((deleteButton) => {
+                deleteButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var formData = new FormData(deleteButton.closest('form'));
+                    fetch(deleteButton.closest('form').action, {
+                        method: 'POST',
+                        body: formData,
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showErrorPopup('An error occurred while deleting the user.');
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                showSuccessPopup(data.message);
+                                deleteButton.closest('.user-item').remove();
+                            } else {
+                                showErrorPopup(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            showErrorPopup('An error occurred while deleting the user.');
+                        });
+                });
             });
-        });
 
-        const deleteProductForms = document.querySelectorAll('.delete-button-product');
+            const deleteProductForms = document.querySelectorAll('.delete-button-product');
 
-        deleteProductForms.forEach((deleteButton) => {
-            deleteButton.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                var formData = new FormData(deleteButton.closest('form'));
-
-                fetch(deleteButton.closest('form').action, {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            showSuccessPopup(data.message);
-                            deleteButton.closest('.product-item').remove();
-                        } else {
-                            showErrorPopup(data.message);
-                        }
+            deleteProductForms.forEach((deleteButton) => {
+                deleteButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var formData = new FormData(deleteButton.closest('form'));
+                    fetch(deleteButton.closest('form').action, {
+                        method: 'POST',
+                        body: formData,
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        showErrorPopup('An error occurred while deleting the product.');
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                showSuccessPopup(data.message);
+                                deleteButton.closest('.product-item').remove();
+                            } else {
+                                showErrorPopup(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            showErrorPopup('An error occurred while deleting the product.');
+                        });
+                });
             });
+
+            function showErrorPopup(message) {
+                document.getElementById('errorMessage').textContent = message;
+                document.getElementById('UserErrorPopup').style.display = 'flex';
+            }
+
+            function showSuccessPopup(message) {
+                document.getElementById('successMessage').textContent = message;
+                document.getElementById('UserSuccessPopup').style.display = 'flex';
+            }
+
+            const closeButtons = document.querySelectorAll('.popup-close-btn');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closePopup);
+            });
+
+            function closePopup() {
+                document.getElementById('UserErrorPopup').style.display = 'none';
+                document.getElementById('UserSuccessPopup').style.display = 'none';
+                location.reload();
+            }
         });
 
-        function showErrorPopup(message) {
-            document.getElementById('errorMessage').textContent = message;
-            document.getElementById('UserErrorPopup').style.display = 'flex';
+        function toggleEditForm(productId) {
+            var form = document.getElementById('editForm_' + productId);
+            form.style.display = 'flex';
         }
 
-        function showSuccessPopup(message) {
-            document.getElementById('successMessage').textContent = message;
-            document.getElementById('UserSuccessPopup').style.display = 'flex';
+        function closeEditForm(productId) {
+            var form = document.getElementById('editForm_' + productId);
+            form.style.display = 'none';
         }
-
-        const closeButtons = document.querySelectorAll('.popup-close-btn');
-        closeButtons.forEach(button => {
-            button.addEventListener('click', closePopup);
-        });
-
-        function closePopup() {
-            document.getElementById('UserErrorPopup').style.display = 'none';
-            document.getElementById('UserSuccessPopup').style.display = 'none';
-            location.reload();
-        }
-    });
-
-    function toggleEditForm(productId) {
-        var form = document.getElementById('editForm_' + productId);
-        form.style.display = 'flex';
-    }
-
-    function closeEditForm(productId) {
-        var form = document.getElementById('editForm_' + productId);
-        form.style.display = 'none';
-    }
-</script>
-
-
+    </script>
 </body>
 
 </html>

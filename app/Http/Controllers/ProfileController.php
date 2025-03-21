@@ -34,12 +34,13 @@ class ProfileController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
+        $user = $request->user();
+
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:users,name,' . Auth::id(),
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'name' => 'required|string|max:255|unique:users,name,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
-        $user = $request->user();
         $user->update($validated);
 
         if ($request->filled('password')) {
@@ -47,6 +48,10 @@ class ProfileController extends Controller
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
             $user->password = bcrypt($validatedPassword['password']);
+        }
+
+        if ($user->type === 'admin') {
+            return redirect('/adminsettings#security')->with('status', 'Profile updated successfully!');
         }
 
         return redirect('/usersettings')->with('status', 'Profile updated successfully!');
@@ -74,8 +79,17 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        return redirect()->back()->with('status', 'Your address has been successfully updated!');
+        if ($user->type === 'admin') {
+            return redirect()
+                ->to(route('admin.settings') . '#address')
+                ->with('status', 'Your address has been successfully updated!');
+        }
+
+        return redirect()
+            ->to(route('usersettings') . '#address')
+            ->with('status', 'Your address has been successfully updated!');
     }
+
 
     public function destroy(Request $request): RedirectResponse
     {
@@ -99,23 +113,23 @@ class ProfileController extends Controller
             Log::error('User is not authenticated');
             abort(403, 'Unauthorized access');
         }
-    
+
         $user = auth()->user();
         Log::info('Authenticated User', ['user' => $user]);
-    
+
         if ($user->type !== 'admin') {
             Log::error('User is not an admin', ['user' => $user]);
             abort(403, 'Unauthorized access');
         }
-    
+
         $users = User::all();
         $totalUsers = $users->count();
         $products = Product::all();
         $stockRequests = StockRequest::where('status', 'pending')->get();
-    
+
         return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests'));
     }
-    
+
 
     public function store(Request $request)
     {
@@ -132,7 +146,10 @@ class ProfileController extends Controller
             'type' => 'user',
         ]);
 
-        return redirect()->back()->with('success', 'User added successfully!');
+        return redirect()
+            ->to(route('admin.settings') . '#user-management')
+            ->with('success', 'User added successfully!');
+
     }
 
     public function updateUser(Request $request, $id)
@@ -177,5 +194,22 @@ class ProfileController extends Controller
 
         return view('adminsettings', compact('products'));
     }
+
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = $request->user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('admin.settings', [], false)
+            ->withFragment('security')
+            ->with('status', 'password-updated');
+    }
+
 
 }

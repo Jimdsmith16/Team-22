@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/request-stock', [OrderController::class, 'addProductToOrder'])->name('stock.request');
 
     // User settings
-    Route::view('/usersettings', 'usersettings');
+    Route::view('/usersettings', 'usersettings')->name('usersettings');
 
     // Profile updates
     Route::put('/user/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -78,7 +78,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Authentication and profile routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
+Route::put('/adminsettings/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 Route::post('/user/add', [ProfileController::class, 'store'])->name('user.add');
 Route::put('/user/update/{id}', [ProfileController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
 Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->where('id', '[0-9]+')->name('user.destroy');

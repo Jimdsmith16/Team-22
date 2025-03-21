@@ -18,16 +18,17 @@ class StockRequestController extends Controller
     public function approve($id)
     {
         $stockRequest = StockRequest::findOrFail($id);
-    
+
         $stockRequest->status = 'approved';
-    
+
         $product = $stockRequest->product;
         $product->number_of_stock += $stockRequest->quantity;
 
         $stockRequest->save();
         $product->save();
-    
-        return redirect()->route('admin.settings')->with('success', 'Stock request approved and stock updated.');
+
+        return redirect()->to(route('admin.settings') . '#Stock')
+            ->with('success', 'Stock request approved and stock updated.');
     }
-    
+
 }
