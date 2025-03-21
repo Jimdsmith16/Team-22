@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeVault User Settings</title>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -14,15 +13,13 @@
             font-family: Arial, sans-serif;
         }
 
-        /* General Page and Body Styling */
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto;
         }
 
-        /* Header Styling */
         .header {
             background-color: #000;
             padding: 0 15px;
@@ -82,7 +79,6 @@
             color: #ffffff;
         }
 
-        /* Body Styling */
         .grid-container {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -225,7 +221,6 @@
             color: #000000;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: 60px 1fr;
@@ -252,7 +247,6 @@
             transition: all 0.3s ease-in-out;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
             margin-top: 15px;
-            /* Moves the button down */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -279,11 +273,61 @@
             color: #555;
             text-align: center;
             margin-bottom: 20px;
-            /* Adds space below the text */
             max-width: 80%;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
+        }
+
+        .alert.error {
+            background-color: #e74c3c;
+        }
+
+        .alert {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #02e652;
+            color: #ffffff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            animation: fadeIn 0.3s ease-out;
+            z-index: 9999;
+        }
+
+        .alert button {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -314,31 +358,17 @@
 
     <!-- Content Section -->
     <div class="grid-container">
-        <!-- Settings Sidebar -->
         <div class="sidebar">
-            <a href="#user-dashboard-link" class="sidebar-link">
-                <ion-icon name="apps"></ion-icon> <span>User Dashboard</span>
-            </a>
-            <a href="#order-history" class="sidebar-link">
-                <ion-icon name="clipboard"></ion-icon> <span>Order History</span>
-            </a>
-            <a href="#address" class="sidebar-link">
-                <ion-icon name="navigate-circle"></ion-icon> <span>Edit Address</span>
-            </a>
-            <a href="#payment-method" class="sidebar-link">
-                <ion-icon name="card"></ion-icon> <span>Payment Method</span>
-            </a>
-            <a href="#security" class="sidebar-link">
-                <ion-icon name="lock-closed"></ion-icon> <span>Security</span>
-            </a>
+            <a href="#user-dashboard-link" class="sidebar-link"><ion-icon name="apps"></ion-icon> User Dashboard</a>
+            <a href="#order-history" class="sidebar-link"><ion-icon name="clipboard"></ion-icon> Order History</a>
+            <a href="#address" class="sidebar-link"><ion-icon name="navigate-circle"></ion-icon> Edit Address</a>
+            <a href="#payment-method" class="sidebar-link"><ion-icon name="card"></ion-icon> Payment Method</a>
+            <a href="#security" class="sidebar-link"><ion-icon name="lock-closed"></ion-icon> Security</a>
             <a href="#" id="logout-link"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <ion-icon name="exit"></ion-icon> <span>Logout</span>
+                <ion-icon name="exit"></ion-icon> Logout
             </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">@csrf</form>
         </div>
 
         <!-- Settings Content -->
@@ -346,7 +376,7 @@
             <section id="user-dashboard-link" class="section-content">
                 <div class="user-edit-container">
                     <header>
-                        <h2> </h2>
+                        <h2>Edit Your Information</h2>
                     </header>
 
                     <form method="POST" action="{{ route('profile.update') }}">
@@ -369,14 +399,25 @@
                             @enderror
                         </div>
 
-                        <button type="submit1" class="submit-button1">Update Information</button>
+                        <button type="submit" class="submit-button1">Update Information</button>
 
-                        @if (session('status') === 'user-updated')
-                            <p class="success-message">Information successfully updated.</p>
-                        @endif
                     </form>
                 </div>
+
+                @if(session('status') === 'user-updated')
+                    <div id="success-alert" class="alert">
+                        <span> Your information was updated successfully!</span>
+                        <button id="alert-close">&times;</button>
+                    </div>
+                @endif
             </section>
+
+            @if($errors->any())
+                <div id="error-alert" class="alert error">
+                    <span> {{ $errors->first() }}</span>
+                    <button id="error-alert-close">&times;</button>
+                </div>
+            @endif
 
             <section id="order-history" class="section-content">
                 <h2>Order History</h2>
@@ -490,38 +531,73 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', () => {
             const links = document.querySelectorAll('.sidebar-link');
             const sections = document.querySelectorAll('.section-content');
 
-            function hideAllSections() {
-                sections.forEach(section => section.style.display = 'none');
+            function hideAll() {
+                sections.forEach(s => s.style.display = 'none');
             }
-
-            function resetActiveLinks() {
-                links.forEach(link => link.classList.remove('active'));
+            function resetLinks() {
+                links.forEach(l => l.classList.remove('active'));
+            }
+            function showSection(hash) {
+                const section = document.querySelector(hash);
+                const link = document.querySelector(`.sidebar-link[href="${hash}"]`);
+                if (section && link) {
+                    hideAll();
+                    resetLinks();
+                    section.style.display = 'block';
+                    link.classList.add('active');
+                }
             }
 
             links.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    hideAllSections();
-                    resetActiveLinks();
-
-                    const targetSection = document.querySelector(link.getAttribute('href'));
-                    if (targetSection) {
-                        targetSection.style.display = 'block';
-                        link.classList.add('active');
-                    }
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const hash = link.getAttribute('href');
+                    history.pushState(null, '', hash);
+                    showSection(hash);
                 });
             });
 
-            hideAllSections();
-            const defaultSection = document.querySelector('#user-dashboard-link');
-            defaultSection.style.display = 'block';
-            document.querySelector('.sidebar-link[href="#user-dashboard-link"]').classList.add('active');
+            const initialHash = window.location.hash || '#user-dashboard-link';
+            showSection(initialHash);
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alert = document.getElementById('success-alert');
+            const closeBtn = document.getElementById('alert-close');
+
+            if (alert) {
+                const timer = setTimeout(dismissalert, 5000);
+
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismissalert();
+                });
+
+                function dismissalert() {
+                    alert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => alert.remove(), 300);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const errToast = document.getElementById('error-toast');
+            const errClose = document.getElementById('error-toast-close');
+
+            if (errToast) {
+                errClose.addEventListener('click', () => errToast.remove());
+            }
+        });
+    </script>
+
 </body>
 
 </html>

@@ -54,7 +54,7 @@ class ProfileController extends Controller
             return redirect('/adminsettings#security')->with('status', 'Profile updated successfully!');
         }
 
-        return redirect('/usersettings')->with('status', 'Profile updated successfully!');
+        return redirect()->route('usersettings')->with('status','user-updated');
     }
 
     public function updateAddress(Request $request)
