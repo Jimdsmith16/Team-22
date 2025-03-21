@@ -386,17 +386,11 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required />
-                            @error('name')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required />
-                            @error('email')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
                         </div>
 
                         <button type="submit" class="submit-button1">Update Information</button>
