@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Previous Orders</title>
+
+
+
         <style>
            html, body {
     height: 100%;
@@ -13,6 +16,7 @@
 }
 
 .content {
+
     flex: 1; /* Pushes footer down when there's less content */
 }
 
@@ -286,7 +290,53 @@
     color: white;
 }
 
+ /* Return Form  */
+ .return-product {
+                max-width: 600px;
+                margin: 40px auto;
+                padding: 20px;
+                background: #f9f9f9;
+                border-radius: 12px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .return-product h3 {
+                color: #333;
+                margin-bottom: 15px;
+            }
+
+            .return-product form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .return-product input,
+            .return-product textarea,
+            .return-product button {
+                width: 100%;
+                padding: 10px;
+                font-size: 1em;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+            }
+
+            .return-product button {
+                background-color: #000;
+                color: white;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+            .return-product button:hover {
+                background-color: #444;
+            }
+
         </style>
+
+
+
     </head>
     <body>
         <!-- Header Section -->
@@ -340,13 +390,28 @@
         <p>Price: £{{ number_format($product->pivot->price, 2) }}</p>
         <p>Quantity: {{ $product->pivot->quantity }}</p>
     </div>
+     <!-- Return Form -->
+     <div class="return-product">
+    <h3>Request a Return</h3>
+    <p>If you're not happy with your order, please fill out the form below to request a return.</p>
+    <form action="https://formspree.io/f/xeoaazag" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="order_number" placeholder="Order Number" required>
+        <input type="text" name="product_name" placeholder="Product Name" required>
+        <textarea name="reason_for_return" rows="6" placeholder="Reason for Return" required></textarea>
+        <textarea name="additional_comments" rows="4" placeholder="Additional Comments (optional)"></textarea>
+        <button type="submit">Submit Return Request</button>
+    </form>
+</div>
 </div>
 
                 @endforeach
                 <p class="total">Total: £{{ number_format($order->products->sum(fn($p) => $p->pivot->price * $p->pivot->quantity), 2) }}</p>
             </div>
         @endforeach
-    </div>
+
+        </div>
 
         <!-- Footer Section -->
         <div class="footer">

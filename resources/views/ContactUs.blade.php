@@ -1,139 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Previous Orders</title>
-        <style>
-           html, body {
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - GradeVault</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* General Page and Body Styling */
+    html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
 }
 
-.content {
-    flex: 1; /* Pushes footer down when there's less content */
-}
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-            
-            /* Header Styling */
-            .header {
-                background-color: #000;
-                padding: 0 15px;
-                height: 60px;
-                color: #fff;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                position: sticky;
-                top: 0;
-                z-index: 1000;
-            }
+    /* Header Styling */
+    .header {
+      background-color: #000;
+      color: #fff;
+      height: 60px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+      position: fixed;
+      /* Fixed to the top */
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
 
-            .header .logo img {
-                height: 50px;
-                max-height: 100%;
+    .header .logo img {
+      height: 50px;
+    }
 
-            }
+    .header nav {
+      display: flex;
+      align-items: center;
+    }
 
-            .header nav a {
-                color: #fff;
-                text-decoration: none;
-                margin: 0 10px;
-                font-size: 1em;
-                transition: color 0.3s ease;
-            }
-            
-            .header nav a:hover {
-                color: gold;
-            }
+    .header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
 
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
 
-            .search-bar input[type="text"] {
-                padding: 5px;
-                font-size: 1em;
-            }
-/* Ensure Previous Orders container is properly spaced */
-.content {
-    max-width: 900px;
-    margin: 80px auto 30px;
-    background-color: #e7e9fc;
-    
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+    .search-bar input[type="text"] {
+      padding: 5px;
+      font-size: 1em;
+    }
 
-/* Add proper spacing to order boxes */
-.order {
-    background: #f9f9f9;
-    max-width: 600px;
-    padding: 20px;
-    border-radius: 13px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    margin-bottom: 30px; /* Increased margin to prevent overlap */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    /* Content Styling */
+    .content {
+      max-width: 800px;
+      width: 90%;
+      margin: 100px auto 20px;
+      /* Push content below the fixed navbar */
+      padding: 20px;
+      background-color: #e7e9fc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
 
-/* Ensure product details don't overlap */
-.product-details {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #eef2ff;
-    padding: 15px;
-    border-radius: 10px;
-    width: 100%;
-    margin: 15px 0; /* More margin for spacing */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    gap: 15px;
-}
+    .content h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
 
+    .content form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-.order:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+    .content form input,
+    .content form textarea,
+    .content form button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      width: 100%;
+    }
 
-.order h3 {
-    font-size: 1.3em;
-    margin-bottom: 15px;
-    color: #444;
-}
+    .content form button {
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
 
+    .content form button:hover {
+      background-color: #333;
+    }
 
-.product-details img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.product-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 1;
-}
-
-.product-info p {
-    margin: 2px 0;
-    font-size: 1em;
-    color: #333;
-}
-
-.total {
-    font-weight: bold;
-    font-size: 1.3em;
-    margin-top: 15px;
-    color: #222;
-}
-
-            .footer {
+    /* Footer Styling */
+    .footer {
     background-color: #000;
     color: #fff;
     text-align: center;
@@ -211,8 +195,8 @@
           }
           .font-toggle-container {
     position: fixed;
-    bottom: 30px; /* Adjust the distance from the footer */
-    left: 680px;
+    bottom: 80px; /* Adjust the distance from the footer */
+    left: 690px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -220,7 +204,6 @@
     width: 100%;
     padding: 10px 0;
     z-index: 1000;
-    
 }
 
 
@@ -245,131 +228,191 @@
               visibility: visible;
           }
 
-          /* DARK MODE GENERAL STYLES */
-.dark-mode {
+          .dark-mode .dark-mode-button {
+    background-color: #444; /* Dark gray background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+        .dark-mode-button:hover {
+            text-decoration: underline;
+        }
+
+        .dark-mode {
     background-color: #121212;
-    color: #e0e0e0;
+    color: #ffffff;
 }
 
-/* Ensure all text and links are readable */
-.dark-mode a,
-.dark-mode p,
-.dark-mode h1,
-.dark-mode h3,
-.dark-mode .total {
-    color:rgb(11, 11, 11);
+.dark-mode .content {
+    background-color: #1e1e1e;
+    color: #ffffff;
 }
 
-/* HEADER & FOOTER */
-.dark-mode .header,
-.dark-mode .footer {
+.dark-mode .header, .dark-mode .footer {
     background-color: #333;
-    
 }
 
 .dark-mode .header nav a {
-    color: white;
-}
-/* Change 'Previous Orders' text to black in dark mode */
-.dark-mode h2 {
-    color: black;
-}
-
-/* Match footer background color with header in dark mode */
-.dark-mode .footer {
-    background-color: #333;
-    color: white; /* Ensure footer text is white */
-}
-
-/* Ensure all footer text stays white */
-.dark-mode .footer p {
-    color: white;
-}
-
-#returnForm {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid gray;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    /* Ensure the form doesn't disrupt the page layout */
-    width: 100%;
-    max-width: 600px; /* Added max-width for consistency */
-    height: auto;
-    box-sizing: border-box;
-    border-radius: 12px; /* Added border-radius to match other elements */
-}
-
-#returnForm h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #444;
-}
-
-#returnForm label {
-    display: block;
-    margin-top: 10px;
-    font-size: 1em;
-    color: #555;
-}
-
-#returnForm textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-    resize: none;
-    box-sizing: border-box;
-}
-
-#returnForm button {
-    background-color: #000;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 10px; /* Added horizontal margin between buttons */
-}
-
-#returnForm button:hover {
-    background-color: #0056b3;
-}
-
-#returnForm button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    color: #ffffff;
 }
 
 
-        </style>
-    </head>
-    <body>
-        <div class="header">
-            <div class="logo">
-            <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .footer .contact-info {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .content {
+        flex: 1;
+      }
+    }
+    .basket-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing */
+}
+
+.basket-icon a {
+    font-size: 24px; /* Adjust icon size */
+    text-decoration: none;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <div class="header">
+    <div class="logo">
+      <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo">
+    </div>
+    <!-- Header Nav Bar -->
+    <nav>
+      <a href="{{ url('/') }}">Home</a>
+      <a href="{{ url('tutor') }}">Tutors</a>
+      <a href="{{ url('about') }}">About</a>
+      <a href="{{ url('contact') }}">Contact Us</a>
+      <a href="{{ url('products') }}">Products</a>
+      @auth
+      @if(auth()->user()->type === 'admin')
+      <a href="{{ url('adminsettings') }}">Settings</a>
+    @else
+      <a href="{{ url('usersettings') }}">Settings</a>
+    @endif
+    @else
+      <a href="{{ url('login') }}">Login</a>
+    @endauth
+    </nav>
+    <div class="basket-container">
+            @auth
+            <div class="basket-icon">
+                <a href="{{ url('basket') }}">
+                    🛒
+                </a>
             </div>
-            <nav>
-                <a href="{{url('/')}}">Home</a>
-                <a href="{{url('tutor')}}">Tutors</a>
-                <a href="{{url('about')}}">About</a>
-                <a href="{{url('contact')}}">Contact Us</a>
-                <a href="{{url('products')}}">Products</a>
-                @auth
-                <a href="{{ url('usersettings') }}">Settings</a>
-                @else
-                <a href="{{ url('login') }}">Log In / Sign Up</a>
-                @endauth
-            </nav>
-            <div class="font-toggle-container">
-    <
+            @endauth
+
+            <!-- Header Search Bar -->
+            <div class="search-bar">
+                <form action="{{route('products.search')}}" method="GET">
+                    <input type="text" name="search" placeholder="Search Products...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+  </div>
+
+  <div class="font-toggle-container">
+    <div class="tooltip">
+        <label class="switch">
+            <input type="checkbox" id="fontToggle" onchange="toggleFontSize()">
+            <span class="slider round"></span>
+        </label>
+        <span class="tooltip-text">Toggle Font Size</span>
+    </div>
+    <button class="dark-mode-button" onclick="toggleDarkMode()">Dark Mode</button>
+</div>
+
+  <!-- Content Section -->
+  <div class="content">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/xldenewb" method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="subject" placeholder="Subject" required>
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Footer Section -->
+  <div class="footer">
+    <div class="contact-info">
+      <p>Contact us</p>
+      <p>Telephone: 123-456-7890</p>
+      <p>Email: info@gradevault.com</p>
+    </div>
+    <p>Guard your Grades with GradeVault</p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+              const savedFontSize = localStorage.getItem("pageFontSize");
+              const fontToggle = document.getElementById("fontToggle");
+
+              if (savedFontSize === "20px") {
+                  document.body.style.fontSize = "20px";
+                  fontToggle.checked = true;
+              }
+
+              window.toggleFontSize = function () {
+                  const isLarge = fontToggle.checked;
+                  document.body.style.fontSize = isLarge ? "20px" : "16px";
+                  localStorage.setItem("pageFontSize", isLarge ? "20px" : "16px");
+              };
+          });
+
+          document.addEventListener("DOMContentLoaded", function () {
+        const fontToggleContainer = document.querySelector(".font-toggle-container");
+
+        window.addEventListener("scroll", function () {
+            let scrollY = window.scrollY || window.pageYOffset; 
+            let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            let scrollPercentage = scrollY / maxScroll; 
+
+            let moveAmount = scrollPercentage * 50; // Adjust the floating effect amount
+            fontToggleContainer.style.transform = `translateY(-${moveAmount}px)`;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+
+    if (darkModeEnabled) {
+        document.body.classList.add("dark-mode");
+    }
+
+    document.querySelector(".dark-mode-button").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+    });
+});
+
+  </script>
+
+</body>
+
+</html>
