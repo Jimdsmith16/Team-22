@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GradeVault User Settings</title>
     <style>
         * {
@@ -16,8 +16,7 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: auto;
+            overflow: hidden;
         }
 
         .header {
@@ -79,14 +78,6 @@
             color: #ffffff;
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            height: calc(100vh - 60px);
-            margin-top: 60px;
-            overflow: hidden;
-        }
-
         .sidebar {
             background-color: #f0f0f0;
             box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -94,9 +85,11 @@
             flex-direction: column;
             align-items: center;
             padding-top: 20px;
-            height: 100%;
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
             overflow-y: auto;
         }
 
@@ -115,19 +108,20 @@
             vertical-align: middle;
         }
 
+        .sidebar a.active {
+            color: #02e652;
+        }
+
         .main-user-content {
+            margin-left: 250px;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
+            height: calc(100vh - 60px);
             overflow-y: auto;
+            margin-top: 60px;
         }
 
         .section-content {
             display: none;
-        }
-
-        .sidebar a.active {
-            color: #02e652;
         }
 
         .box {
@@ -201,7 +195,6 @@
             outline: none;
         }
 
-
         .submit-button,
         .submit-button1 {
             width: 100%;
@@ -222,13 +215,17 @@
         }
 
         @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: 60px 1fr;
+            .sidebar {
+                width: 60px;
             }
 
             .sidebar a {
                 font-size: 12px;
                 padding: 15px 10px;
+            }
+
+            .main-user-content {
+                margin-left: 60px;
             }
         }
 
@@ -329,6 +326,24 @@
                 opacity: 0;
             }
         }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-input-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+        }
     </style>
 </head>
 
@@ -336,7 +351,7 @@
     <!-- Header Section -->
     <div class="header">
         <div class="logo">
-            <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo"></a>
+            <a href="/"> <img src="{{asset('Images/GV.png')}}" alt="GradeVault Logo" /></a>
         </div>
         <!-- Header Nav Bar -->
         <nav>
@@ -356,169 +371,167 @@
         </nav>
     </div>
 
-    <!-- Content Section -->
-    <div class="grid-container">
-        <div class="sidebar">
-            <a href="#user-dashboard-link" class="sidebar-link"><ion-icon name="apps"></ion-icon> User Dashboard</a>
-            <a href="#order-history" class="sidebar-link"><ion-icon name="clipboard"></ion-icon> Order History</a>
-            <a href="#address" class="sidebar-link"><ion-icon name="navigate-circle"></ion-icon> Edit Address</a>
-            <a href="#payment-method" class="sidebar-link"><ion-icon name="card"></ion-icon> Payment Method</a>
-            <a href="#security" class="sidebar-link"><ion-icon name="lock-closed"></ion-icon> Security</a>
-            <a href="#" id="logout-link"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <ion-icon name="exit"></ion-icon> Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">@csrf</form>
-        </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#user-dashboard-link" class="sidebar-link"><ion-icon name="apps"></ion-icon> User Dashboard</a>
+        <a href="#order-history" class="sidebar-link"><ion-icon name="clipboard"></ion-icon> Order History</a>
+        <a href="#address" class="sidebar-link"><ion-icon name="navigate-circle"></ion-icon> Edit Address</a>
+        <a href="#payment-method" class="sidebar-link"><ion-icon name="card"></ion-icon> Payment Method</a>
+        <a href="#security" class="sidebar-link"><ion-icon name="lock-closed"></ion-icon> Security</a>
+        <a href="#" id="logout-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <ion-icon name="exit"></ion-icon> Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">@csrf</form>
+    </div>
 
-        <!-- Settings Content -->
-        <div class="main-user-content">
-            <section id="user-dashboard-link" class="section-content">
-                <div class="user-edit-container">
-                    <header>
-                        <h2>Edit Your Information</h2>
-                    </header>
-
-                    <form method="POST" action="{{ route('profile.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required />
-                        </div>
-
-                        <button type="submit" class="submit-button1">Update Information</button>
-
-                    </form>
-                </div>
-
-                @if(session('status') === 'user-updated')
-                    <div id="success-alert" class="alert">
-                        <span> Your information was updated successfully!</span>
-                        <button id="alert-close">&times;</button>
+    <!-- Main Content -->
+    <div class="main-user-content">
+        <section id="user-dashboard-link" class="section-content">
+            <div class="user-edit-container">
+                <header>
+                    <h2>Edit Your Information</h2>
+                </header>
+                <form method="POST" action="{{ route('profile.update') }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required />
                     </div>
-                @endif
-            </section>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required />
+                    </div>
+                    <button type="submit" class="submit-button1">Update Information</button>
+                </form>
+            </div>
 
-            @if($errors->any())
-                <div id="error-alert" class="alert error">
-                    <span> {{ $errors->first() }}</span>
-                    <button id="error-alert-close">&times;</button>
+            @if(session('status') === 'user-updated')
+                <div id="success-alert" class="alert">
+                    <span> Your information was updated successfully!</span>
+                    <button id="alert-close">&times;</button>
                 </div>
             @endif
+        </section>
 
-            <section id="order-history" class="section-content">
-                <h2>Order History</h2>
-                <p class="order-history-text">Your past orders will be displayed here.</p>
-                <a href="{{ route('previous.orders') }}" class="btn view-orders-btn">View Previous Orders</a>
-            </section>
+        @if($errors->any())
+            <div id="error-alert" class="alert error">
+                <span> {{ $errors->first() }}</span>
+                <button id="error-alert-close">&times;</button>
+            </div>
+        @endif
 
-            <section id="address" class="section-content">
-                <div class="address-container">
-                    <header>
-                        <h2>Edit Address</h2>
-                    </header>
-                    <form method="POST" action="{{ route('address.update') }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="address_line1">Address Line 1</label>
-                            <input id="address_line1" name="address_line1" type="text"
-                                value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}"
-                                required aria-label="Address Line 1" />
-                            @error('address_line1')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="address_line2">Address Line 2</label>
-                            <input id="address_line2" name="address_line2" type="text"
-                                value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
-                                aria-label="Address Line 2" />
-                            @error('address_line2')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="postcode">Postcode</label>
-                            <input id="postcode" name="postcode" type="text"
-                                value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
-                                aria-label="Postcode" />
-                            @error('postcode')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <input id="country" name="country" type="text"
-                                value="{{ old('country', auth()->user()->address->country ?? '') }}" required
-                                aria-label="Country" />
-                            @error('country')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <button type="submit" class="submit-button">Update Address</button>
-                        @if (session('status') === 'address-updated')
-                            <p class="success-message">Address successfully updated.</p>
-                        @endif
-                    </form>
-                </div>
-            </section>
+        <section id="order-history" class="section-content">
+            <h2>Order History</h2>
+            <p class="order-history-text">Your past orders will be displayed here.</p>
+            <a href="{{ route('previous.orders') }}" class="btn view-orders-btn">View Previous Orders</a>
+        </section>
 
-            <section id="payment-method" class="section-content">
-                <div class="user-dashboard-boxes">
-                    <div class="box">
-                        <span><strong>Payment Method:</strong> Manage your payment methods here.</span>
+        <section id="address" class="section-content">
+            <div class="address-container">
+                <header>
+                    <h2>Edit Address</h2>
+                </header>
+                <form method="POST" action="{{ route('address.update') }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="address_line1">Address Line 1</label>
+                        <input id="address_line1" name="address_line1" type="text"
+                            value="{{ old('address_line1', auth()->user()->address->address_line1 ?? '') }}" required
+                            aria-label="Address Line 1" />
+                        @error('address_line1')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="address_line2">Address Line 2</label>
+                        <input id="address_line2" name="address_line2" type="text"
+                            value="{{ old('address_line2', auth()->user()->address->address_line2 ?? '') }}"
+                            aria-label="Address Line 2" />
+                        @error('address_line2')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">Postcode</label>
+                        <input id="postcode" name="postcode" type="text"
+                            value="{{ old('postcode', auth()->user()->address->postcode ?? '') }}" required
+                            aria-label="Postcode" />
+                        @error('postcode')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input id="country" name="country" type="text"
+                            value="{{ old('country', auth()->user()->address->country ?? '') }}" required
+                            aria-label="Country" />
+                        @error('country')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="submit-button">Update Address</button>
+                </form>
+                @if (session('status') === 'address-updated')
+                    <div id="address-success-alert" class="alert">
+                        <span>Address successfully updated.</span>
+                        <button id="address-alert-close">&times;</button>
+                    </div>
+                @endif
+            </div>
+        </section>
+
+        <section id="payment-method" class="section-content">
+            <div class="user-dashboard-boxes">
+                <div class="box">
+                    <span><strong>Payment Method:</strong> Manage your payment methods here.</span>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="security" class="section-content">
-                <div class="password-container">
-
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="form-group">
-                            <label for="current_password">Current Password</label>
+        <section id="security" class="section-content">
+            <div class="password-container">
+                <form method="POST" action="{{ route('user.password.update') }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <div class="password-input-container">
                             <input id="current_password" name="current_password" type="password" required />
-                            @error('current_password')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
+                            <span class="toggle-password" data-target="current_password">
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            </span>
                         </div>
-
-                        <div class="form-group">
-                            <label for="password">New Password</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">New Password</label>
+                        <div class="password-input-container">
                             <input id="password" name="password" type="password" required />
-                            @error('password')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
+                            <span class="toggle-password" data-target="password">
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            </span>
                         </div>
-
-                        <div class="form-group">
-                            <label for="password_confirmation">Confirm New Password</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirm New Password</label>
+                        <div class="password-input-container">
                             <input id="password_confirmation" name="password_confirmation" type="password" required />
-                            @error('password_confirmation')
-                                <span class="error-message">{{ $message }}</span>
-                            @enderror
+                            <span class="toggle-password" data-target="password_confirmation">
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            </span>
                         </div>
-
-                        <button type="submit" class="submit-button">Save</button>
-
-                        @if (session('status') === 'password-updated')
-                            <p class="success-message">Password successfully updated.</p>
-                        @endif
-                    </form>
-                </div>
-            </section>
-        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Save</button>
+                </form>
+                @if (session('status') === 'password-updated')
+                    <div id="password-success-alert" class="alert">
+                        <span>Password successfully updated.</span>
+                        <button id="password-alert-close">&times;</button>
+                    </div>
+                @endif
+            </div>
+        </section>
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -526,16 +539,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOMContentLoaded fired. Current hash:", window.location.hash);
             const links = document.querySelectorAll('.sidebar-link');
             const sections = document.querySelectorAll('.section-content');
 
             function hideAll() {
                 sections.forEach(s => s.style.display = 'none');
             }
+
             function resetLinks() {
                 links.forEach(l => l.classList.remove('active'));
             }
+
             function showSection(hash) {
+                console.log("Trying to show section for hash:", hash);
                 const section = document.querySelector(hash);
                 const link = document.querySelector(`.sidebar-link[href="${hash}"]`);
                 if (section && link) {
@@ -543,6 +560,10 @@
                     resetLinks();
                     section.style.display = 'block';
                     link.classList.add('active');
+                    document.querySelector('.main-user-content').scrollTop = 0;
+                    console.log("Displayed section:", hash);
+                } else {
+                    console.error("Section or link not found for hash:", hash);
                 }
             }
 
@@ -583,11 +604,75 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const errToast = document.getElementById('error-toast');
-            const errClose = document.getElementById('error-toast-close');
+            const errAlert = document.getElementById('error-alert');
+            const errClose = document.getElementById('error-alert-close');
 
-            if (errToast) {
-                errClose.addEventListener('click', () => errToast.remove());
+            if (errAlert) {
+                errClose.addEventListener('click', () => errAlert.remove());
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addressAlert = document.getElementById('address-success-alert');
+            const addressAlertClose = document.getElementById('address-alert-close');
+
+            if (addressAlert) {
+                const timer = setTimeout(() => {
+                    dismissAddressAlert();
+                }, 5000);
+
+                addressAlertClose.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismissAddressAlert();
+                });
+
+                function dismissAddressAlert() {
+                    addressAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => addressAlert.remove(), 300);
+                }
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toggle-password').forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    if (input.getAttribute('type') === 'password') {
+                        input.setAttribute('type', 'text');
+                        this.innerHTML = '<ion-icon name="eye-outline"></ion-icon>';
+                    } else {
+                        input.setAttribute('type', 'password');
+                        this.innerHTML = '<ion-icon name="eye-off-outline"></ion-icon>';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordAlert = document.getElementById('password-success-alert');
+            const passwordAlertClose = document.getElementById('password-alert-close');
+
+            if (passwordAlert) {
+                const timer = setTimeout(() => {
+                    dismissPasswordAlert();
+                }, 5000);
+
+                passwordAlertClose.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismissPasswordAlert();
+                });
+
+                function dismissPasswordAlert() {
+                    passwordAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => passwordAlert.remove(), 300);
+                }
             }
         });
     </script>

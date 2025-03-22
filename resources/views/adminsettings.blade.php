@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GradeVault Admin Settings</title>
     <style>
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +20,7 @@
             min-height: 100vh;
         }
 
+        /* Header & Navigation */
         .header {
             background-color: #000;
             padding: 0 15px;
@@ -114,6 +116,10 @@
             vertical-align: middle;
         }
 
+        .sidebar a.active {
+            color: #02e652;
+        }
+
         .main-admin-content {
             padding: 20px;
             display: flex;
@@ -125,10 +131,6 @@
 
         .section-content {
             display: none;
-        }
-
-        .sidebar a.active {
-            color: #02e652;
         }
 
         .box {
@@ -187,21 +189,7 @@
             gap: 8px;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            font-size: 0.9rem;
-            border: 1px solid #cccccc;
-            border-radius: 12px;
-            box-sizing: border-box;
-            transition: border 0.3s ease;
-        }
-
-        .form-group input:focus {
-            border-color: #02e652;
-            outline: none;
-        }
-
+        .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 12px;
@@ -210,13 +198,17 @@
             border-radius: 12px;
             box-sizing: border-box;
             transition: border 0.3s ease;
-            height: 150px;
-            resize: none;
         }
 
+        .form-group input:focus,
         .form-group textarea:focus {
             border-color: #02e652;
             outline: none;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: none;
         }
 
         .submit-button,
@@ -258,6 +250,7 @@
             }
         }
 
+        /* User Management Styles */
         .user-list {
             display: flex;
             flex-direction: column;
@@ -298,146 +291,7 @@
             border-radius: 8px;
         }
 
-        .submit-button,
-        .submit-button1 {
-            padding: 10px;
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-
-        .submit-button:hover,
-        .submit-button1:hover {
-            background-color: gold;
-            color: black;
-        }
-
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #aaa;
-        }
-
-        .close-btn:hover {
-            color: black;
-        }
-
-        .popup-close-btn {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .popup-close-btn:hover {
-            background-color: #d32f2f;
-        }
-
-        @media (max-width: 768px) {
-            #inventory .product-item {
-                width: calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            #inventory .product-item {
-                width: 100%;
-            }
-        }
-
-        #inventory .product-item {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .product-info p {
-            margin: 5px 0;
-        }
-
-        .product-actions form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .product-field {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .product-field label {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .product-field input,
-        .product-field textarea {
-            width: 100%;
-            padding: 12px;
-            font-size: 0.9rem;
-            border: 1px solid #cccccc;
-            border-radius: 12px;
-            box-sizing: border-box;
-            transition: border 0.3s ease;
-        }
-
-        .product-field textarea {
-            height: 150px;
-            resize: none;
-        }
-
-        .product-field input:focus,
-        .product-field textarea:focus {
-            border-color: #02e652;
-            outline: none;
-        }
-
-        .submit-button1 {
+        .delete-button-user {
             width: 100%;
             padding: 12px;
             background-color: #000000;
@@ -447,57 +301,15 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             font-size: 0.9rem;
             cursor: pointer;
+            margin-bottom: 20px;
         }
 
-        .submit-button1:hover {
+        .delete-button-user:hover {
             background-color: gold;
             color: #000000;
         }
 
-        .delete-button {
-            width: 100%;
-            padding: 12px;
-            background-color: #f44336;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .delete-button:hover {
-            background-color: #d32f2f;
-        }
-
-        .product-item .product-info {
-            margin-bottom: 20px;
-        }
-
-        .product-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .product-item {
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            #inventory .product-item {
-                width: calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            #inventory .product-item {
-                width: 100%;
-            }
-        }
-
+        /* Inventory Styles */
         #inventory {
             padding: 20px;
             background-color: #f4f4f4;
@@ -547,23 +359,45 @@
             text-align: center;
         }
 
-        #inventory .product-list {
+        .product-list {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            justify-items: center;
         }
 
-        #inventory .product-list .product-item .product-image {
+        @media (max-width: 768px) {
+            .product-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-item {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 350px;
+        }
+
+        #inventory .product-item .product-image {
             text-align: center;
         }
 
-        #inventory .product-list .product-item .product-image img {
+        #inventory .product-item .product-image img {
             width: 150px;
             height: auto;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form {
+        #inventory .product-item .hidden-edit-form {
             display: none;
             position: fixed;
             top: 0;
@@ -576,7 +410,7 @@
             z-index: 1000;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .modal-content {
+        #inventory .product-item .hidden-edit-form .modal-content {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
@@ -588,7 +422,7 @@
             box-sizing: border-box;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .modal-content .close-button {
+        #inventory .product-item .hidden-edit-form .modal-content .close-button {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -597,71 +431,25 @@
             cursor: pointer;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .product-field {
+        #inventory .product-item .hidden-edit-form .product-field {
             margin-bottom: 15px;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .product-field label {
+        #inventory .product-item .hidden-edit-form .product-field label {
             font-weight: bold;
             margin-bottom: 5px;
             display: block;
         }
 
-        #inventory .product-list .product-item .hidden-edit-form .product-field input,
-        #inventory .product-list .product-item .hidden-edit-form .product-field textarea {
+        #inventory .product-item .hidden-edit-form .product-field input,
+        #inventory .product-item .hidden-edit-form .product-field textarea {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .popup-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        #UserSuccessPopup .popup-content {
-            border: 2px solid #4CAF50;
-            background-color: #e8f5e9;
-        }
-
-        #UserSuccessPopup .popup-content p {
-            color: #388e3c;
-        }
-
-        #UserErrorPopup .popup-content {
-            border: 2px solid #f44336;
-            background-color: #ffebee;
-        }
-
-        #UserErrorPopup .popup-content p {
-            color: #d32f2f;
-        }
-
-        .delete-button-user {
+        .submit-button1 {
             width: 100%;
             padding: 12px;
             background-color: #000000;
@@ -671,10 +459,9 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             font-size: 0.9rem;
             cursor: pointer;
-            margin-bottom: 20px;
         }
 
-        .delete-button-user:hover {
+        .submit-button1:hover {
             background-color: gold;
             color: #000000;
         }
@@ -697,6 +484,7 @@
             color: #000000;
         }
 
+        /* Stock Management Styles */
         #stock-requests-section {
             padding: 20px;
             margin-top: 10px;
@@ -711,15 +499,6 @@
             border-bottom: 2px solid rgb(0, 0, 0);
             padding-bottom: 10px;
             text-align: center;
-        }
-
-        #stock-requests-section .alert {
-            margin-bottom: 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            background-color: #e0f7fa;
-            color: #00796b;
-            padding: 15px;
         }
 
         #stock-requests-section table {
@@ -774,22 +553,127 @@
             cursor: not-allowed;
         }
 
-        .password-container .error-message {
-            margin-bottom: 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            background-color: #e0f7fa;
-            color: #00796b;
-            padding: 15px;
+        .alert.error {
+            background-color: #e74c3c;
         }
 
-        .password-container .alert {
-            margin-bottom: 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            background-color: #e0f7fa;
-            color: #00796b;
-            padding: 15px;
+        .alert {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #02e652;
+            color: #ffffff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            animation: fadeIn 0.3s ease-out;
+            z-index: 9999;
+        }
+
+        .alert button {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-input-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .popup-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #UserSuccessPopup .popup-content {
+            border: 2px solid #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        #UserSuccessPopup .popup-content p {
+            color: #388e3c;
+        }
+
+        #UserErrorPopup .popup-content {
+            border: 2px solid #f44336;
+            background-color: #ffebee;
+        }
+
+        #UserErrorPopup .popup-content p {
+            color: #d32f2f;
+        }
+
+        .alert-error {
+            background-color: #e74c3c;
+        }
+
+        .alert button {
+            display: none;
         }
     </style>
 </head>
@@ -863,21 +747,24 @@
                                 <label for="name">Name</label>
                                 <input id="name" name="name" type="text" value="{{ Auth::user()->name }}" required
                                     aria-describedby="nameHelp" />
-                                @error('name')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
+
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" name="email" type="email" value="{{ Auth::user()->email }}" required
                                     aria-describedby="emailHelp" />
-                                @error('email')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
+
                             </div>
                             <button type="submit" class="submit-button1">Update Information</button>
-                            @if (session('status') === 'user-updated')
-                                <p class="success-message">Information successfully updated.</p>
+                            @if ($msg = session()->pull('status'))
+                                <div id="success-alert" class="alert">
+                                    <span>{{ $msg }}</span>
+                                </div>
+                            @endif
+                            @if($errors->any())
+                                <div id="error-alert" class="alert error">
+                                    <span>{{ $errors->first() }}</span>
+                                </div>
                             @endif
                         </form>
                     </div>
@@ -885,7 +772,6 @@
 
                 <!-- Inventory Section -->
                 <section id="inventory" class="section-content">
-                    <!-- Dashboard Boxes -->
                     <div class="admin-dashboard-boxes">
                         <div class="dashboard-box-container">
                             <div class="dashboard-box">
@@ -931,20 +817,13 @@
                         </div>
                         <button type="submit" class="submit-button1">Add Product</button>
                     </form>
-                    <!-- Success Popup -->
-                    <div id="successPopup" class="popup" style="display: none;">
-                        <div class="popup-content">
-                            <span class="popup-close-btn" onclick="closePopup()">×</span>
-                            <p id="successMessage"></p>
+
+                    @if ($msg = session()->pull('product-status'))
+                        <div id="product-success-alert" class="alert">
+                            <span>{{ $msg }}</span>
                         </div>
-                    </div>
-                    <!-- Error Popup -->
-                    <div id="errorPopup" class="popup" style="display: none;">
-                        <div class="popup-content">
-                            <span class="popup-close-btn" onclick="closePopup()">×</span>
-                            <p id="errorMessage"></p>
-                        </div>
-                    </div>
+                    @endif
+
                     <!-- Products Section -->
                     <h3>Existing Products</h3>
                     <div class="product-list">
@@ -1034,9 +913,9 @@
                 <section id="Stock" class="section-content" style="display: none;">
                     <div id="stock-requests-section" class="container">
                         <h1>Stock Requests</h1>
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
+                        @if($msg = session()->pull('success'))
+                            <div id="stock-success-alert" class="alert">
+                                <span>{{ $msg }}</span>
                             </div>
                         @endif
                         <table class="table table-bordered">
@@ -1084,6 +963,7 @@
                 <!-- User Management Section -->
                 <section id="user-management" class="section-content">
                     <div class="admin-dashboard-boxes">
+
                         <form method="POST" action="{{ route('user.add') }}">
                             @csrf
                             <div class="form-group">
@@ -1097,6 +977,13 @@
                             </div>
                             <button type="submit" class="submit-button1">Add User</button>
                         </form>
+
+                        @if(session('user-add-success'))
+                            <div id="user-success-alert" class="alert alert-success">
+                                <span>{{ session('user-add-success') }}</span>
+                            </div>
+                        @endif
+
                         <h3>Existing Users</h3>
                         <div class="user-list">
                             @foreach($users as $user)
@@ -1113,8 +1000,7 @@
                                             <input type="email" name="email" value="{{ $user->email }}" required>
                                             <button type="submit" class="submit-button1">Update</button>
                                         </form>
-                                        <form id="deleteUserForm" action="{{ route('user.destroy', $user->id) }}"
-                                            method="POST">
+                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="delete-button-user">Delete User</button>
@@ -1126,19 +1012,9 @@
                     </div>
                 </section>
 
-                <!-- Success Popup -->
-                <div id="UserSuccessPopup" class="popup" style="display:none;">
-                    <div class="popup-content">
-                        <p id="successMessage">Successfully removed.</p>
-                        <button class="popup-close-btn">x</button>
-                    </div>
-                </div>
-
-                <!-- Error Popup -->
                 <div id="UserErrorPopup" class="popup" style="display:none;">
                     <div class="popup-content">
                         <p id="errorMessage">Unable to delete this user</p>
-                        <button class="popup-close-btn">x</button>
                     </div>
                 </div>
 
@@ -1188,10 +1064,12 @@
                                 @enderror
                             </div>
                             <button type="submit" class="submit-button">Update Address</button>
-                            @if (session('status') === 'address-updated')
-                                <p class="success-message">Address successfully updated.</p>
-                            @endif
                         </form>
+                        @if ($msg = session()->pull('address-status'))
+                            <div id="address-success-alert" class="alert">
+                                <span>{{ $msg }}</span>
+                            </div>
+                        @endif
                     </div>
                 </section>
 
@@ -1207,63 +1085,66 @@
                 <!-- Security Section -->
                 <section id="security" class="section-content">
                     <div class="password-container">
-                        <form method="POST" action="{{ route('password.update') }}#security">
+                        <form method="POST" action="{{ route('user.password.update') }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label for="current_password">Current Password</label>
-                                <input id="current_password" name="current_password" type="password" required />
-                                @error('current_password')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
+                                <div class="password-input-container">
+                                    <input id="current_password" name="current_password" type="password" required />
+                                    <span class="toggle-password" data-target="current_password">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">New Password</label>
-                                <input id="password" name="password" type="password" required />
-                                @error('password')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
+                                <div class="password-input-container">
+                                    <input id="password" name="password" type="password" required />
+                                    <span class="toggle-password" data-target="password">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation">Confirm New Password</label>
-                                <input id="password_confirmation" name="password_confirmation" type="password"
-                                    required />
-                                @error('password_confirmation')
-                                    <span class="error-message">{{ $message }}</span>
-                                @enderror
+                                <div class="password-input-container">
+                                    <input id="password_confirmation" name="password_confirmation" type="password"
+                                        required />
+                                    <span class="toggle-password" data-target="password_confirmation">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </span>
+                                </div>
                             </div>
                             <button type="submit" class="submit-button">Save</button>
-                            @if(session('status') === 'password-updated')
-                                <div class="alert">
-                                    Password successfully updated.
-                                </div>
-                            @endif
                         </form>
+                        @if (session('status') === 'password-updated')
+                            <div id="password-success-alert" class="alert">
+                                <span>Password successfully updated.</span>
+                            </div>
+                        @endif
                     </div>
                 </section>
             </div>
         </div>
     </div>
 
+    <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Section Switching and Popup Handling Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const links = document.querySelectorAll('.sidebar-link');
             const sections = document.querySelectorAll('.section-content');
 
             function hideAllSections() {
-                sections.forEach(section => {
-                    section.style.display = 'none';
-                });
+                sections.forEach(section => section.style.display = 'none');
             }
-
             function resetActiveLinks() {
-                links.forEach(link => {
-                    link.classList.remove('active');
-                });
+                links.forEach(link => link.classList.remove('active'));
             }
-
             function showSectionFromHash() {
                 const hash = window.location.hash.substring(1);
                 hideAllSections();
@@ -1274,9 +1155,7 @@
                     const activeLink = document.querySelector(`.sidebar-link[href="#${hash}"]`);
                     if (targetSection) {
                         targetSection.style.display = 'block';
-                        if (activeLink) {
-                            activeLink.classList.add('active');
-                        }
+                        if (activeLink) activeLink.classList.add('active');
                     }
                 } else {
                     document.getElementById('admin-dashboard-link').style.display = 'block';
@@ -1285,103 +1164,187 @@
                 window.scrollTo(0, 0);
             }
 
-            showSectionFromHash();
+            function createAlert(message, isSuccess = true) {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = isSuccess ? 'alert alert-success' : 'alert alert-error';
+                alertDiv.innerHTML = `
+            <span>${message}</span>
+            <button type="button" class="alert-close-btn">&times;</button>
+        `;
+                document.body.prepend(alertDiv);
 
+                const closeBtn = alertDiv.querySelector('.alert-close-btn');
+                const timer = setTimeout(() => dismiss(alertDiv), 5000);
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismiss(alertDiv);
+                });
+
+                function dismiss(el) {
+                    el.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => el.remove(), 300);
+                }
+            }
+
+            function wireDeleteButtons(selector, successMessage) {
+                document.querySelectorAll(selector).forEach(button => {
+                    button.addEventListener('click', event => {
+                        event.preventDefault();
+                        const form = button.closest('form');
+                        fetch(form.action, { method: 'POST', body: new FormData(form) })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    createAlert(successMessage || data.message, true);
+                                    button.closest(selector.includes('user') ? '.user-item' : '.product-item').remove();
+                                } else {
+                                    createAlert(data.message, false);
+                                }
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                createAlert('An error occurred.', false);
+                            });
+                    });
+                });
+            }
+
+            showSectionFromHash();
             links.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    window.location.hash = targetId;
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    window.location.hash = link.getAttribute('href').substring(1);
                     showSectionFromHash();
                 });
             });
-
             window.addEventListener('hashchange', showSectionFromHash);
 
-            const deleteUserForms = document.querySelectorAll('.delete-button-user');
+            wireDeleteButtons('.delete-button-user');
+            wireDeleteButtons('.delete-button-product', 'The product has been successfully removed.');
 
-            deleteUserForms.forEach((deleteButton) => {
-                deleteButton.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    var formData = new FormData(deleteButton.closest('form'));
-                    fetch(deleteButton.closest('form').action, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                showSuccessPopup(data.message);
-                                deleteButton.closest('.user-item').remove();
-                            } else {
-                                showErrorPopup(data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            showErrorPopup('An error occurred while deleting the user.');
-                        });
+            window.toggleEditForm = productId => {
+                document.getElementById('editForm_' + productId).style.display = 'flex';
+            };
+            window.closeEditForm = productId => {
+                document.getElementById('editForm_' + productId).style.display = 'none';
+            };
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alertEl = document.getElementById('success-alert');
+            const closeBtn = document.getElementById('alert-close');
+            if (alertEl) {
+                const timer = setTimeout(dismissAlert, 5000);
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismissAlert();
                 });
-            });
-
-            const deleteProductForms = document.querySelectorAll('.delete-button-product');
-
-            deleteProductForms.forEach((deleteButton) => {
-                deleteButton.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    var formData = new FormData(deleteButton.closest('form'));
-                    fetch(deleteButton.closest('form').action, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                showSuccessPopup(data.message);
-                                deleteButton.closest('.product-item').remove();
-                            } else {
-                                showErrorPopup(data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            showErrorPopup('An error occurred while deleting the product.');
-                        });
-                });
-            });
-
-            function showErrorPopup(message) {
-                document.getElementById('errorMessage').textContent = message;
-                document.getElementById('UserErrorPopup').style.display = 'flex';
-            }
-
-            function showSuccessPopup(message) {
-                document.getElementById('successMessage').textContent = message;
-                document.getElementById('UserSuccessPopup').style.display = 'flex';
-            }
-
-            const closeButtons = document.querySelectorAll('.popup-close-btn');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', closePopup);
-            });
-
-            function closePopup() {
-                document.getElementById('UserErrorPopup').style.display = 'none';
-                document.getElementById('UserSuccessPopup').style.display = 'none';
-                location.reload();
+                function dismissAlert() {
+                    alertEl.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => alertEl.remove(), 300);
+                }
             }
         });
-
-        function toggleEditForm(productId) {
-            var form = document.getElementById('editForm_' + productId);
-            form.style.display = 'flex';
-        }
-
-        function closeEditForm(productId) {
-            var form = document.getElementById('editForm_' + productId);
-            form.style.display = 'none';
-        }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const errAlert = document.getElementById('error-alert');
+            const errClose = document.getElementById('error-alert-close');
+            if (errAlert) {
+                errClose.addEventListener('click', () => errAlert.remove());
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addressAlert = document.getElementById('address-success-alert');
+            const addressAlertClose = document.getElementById('address-alert-close');
+            if (addressAlert) {
+                const timer = setTimeout(() => {
+                    dismissAddressAlert();
+                }, 5000);
+                addressAlertClose.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    dismissAddressAlert();
+                });
+                function dismissAddressAlert() {
+                    addressAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => addressAlert.remove(), 300);
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.toggle-password').forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    if (input.getAttribute('type') === 'password') {
+                        input.setAttribute('type', 'text');
+                        this.innerHTML = '<ion-icon name="eye-outline"></ion-icon>';
+                    } else {
+                        input.setAttribute('type', 'password');
+                        this.innerHTML = '<ion-icon name="eye-off-outline"></ion-icon>';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productAlert = document.getElementById('product-success-alert');
+            if (productAlert) {
+                setTimeout(() => {
+                    productAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => productAlert.remove(), 300);
+                }, 5000);
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stockAlert = document.getElementById('stock-success-alert');
+            const stockClose = document.getElementById('stock-alert-close');
+            if (stockAlert) {
+                const timer = setTimeout(() => {
+                    stockAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => stockAlert.remove(), 300);
+                }, 5000);
+
+                stockClose.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    stockAlert.style.animation = 'fadeOut 0.3s forwards';
+                    setTimeout(() => stockAlert.remove(), 300);
+                });
+            }
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alertEl = document.getElementById('user-success-alert');
+            if (!alertEl) return;
+
+            const closeBtn = alertEl.querySelector('.alert-close-btn');
+            const timer = setTimeout(dismiss, 5000);
+
+            closeBtn.addEventListener('click', () => {
+                clearTimeout(timer);
+                dismiss();
+            });
+
+            function dismiss() {
+                alertEl.style.animation = 'fadeOut 0.3s forwards';
+                setTimeout(() => alertEl.remove(), 300);
+            }
+        });
+    </script>
+
 </body>
 
 </html>

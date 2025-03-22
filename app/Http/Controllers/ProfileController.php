@@ -15,7 +15,6 @@ use App\Models\Product;
 use App\Models\StockRequest;
 use Illuminate\Support\Facades\Log;
 
-
 class ProfileController extends Controller
 {
     public function edit(Request $request): View
@@ -36,25 +35,24 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
+        $this->updateProfile($user, $request);
+
+        if ($user->type === 'admin') {
+            return redirect()->back()->with('status', 'Information successfully updated.');
+        }
+
+        return redirect()->route('usersettings')
+            ->with('status', 'user-updated');
+    }
+
+    protected function updateProfile(User $user, Request $request): void
+    {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:users,name,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
         $user->update($validated);
-
-        if ($request->filled('password')) {
-            $validatedPassword = $request->validate([
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            $user->password = bcrypt($validatedPassword['password']);
-        }
-
-        if ($user->type === 'admin') {
-            return redirect('/adminsettings#security')->with('status', 'Profile updated successfully!');
-        }
-
-        return redirect()->route('usersettings')->with('status','user-updated');
     }
 
     public function updateAddress(Request $request)
@@ -82,12 +80,13 @@ class ProfileController extends Controller
         if ($user->type === 'admin') {
             return redirect()
                 ->to(route('admin.settings') . '#address')
-                ->with('status', 'Your address has been successfully updated!');
+                ->with('address-status', 'Address successfully updated.');
         }
 
         return redirect()
             ->to(route('usersettings') . '#address')
-            ->with('status', 'Your address has been successfully updated!');
+            ->with('status', 'address-updated');
+
     }
 
 
@@ -130,7 +129,6 @@ class ProfileController extends Controller
         return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
@@ -148,8 +146,7 @@ class ProfileController extends Controller
 
         return redirect()
             ->to(route('admin.settings') . '#user-management')
-            ->with('success', 'User added successfully!');
-
+            ->with('user-add-success', 'User added successfully!');
     }
 
     public function updateUser(Request $request, $id)
@@ -188,6 +185,7 @@ class ProfileController extends Controller
             return response()->json(['success' => false, 'message' => 'Unable to delete user. User has an active order.']);
         }
     }
+
     public function showInventory()
     {
         $products = Product::all();
@@ -206,10 +204,12 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('admin.settings', [], false)
-            ->withFragment('security')
-            ->with('status', 'password-updated');
+        $url = $user->type === 'admin'
+            ? route('admin.settings') . '#admin-dashboard-link'
+            : route('usersettings') . '#security';
+
+        return redirect()->to($url)
+            ->with('status', 'password updated');
+
     }
-
-
 }

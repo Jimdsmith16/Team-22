@@ -43,7 +43,8 @@ class ProductController extends Controller
         return view('ProductDisplayPage', compact('products', 'categories'));
     }
 
-    public function findByCategory($id) {
+    public function findByCategory($id)
+    {
         $products = $id
             ? Product::where('category_id', $id)->get()
             : Product::all();
@@ -76,39 +77,39 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             $product->delete();
-            
+
             return response()->json(['success' => true, 'message' => 'Product deleted successfully.']);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'An error occurred while deleting the product.']);
         }
     }
-    
+
 
     public function store(Request $request)
     {
-    $request->validate([
-        'name' => 'required|string|max:100',
-        'price' => 'required|numeric|min:0',
-        'description' => 'required|string',
-        'alt_text' => 'required|string|max:255',
-        'number_of_stock' => 'required|integer|min:0',
-        'image_link' => 'required|string|max:255',
-        'average_rating' => 'required|integer|min:1|max:5',
-        'category_id' => 'required|integer|exists:categories,id',
-    ]);
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'alt_text' => 'required|string|max:255',
+            'number_of_stock' => 'required|integer|min:0',
+            'image_link' => 'required|string|max:255',
+            'average_rating' => 'required|integer|min:1|max:5',
+            'category_id' => 'required|integer|exists:categories,id',
+        ]);
 
-    Product::create([
-        'name' => $request->name,
-        'price' => $request->price,
-        'description' => $request->description,
-        'alt_text' => $request->alt_text,
-        'number_of_stock' => $request->number_of_stock,
-        'image_link' => $request->image_link,
-        'average_rating' => $request->average_rating,
-        'category_id' => $request->category_id,
-    ]);
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'alt_text' => $request->alt_text,
+            'number_of_stock' => $request->number_of_stock,
+            'image_link' => $request->image_link,
+            'average_rating' => $request->average_rating,
+            'category_id' => $request->category_id,
+        ]);
 
-    return redirect()->back()->with('success', 'Product added successfully!');
+        return redirect()->to(route('admin.settings') . '#inventory')->with('product-status', 'Product was successfully added to your page.');
+
     }
-
 }

@@ -78,8 +78,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Authentication and profile routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::put('/password/reset', [ResetPasswordController::class, 'updatePassword'])->name('password.update');
-Route::put('/adminsettings/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+Route::put('/adminsettings/password', [ProfileController::class, 'updatePassword'])->name('admin.password.update');
+Route::put('/usersettings/password', [ProfileController::class, 'updatePassword'])->name('user.password.update');
 Route::post('/user/add', [ProfileController::class, 'store'])->name('user.add');
 Route::put('/user/update/{id}', [ProfileController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
 Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->where('id', '[0-9]+')->name('user.destroy');
