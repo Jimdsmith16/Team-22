@@ -1025,12 +1025,12 @@
                             </div>
                             <div class="dashboard-box">
                                 <h4>Total Revenue</h4>
-                                <p>${{ number_format($orders->sum('total'), 2) }}</p>
+                                <p>£{{ number_format($orders->sum('total'), 2) }}</p>
                             </div>
                             <div class="dashboard-box">
                                 <h4>Average Order Value</h4>
                                 <p>
-                                    ${{ number_format($orders->count() ? $orders->sum('total') / $orders->count() : 0, 2) }}
+                                    £{{ number_format($orders->count() ? $orders->sum('total') / $orders->count() : 0, 2) }}
                                 </p>
                             </div>
                         </div>
@@ -1053,7 +1053,7 @@
                                         <td>
                                             {{ $order->estimated_delivery_date ? $order->estimated_delivery_date->format('Y-m-d') : 'N/A' }}
                                         </td>
-                                        <td>${{ number_format($order->total, 2) }}</td>
+                                        <td>£{{ number_format($order->total, 2) }}</td>
                                         <td>
                                             <a href="{{ route('order.confirmation', $order->id) }}"
                                                 class="submit-button1">View</a>
