@@ -84,7 +84,6 @@ class ProductController extends Controller
         }
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
@@ -112,4 +111,23 @@ class ProductController extends Controller
         return redirect()->to(route('admin.settings') . '#inventory')->with('product-status', 'Product was successfully added to your page.');
 
     }
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'price' => 'nullable|numeric',
+            'description' => 'nullable|string',
+            'alt_text' => 'nullable|string',
+            'number_of_stock' => 'nullable|integer',
+            'average_rating' => 'nullable|numeric|min:1|max:5',
+            'category_id' => 'nullable|integer',
+        ]);
+
+        $product = \App\Models\Product::findOrFail($id);
+
+        $product->update($validatedData);
+
+        return redirect()->to(route('admin.settings') . '#inventory')->with('product-status', 'Product was successfully updated!');
+    }
+
 }

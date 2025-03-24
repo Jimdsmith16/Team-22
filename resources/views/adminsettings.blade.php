@@ -675,6 +675,58 @@
         .alert button {
             display: none;
         }
+
+        #orders-section {
+            padding: 20px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+
+        #orders-section h1 {
+            font-size: 25px;
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid rgb(0, 0, 0);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        #orders-section table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        #orders-section th,
+        #orders-section td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        #orders-section th {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #orders-section td {
+            background-color: #f9f9f9;
+        }
+
+        #orders-section tr:nth-child(even) {
+            background-color: #f1f1f1;
+        }
+
+        #orders-section tr:hover {
+            background-color: #e1e1e1;
+        }
+
+        #orders-section a.submit-button1 {
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -711,6 +763,9 @@
                 </a>
                 <a href="#Stock" class="sidebar-link">
                     <ion-icon name="bar-chart"></ion-icon> <span>Stock Management</span>
+                </a>
+                <a href="#Orders" class="sidebar-link">
+                    <ion-icon name="paper-plane-sharp"></ion-icon> <span>Order Management</span>
                 </a>
                 <a href="#user-management" class="sidebar-link">
                     <ion-icon name="person"></ion-icon> <span>User Management</span>
@@ -955,6 +1010,60 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Orders Management Section -->
+                <section id="Orders" class="section-content" style="display: none;">
+                    <div id="orders-section" class="container">
+                        <div class="dashboard-box-container">
+                            <div class="dashboard-box">
+                                <h4>Total Orders</h4>
+                                <p>{{ \App\Models\Order::query()->count() }}</p>
+                            </div>
+                            <div class="dashboard-box">
+                                <h4>Total Revenue</h4>
+                                <p>${{ number_format($orders->sum('total'), 2) }}</p>
+                            </div>
+                            <div class="dashboard-box">
+                                <h4>Average Order Value</h4>
+                                <p>
+                                    ${{ number_format($orders->count() ? $orders->sum('total') / $orders->count() : 0, 2) }}
+                                </p>
+                            </div>
+                        </div>
+                        <h1>All Orders</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>User</th>
+                                    <th>Estimated Delivery Date</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($orders as $order)
+                                    <tr>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $order->user->name ?? 'N/A' }}</td>
+                                        <td>
+                                            {{ $order->estimated_delivery_date ? $order->estimated_delivery_date->format('Y-m-d') : 'N/A' }}
+                                        </td>
+                                        <td>${{ number_format($order->total, 2) }}</td>
+                                        <td>
+                                            <a href="{{ route('order.confirmation', $order->id) }}"
+                                                class="submit-button1">View</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" style="text-align: center;">No orders found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -1324,7 +1433,7 @@
             }
         });
     </script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const alertEl = document.getElementById('user-success-alert');

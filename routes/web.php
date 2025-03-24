@@ -83,6 +83,7 @@ Route::put('/usersettings/password', [ProfileController::class, 'updatePassword'
 Route::post('/user/add', [ProfileController::class, 'store'])->name('user.add');
 Route::put('/user/update/{id}', [ProfileController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
 Route::delete('/user/destroy/{id}', [ProfileController::class, 'destroyUser'])->where('id', '[0-9]+')->name('user.destroy');
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
 
 // Search route (publicly accessible)
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');

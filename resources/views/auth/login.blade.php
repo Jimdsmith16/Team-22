@@ -59,9 +59,10 @@
                     </div>
                 @enderror
                 <div class="remember-forgot">
-                    <label><input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember
-                        Me</label>
-                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                    <label>
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                    </label>
+                    <a href="{{ url('/contact') }}">Forgot Password?</a>
                 </div>
 
                 <button class="btn" type="submit">Login</button>
@@ -279,5 +280,4 @@
     .error-message .close-btn:hover {
         color: #ff0000;
     }
-
 </style>

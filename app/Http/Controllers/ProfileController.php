@@ -125,8 +125,9 @@ class ProfileController extends Controller
         $totalUsers = $users->count();
         $products = Product::all();
         $stockRequests = StockRequest::where('status', 'pending')->get();
+        $orders = \App\Models\Order::with('user', 'products')->get();
 
-        return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests'));
+        return view('adminsettings', compact('users', 'totalUsers', 'products', 'stockRequests', 'orders'));
     }
 
     public function store(Request $request)
@@ -185,7 +186,6 @@ class ProfileController extends Controller
             return response()->json(['success' => false, 'message' => 'Unable to delete user. User has an active order.']);
         }
     }
-
     public function showInventory()
     {
         $products = Product::all();

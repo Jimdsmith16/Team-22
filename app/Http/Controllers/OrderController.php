@@ -117,4 +117,10 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Stock request submitted successfully!');
     }
+    public function index()
+    {
+        $orders = Order::with('user', 'products')->get();
+        return view('admin.orders', compact('orders'));
+    }
+
 }
